@@ -31,6 +31,7 @@ public class Comment {
     public void setPostId(int postId) {
         this.postId = postId;
     }
+
     public int getCommentId() {
         return commentId;
     }

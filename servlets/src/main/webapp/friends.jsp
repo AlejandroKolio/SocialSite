@@ -1,4 +1,5 @@
-<%@page import="model.User" %>
+<%@ page import="model.User" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=US-ASCII" pageEncoding="US-ASCII" %>
 <!DOCTYPE html>
 <html class="st-layout ls-top-navbar ls-bottom-footer show-sidebar sidebar-l2" lang="en">
@@ -70,9 +71,9 @@
             </div>
             <h4 align="center" class="category">Account</h4>
             <ul class="sidebar-menu">
-                <li class="active"><a href="/profile"><i class="icon-user-1"></i> <span>Profile</span></a></li>
+                <li><a href="/profile"><i class="icon-user-1"></i> <span>Profile</span></a></li>
                 <li><a href="#"><i class="fa fa-camera-retro"></i> <span>Photos</span></a></li>
-                <li><a href="/friends"><i class="fa fa-group"></i> <span>Friends</span></a></li>
+                <li class="active"><a href="#"><i class="fa fa-group"></i> <span>Friends</span></a></li>
                 <li><a href="#"><i class="icon-comment-fill-1"></i> <span>Messages</span></a></li>
                 <li><a href="#"><i class="icon-unlock-fill"></i> <span>Logout</span></a></li>
             </ul>
@@ -331,7 +332,71 @@
             <div class="st-content-inner">
 
                 <div class="container-fluid">
-                    <h1>Blank Page!</h1>
+                    <h4>List of Users</h4>
+
+
+
+
+
+                    <div class="panel panel-default">
+                        <!-- Progress table -->
+                        <div class="table-responsive">
+                            <table class="table v-middle">
+
+                                <thead>
+                                <tr>
+                                    <th width="1"></th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Country</th>
+                                </tr>
+                                </thead>
+
+
+                                <tbody id="responsive-table-body">
+                                <c:forEach items="${requestScope.users}" var="user">
+                                <tr>
+                                    <td></td>
+                                    <td><img src="images/people/110/guy-5.jpg" width="40" class="img-circle">
+                                        <a href="#"><a href="/friends/${user.userId}">${user.firstName} ${user.lastName}</a></a>
+                                    </td>
+                                    <td><a href="#">${user.email}</a></td>
+                                    <td>Miami, FL<a href="#"><i class="fa fa-map-marker fa-fw text-muted"></i></a></td>
+                                    <td></td>
+                                </tr>
+                                </c:forEach>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- // Progress table -->
+
+                        <div class="panel-footer padding-none text-center">
+                            <ul class="pagination">
+                                <li class="disabled"><a href="#">?</a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#">?</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <table>
+
+                            <tr>
+
+                                <br>
+                            </tr>
+
+                    </table>
                 </div>
 
             </div><!--end of st-content-inner-->
