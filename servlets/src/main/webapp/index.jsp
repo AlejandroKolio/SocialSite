@@ -72,7 +72,7 @@
             <ul class="sidebar-menu">
                 <li class="active"><a href="/profile"><i class="icon-user-1"></i> <span>Profile</span></a></li>
                 <li><a href="#"><i class="fa fa-camera-retro"></i> <span>Photos</span></a></li>
-                <li><a href="/friends"><i class="fa fa-group"></i> <span>Friends</span></a></li>
+                <li><a href="/users"><i class="fa fa-group"></i> <span>Friends</span></a></li>
                 <li><a href="#"><i class="icon-comment-fill-1"></i> <span>Messages</span></a></li>
                 <li><a href="#"><i class="icon-unlock-fill"></i> <span>Logout</span></a></li>
             </ul>

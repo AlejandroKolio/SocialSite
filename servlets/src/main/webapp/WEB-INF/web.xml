@@ -35,5 +35,4 @@
         <url-pattern>/app.js</url-pattern>
         <url-pattern>/all.js</url-pattern>
     </filter-mapping>
-
 </web-app>

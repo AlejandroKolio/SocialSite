@@ -42,7 +42,6 @@ public class AuthenticationFilter implements Filter {
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
         }
-
     }
 
     public void destroy() {

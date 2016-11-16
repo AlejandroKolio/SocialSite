@@ -11,7 +11,7 @@ import java.io.IOException;
  * Created by Aleksandr_Shakhov on 13.11.16 19:27.
  */
 
-@WebServlet(name = "Logout", urlPatterns = {"/Logout"})
+@WebServlet(name = "Logout", urlPatterns = {"/logout"})
 public class LogoutServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;

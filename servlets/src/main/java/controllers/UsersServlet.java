@@ -15,19 +15,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 /**
  * Created by Aleksandr_Shakhov on 14.11.16 20:51.
  */
 
-@WebServlet(urlPatterns = "/friends/*")
-public class FriendsServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/users/*")
+public class UsersServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    static Logger logger = Logger.getLogger(FriendsServlet.class);
+    static Logger logger = Logger.getLogger(UsersServlet.class);
 
     private UserService service = new UserServiceImp();
 
@@ -37,9 +36,8 @@ public class FriendsServlet extends HttpServlet {
         if (req.getPathInfo() == null) {
             List<User> users = service.getUsers();
             req.setAttribute("users", users);
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/friends.jsp");
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/users.jsp");
             requestDispatcher.forward(req, resp);
-
         } else {
             String[] tokens = req.getPathInfo().split("/");
             try {
@@ -51,7 +49,8 @@ public class FriendsServlet extends HttpServlet {
 
                     HttpSession session = req.getSession();
                     session.setAttribute("User", user);
-                    resp.sendRedirect("/users.jsp");
+                    RequestDispatcher rd = req.getRequestDispatcher("/users.jsp");
+                    rd.include(req, resp);
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();

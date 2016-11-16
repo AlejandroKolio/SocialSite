@@ -1,6 +1,6 @@
 <%@ page import="model.User" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=US-ASCII" pageEncoding="US-ASCII" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html class="st-layout ls-top-navbar ls-bottom-footer show-sidebar sidebar-l2" lang="en">
 <head>
@@ -10,8 +10,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Profile</title>
-    <link href="css/vendor/all.css" rel="stylesheet">
-    <link href="css/app/app.css" rel="stylesheet">
+    <link href="/css/vendor/all.css" rel="stylesheet">
+    <link href="/css/app/app.css" rel="stylesheet">
 </head>
 
 <body>
@@ -33,15 +33,13 @@
                     <!-- User -->
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle user" data-toggle="dropdown">
-                            <img src="images/people/110/guy-5.jpg" alt="User" class="img-circle" width="40"/>
-                            <%User user = (User) session.getAttribute("User");%>
-                            <%= user.getFirstName() + " " + user.getLastName() %>
-                            <span class="caret"></span>
+                            <img src="/images/people/110/guy-5.jpg" alt="User" class="img-circle" width="40"/> Alexander
+                            Shakhov <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Profile</a></li>
-                            <li><a href="#">Messages</a></li>
-                            <li><a href="Logout">Logout</a></li>
+                            <li><a href="user-private-profile.html">Profile</a></li>
+                            <li><a href="user-private-messages.html">Messages</a></li>
+                            <li><a href="login.html">Logout</a></li>
                         </ul>
                     </li><!--end of User-->
                 </ul>
@@ -63,19 +61,16 @@
         <div data-scrollable>
             <div class="sidebar-block">
                 <div class="profile">
-                    <img src="images/people/110/guy-5.jpg" alt="people" class="img-circle"/>
-
-                    <h4> <%= user.getFirstName() + " " + user.getLastName() %> </h4>
-
+                    <img src="/images/people/110/guy-5.jpg" alt="people" class="img-circle"/><h4>Alexander Shakhov</h4>
                 </div>
             </div>
             <h4 align="center" class="category">Account</h4>
             <ul class="sidebar-menu">
-                <li><a href="/profile"><i class="icon-user-1"></i> <span>Profile</span></a></li>
+                <li class="active"><a href="/profile"><i class="icon-user-1"></i> <span>Profile</span></a></li>
                 <li><a href="#"><i class="fa fa-camera-retro"></i> <span>Photos</span></a></li>
-                <li class="active"><a href="#"><i class="fa fa-group"></i> <span>Friends</span></a></li>
+                <li><a href="/users"><i class="fa fa-group"></i> <span>Friends</span></a></li>
                 <li><a href="#"><i class="icon-comment-fill-1"></i> <span>Messages</span></a></li>
-                <li><a href="#"><i class="icon-unlock-fill"></i> <span>Logout</span></a></li>
+                <li><a href="/logout"><i class="icon-unlock-fill"></i> <span>Logout</span></a></li>
             </ul>
         </div>
     </div>
@@ -105,7 +100,7 @@
                                     <div class="media">
                                         <div class="pull-left">
                                             <span class="status"></span>
-                                            <img src="images/people/110/guy-6.jpg" width="40" class="img-circle"/>
+                                            <img src="/images/people/110/guy-6.jpg" width="40" class="img-circle"/>
                                         </div>
                                         <div class="media-body">
                                             <div class="contact-name">Jonathan S.</div>
@@ -121,7 +116,7 @@
                                     <div class="media">
                                         <div class="pull-left">
                                             <span class="status"></span>
-                                            <img src="images/people/110/woman-5.jpg" width="40" class="img-circle"/>
+                                            <img src="/images/people/110/woman-5.jpg" width="40" class="img-circle"/>
                                         </div>
                                         <div class="media-body">
                                             <div class="contact-name">Mary A.</div>
@@ -136,7 +131,7 @@
                                     <div class="media">
                                         <div class="pull-left ">
                                             <span class="status"></span>
-                                            <img src="images/people/110/guy-3.jpg" width="40" class="img-circle"/>
+                                            <img src="/images/people/110/guy-3.jpg" width="40" class="img-circle"/>
                                         </div>
                                         <div class="media-body">
                                             <div class="contact-name">Adrian D.</div>
@@ -150,7 +145,7 @@
                                 <a href="#">
                                     <div class="media">
                                         <div class="pull-left">
-                                            <img src="images/people/110/woman-6.jpg" width="40" class="img-circle"/>
+                                            <img src="/images/people/110/woman-6.jpg" width="40" class="img-circle"/>
                                         </div>
                                         <div class="media-body">
                                             <div class="contact-name">Michelle S.</div>
@@ -164,7 +159,7 @@
                                 <a href="#">
                                     <div class="media">
                                         <div class="pull-left">
-                                            <img src="images/people/110/woman-7.jpg" width="40" class="img-circle"/>
+                                            <img src="/images/people/110/woman-7.jpg" width="40" class="img-circle"/>
                                         </div>
                                         <div class="media-body">
                                             <div class="contact-name">Daniele A.</div>
@@ -178,7 +173,7 @@
                                     <div class="media">
                                         <div class="pull-left">
                                             <span class="status"></span>
-                                            <img src="images/people/110/guy-4.jpg" width="40" class="img-circle"/>
+                                            <img src="/images/people/110/guy-4.jpg" width="40" class="img-circle"/>
                                         </div>
                                         <div class="media-body">
                                             <div class="contact-name">Jake F.</div>
@@ -193,7 +188,7 @@
                                     <div class="media">
                                         <div class="pull-left">
                                             <span class="status"></span>
-                                            <img src="images/people/110/woman-6.jpg" width="40" class="img-circle"/>
+                                            <img src="/images/people/110/woman-6.jpg" width="40" class="img-circle"/>
                                         </div>
                                         <div class="media-body">
                                             <div class="contact-name">Jane A.</div>
@@ -208,7 +203,7 @@
                                     <div class="media">
                                         <div class="pull-left">
                                             <span class="status"></span>
-                                            <img src="images/people/110/woman-8.jpg" width="40" class="img-circle"/>
+                                            <img src="/images/people/110/woman-8.jpg" width="40" class="img-circle"/>
                                         </div>
                                         <div class="media-body">
                                             <div class="contact-name">Sabine J.</div>
@@ -223,7 +218,7 @@
                                     <div class="media">
                                         <div class="pull-left">
                                             <span class="status"></span>
-                                            <img src="images/people/110/woman-9.jpg" width="40" class="img-circle"/>
+                                            <img src="/images/people/110/woman-9.jpg" width="40" class="img-circle"/>
                                         </div>
                                         <div class="media-body">
                                             <div class="contact-name">Danny B.</div>
@@ -238,7 +233,7 @@
                                     <div class="media">
                                         <div class="pull-left">
                                             <span class="status"></span>
-                                            <img src="images/people/110/woman-8.jpg" width="40" class="img-circle"/>
+                                            <img src="/images/people/110/woman-8.jpg" width="40" class="img-circle"/>
                                         </div>
                                         <div class="media-body">
                                             <div class="contact-name">Elise J.</div>
@@ -253,7 +248,7 @@
                                     <div class="media">
                                         <div class="pull-left">
                                             <span class="status"></span>
-                                            <img src="images/people/110/guy-3.jpg" width="40" class="img-circle"/>
+                                            <img src="/images/people/110/guy-3.jpg" width="40" class="img-circle"/>
                                         </div>
                                         <div class="media-body">
                                             <div class="contact-name">John J.</div>
@@ -268,7 +263,8 @@
                 </div><!--end of split-vertical-cell-->
             </div><!--end of split-vertical-body-->
         </div><!--end of split-vertical-->
-    </div><!--end of sidebar sidebar-chat right sidebar-size-2 sidebar-offset-0 chat-skin-white sidebar-visible-mobile-->
+    </div>
+    <!--end of sidebar sidebar-chat right sidebar-size-2 sidebar-offset-0 chat-skin-white sidebar-visible-mobile-->
 
     <!--Chat Script-->
     <script id="chat-window-template" type="text/x-handlebars-template">
@@ -328,78 +324,63 @@
     <div class="st-pusher" id="content">
         <!-- this is the wrapper for the content -->
         <div class="st-content">
-            <!--extra div for emulating position:fixed of the menu-->
+
+
+            <!-- extra div for emulating position:fixed of the menu -->
             <div class="st-content-inner">
 
                 <div class="container-fluid">
-                    <h4>List of Users</h4>
 
+                    <div class="media media-grid media-clearfix-xs">
+                        <div class="media-left">
 
+                            <div class="width-250 width-auto-xs">
+                                <div class="panel panel-default widget-user-1 text-center">
+                                    <div class="avatar">
+                                        <img src="/images/people/110/guy-3.jpg" alt="" class="img-circle">
 
+                                        <%User user = (User) session.getAttribute("User");%>
+                                        <h3><%= user.getFirstName() + " " + user.getLastName() %></h3>
 
+                                        <form action="/follow/${user.getId}" method="post">
+                                            <button type="submit" class="btn btn-primary">Follow</button>
+                                        </form>
+                                    </div>
 
-                    <div class="panel panel-default">
-                        <!-- Progress table -->
-                        <div class="table-responsive">
-                            <table class="table v-middle">
-
-                                <thead>
-                                <tr>
-                                    <th width="1"></th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Country</th>
-                                </tr>
-                                </thead>
-
-
-                                <tbody id="responsive-table-body">
-                                <c:forEach items="${requestScope.users}" var="user">
-                                <tr>
-                                    <td></td>
-                                    <td><img src="images/people/110/guy-5.jpg" width="40" class="img-circle">
-                                        <a href="#"><a href="/friends/${user.userId}">${user.firstName} ${user.lastName}</a></a>
-                                    </td>
-                                    <td><a href="#">${user.email}</a></td>
-                                    <td>Miami, FL<a href="#"><i class="fa fa-map-marker fa-fw text-muted"></i></a></td>
-                                    <td></td>
-                                </tr>
-                                </c:forEach>
-
-
-                                </tbody>
-                            </table>
+                                    <div class="profile-icons margin-none">
+                                        <span><i class="fa fa-users"></i> 372</span>
+                                        <span><i class="fa fa-photo"></i> 43</span>
+                                        <span><i class="fa fa-video-camera"></i> 3</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <!-- // Progress table -->
-
-                        <div class="panel-footer padding-none text-center">
-                            <ul class="pagination">
-                                <li class="disabled"><a href="#">?</a></li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">?</a></li>
-                            </ul>
+                        <div class="media-body">
+                            <div class="panel panel-default share">
+                                <div class="input-group">
+                                    <div class="input-group-btn">
+                                        <a class="btn btn-primary" href="#"><i class="fa fa-envelope"></i> Send</a>
+                                    </div>
+                                    <input type="text" class="form-control share-text" placeholder="Write message...">
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-
-
-
-
-                    <table>
-
-                            <tr>
-
-                                <br>
-                            </tr>
-
-                    </table>
                 </div>
 
-            </div><!--end of st-content-inner-->
+                <div id="ascrail2000" class="nicescroll-rails"
+                     style="width: 5px; z-index: auto; cursor: default; position: absolute; top: 71px; left: 1220px; height: 39px; display: none;">
+                    <div style="position: relative; top: 0px; float: right; width: 5px; height: 0px; background-color: rgb(22, 174, 159); border: 0px; background-clip: padding-box; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;"></div>
+                </div>
+                <div id="ascrail2000-hr" class="nicescroll-rails"
+                     style="height: 5px; z-index: auto; top: 105px; left: 280px; position: absolute; cursor: default; display: none;">
+                    <div style="position: absolute; top: 0px; height: 5px; width: 0px; background-color: rgb(22, 174, 159); border: 0px; background-clip: padding-box; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;">
+                    </div>
+                </div>
+            </div>
+            <!-- /st-content-inner -->
+
 
         </div><!--end of st-content-->
     </div><!--end of content push wrapper-->
@@ -450,6 +431,7 @@
     };
 </script>
 
-<script src="js/vendor/all.js"></script>
-<script src="js/app/app.js"></script>
+<script src="/js/vendor/all.js"></script>
+<script src="/js/app/app.js"></script>
 </body>
+</html>
