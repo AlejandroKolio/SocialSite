@@ -32,7 +32,6 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         String[] tokens = request.getPathInfo().split("/");
         try {
             if (tokens != null && tokens.length >= 2) {
@@ -40,9 +39,11 @@ public class UserServlet extends HttpServlet {
 
                 UserDao userDao = new UserDaoImp();
                 User user = userDao.getUserByUserId(userId);
+                String userName = user.getFirstName() + " " + user.getLastName();
 
-                HttpSession session = request.getSession();
-                session.setAttribute("User", user);
+                request.setAttribute("userId", userId);
+                request.setAttribute("userName", userName);
+
                 RequestDispatcher rd = request.getRequestDispatcher("/user.jsp");
                 rd.forward(request, response);
             }

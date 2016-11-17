@@ -23,7 +23,8 @@ import java.util.List;
 
 @WebServlet(urlPatterns = "/friends/*")
 public class FriendsServlet extends HttpServlet {
-
+    // TODO: 17.11.16 This Servlet is in process. Still no clue how to process is better yet. 
+/*
     private static final long serialVersionUID = 1L;
 
     static Logger logger = Logger.getLogger(FriendsServlet.class);
@@ -61,5 +62,5 @@ public class FriendsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-    }
+    }*/
 }

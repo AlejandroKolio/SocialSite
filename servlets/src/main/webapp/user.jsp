@@ -1,4 +1,6 @@
 <%@ page import="model.User" %>
+<%@ page import="dao.UserDao" %>
+<%@ page import="dao.UserDaoImp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -12,6 +14,7 @@
     <title>Profile</title>
     <link href="/css/vendor/all.css" rel="stylesheet">
     <link href="/css/app/app.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/follow_unfollow.css">
 </head>
 
 <body>
@@ -339,12 +342,20 @@
                                     <div class="avatar">
                                         <img src="/images/people/110/guy-3.jpg" alt="" class="img-circle">
 
+                                        <h3><%=request.getAttribute("userName")%></h3>
+                                        <c:set var="req" value="${pageContext.request}"/>
                                         <%User user = (User) session.getAttribute("User");%>
-                                        <h3><%= user.getFirstName() + " " + user.getLastName() %></h3>
 
-                                        <form action="/follow/${user.getId}" method="post">
-                                            <button type="submit" class="btn btn-primary">Follow</button>
+                                        <form action="/follow/<%=request.getAttribute("userId")%>;<%=user.getUserId()%>" method="post">
+                                        <button class="btn btn-primary btn-follow">
+                                            <span class="follow"><i class="fa fa-user-plus"></i> Follow</span>
+                                            <span class="unfollow">Unfollow</span>
+                                            <span class="following">Following</span>
+                                        </button>
                                         </form>
+                                        <%--<a href="" class="btn btn-success">Following <i class="fa fa-check-circle fa-fw"></i></a>--%>
+                                        <%--<a href="#" class="btn btn-default btn-sm">Follow <i class="fa fa-share"></i></a>--%>
+                                        <%--<a href=/follow/<%=user.getUserId()%>">Follow</a>--%>
                                     </div>
 
                                     <div class="profile-icons margin-none">
@@ -430,6 +441,10 @@
         }
     };
 </script>
+
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+<script src="/js/follow_unfollow.js"></script>
 
 <script src="/js/vendor/all.js"></script>
 <script src="/js/app/app.js"></script>

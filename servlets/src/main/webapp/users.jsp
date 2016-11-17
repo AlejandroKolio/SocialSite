@@ -383,14 +383,10 @@
                             </ul>
                         </div>
                     </div>
-
                     <table>
-
                             <tr>
-
                                 <br>
                             </tr>
-
                     </table>
                 </div>
 

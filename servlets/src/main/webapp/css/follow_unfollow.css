@@ -1,0 +1,16 @@
+.unfollow {
+  display: none;
+}
+
+.following {
+  display: none;
+}
+
+.btn-following {
+  color: #fff;
+  background-color: #00b710;
+  border-color: #009d10;
+}
+.btn-following:focus {
+  color: #fff;
+}

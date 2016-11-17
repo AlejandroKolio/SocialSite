@@ -44,11 +44,12 @@ public class UsersServlet extends HttpServlet {
                 if (tokens != null && tokens.length >= 2) {
                     int userId = Integer.parseInt(tokens[1]);
 
-                    UserDao userDao = new UserDaoImp();
-                    User user = userDao.getUserByUserId(userId);
+/*                    UserDao userDao = new UserDaoImp();
+                    User otherUser = userDao.getUserByUserId(userId);
 
                     HttpSession session = req.getSession();
-                    session.setAttribute("User", user);
+                    session.setAttribute("OtherUser", otherUser);*/
+
                     RequestDispatcher rd = req.getRequestDispatcher("/users.jsp");
                     rd.include(req, resp);
                 }
