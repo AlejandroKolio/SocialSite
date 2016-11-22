@@ -1,6 +1,8 @@
 <%@ page import="model.User" %>
 <%@ page import="dao.UserDao" %>
 <%@ page import="dao.UserDaoImp" %>
+<%@ page import="dao.FollowerDao" %>
+<%@ page import="dao.FollowerDaoImp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -36,8 +38,10 @@
                     <!-- User -->
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle user" data-toggle="dropdown">
-                            <img src="/images/people/110/guy-5.jpg" alt="User" class="img-circle" width="40"/> Alexander
-                            Shakhov <span class="caret"></span>
+                            <img src="/images/people/110/guy-5.jpg" alt="User" class="img-circle" width="40"/>
+                            <%User user = (User) session.getAttribute("User");%>
+                            <%= user.getFirstName() + " " + user.getLastName() %>
+                            <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="user-private-profile.html">Profile</a></li>
@@ -64,7 +68,8 @@
         <div data-scrollable>
             <div class="sidebar-block">
                 <div class="profile">
-                    <img src="/images/people/110/guy-5.jpg" alt="people" class="img-circle"/><h4>Alexander Shakhov</h4>
+                    <img src="/images/people/110/guy-5.jpg" alt="people" class="img-circle"/>
+                    <h4><%= user.getFirstName() + " " + user.getLastName() %></h4>
                 </div>
             </div>
             <h4 align="center" class="category">Account</h4>
@@ -343,19 +348,38 @@
                                         <img src="/images/people/110/guy-3.jpg" alt="" class="img-circle">
 
                                         <h3><%=request.getAttribute("userName")%></h3>
-                                        <c:set var="req" value="${pageContext.request}"/>
-                                        <%User user = (User) session.getAttribute("User");%>
 
-                                        <form action="/follow/<%=request.getAttribute("userId")%>;<%=user.getUserId()%>" method="post">
+                                        <%FollowerDao followerDao = (FollowerDao) request.getAttribute("followerDao");%>
+
+                                        <%if(!followerDao.isFollower((Integer)request.getAttribute("userId"), user.getUserId())) {%>
+                                            <form action="/follow/<%=(Integer)request.getAttribute("userId")%>;<%=user.getUserId()%>" method="post">
+                                                <button class="btn btn-primary btn-follow">
+                                                    <span class="follow"><i class="fa fa-chain"></i> Follow</span>
+                                                </button>
+                                            </form>
+                                        <%} else { %>
+                                        <form action="/unfollow/<%=(Integer)request.getAttribute("userId")%>;<%=user.getUserId()%>" method="post">
+                                            <button class="btn btn-danger btn-follow">
+                                                <span class="follow"><i class="fa fa-chain-broken"></i> Unfollow</span>
+                                            </button>
+                                        </form>
+                                        <% } %>
+
+                                        <%--
+                                        <form action="/follow/<%=(Integer)request.getAttribute("userId")%>;<%=user.getUserId()%>" method="post">
                                         <button class="btn btn-primary btn-follow">
                                             <span class="follow"><i class="fa fa-user-plus"></i> Follow</span>
                                             <span class="unfollow">Unfollow</span>
                                             <span class="following">Following</span>
                                         </button>
                                         </form>
+                                        --%>
+
                                         <%--<a href="" class="btn btn-success">Following <i class="fa fa-check-circle fa-fw"></i></a>--%>
                                         <%--<a href="#" class="btn btn-default btn-sm">Follow <i class="fa fa-share"></i></a>--%>
                                         <%--<a href=/follow/<%=user.getUserId()%>">Follow</a>--%>
+
+
                                     </div>
 
                                     <div class="profile-icons margin-none">
@@ -375,7 +399,9 @@
                                     <input type="text" class="form-control share-text" placeholder="Write message...">
                                 </div>
                             </div>
+
                         </div>
+
                     </div>
 
                 </div>
@@ -442,9 +468,9 @@
     };
 </script>
 
-<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<%--<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
-<script src="/js/follow_unfollow.js"></script>
+<script src="/js/follow_unfollow.js"></script>--%>
 
 <script src="/js/vendor/all.js"></script>
 <script src="/js/app/app.js"></script>

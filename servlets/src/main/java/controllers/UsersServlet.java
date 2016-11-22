@@ -21,7 +21,7 @@ import java.util.List;
  * Created by Aleksandr_Shakhov on 14.11.16 20:51.
  */
 
-@WebServlet(urlPatterns = "/users/*")
+@WebServlet(urlPatterns = "/users")
 public class UsersServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -35,32 +35,26 @@ public class UsersServlet extends HttpServlet {
 
         if (req.getPathInfo() == null) {
             List<User> users = service.getUsers();
+
             req.setAttribute("users", users);
+
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/users.jsp");
             requestDispatcher.forward(req, resp);
         } else {
             String[] tokens = req.getPathInfo().split("/");
             try {
                 if (tokens != null && tokens.length >= 2) {
+
                     int userId = Integer.parseInt(tokens[1]);
-
-/*                    UserDao userDao = new UserDaoImp();
-                    User otherUser = userDao.getUserByUserId(userId);
-
-                    HttpSession session = req.getSession();
-                    session.setAttribute("OtherUser", otherUser);*/
 
                     RequestDispatcher rd = req.getRequestDispatcher("/users.jsp");
                     rd.include(req, resp);
+                } else {
+                    // TODO: 18.11.16
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
     }
 }

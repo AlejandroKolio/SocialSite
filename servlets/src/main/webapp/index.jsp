@@ -9,8 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Profile</title>
-    <link href="css/vendor/all.css" rel="stylesheet">
-    <link href="css/app/app.css" rel="stylesheet">
+    <link href="/css/vendor/all.css" rel="stylesheet">
+    <link href="/css/app/app.css" rel="stylesheet">
 </head>
 
 <body>
@@ -74,9 +74,10 @@
             <ul class="sidebar-menu">
                 <li class="active"><a href="/profile"><i class="icon-user-1"></i> <span>Profile</span></a></li>
                 <li><a href="#"><i class="fa fa-camera-retro"></i> <span>Photos</span></a></li>
-                <li><a href="/users"><i class="fa fa-group"></i> <span>Friends</span></a></li>
+                <li><a href="/users"><i class="fa fa-group"></i> <span>People</span></a></li>
                 <li><a href="#"><i class="icon-comment-fill-1"></i> <span>Messages</span></a></li>
                 <li><a href="#"><i class="icon-unlock-fill"></i> <span>Logout</span></a></li>
+                <li><a href="/posts"><i class="fa fa-text-width"></i> <span> Posts</span></a></li>
             </ul>
         </div>
     </div>
@@ -334,6 +335,15 @@
 
                 <div class="container-fluid">
                     <h1>Blank Page!</h1>
+
+                    <form action="/UploadServlet" method="post"
+                          enctype="multipart/form-data">
+                        <input type="file" name="file" size="50" />
+                        <br />
+                        <input type="submit" value="Upload File" />
+                    </form>
+
+
                 </div>
 
             </div><!--end of st-content-inner-->
@@ -387,6 +397,6 @@
     };
 </script>
 
-<script src="js/vendor/all.js"></script>
-<script src="js/app/app.js"></script>
+<script src="/js/vendor/all.js"></script>
+<script src="/js/app/app.js"></script>
 </body>

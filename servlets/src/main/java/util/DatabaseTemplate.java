@@ -65,6 +65,36 @@ public class DatabaseTemplate {
         }
     }
 
+    public static boolean executeIsRegisteredStatement(String query, int id) {
+        PreparedStatement preparedStatement = createPreparedStatement(query, id);
+        try {
+           int i = preparedStatement.executeUpdate();
+            if(i != 1) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
+    public static boolean executeIsFollower(String query, int one_id, int two_id) {
+        PreparedStatement preparedStatement = createPreparedStatement(query, one_id, two_id);
+        try {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
     private static PreparedStatement createPreparedStatement(String query, Object... parameters) {
         Connection conToUse;
         PreparedStatement preparedStatement = null;
@@ -104,4 +134,6 @@ public class DatabaseTemplate {
             throw new RuntimeException(e);
         }
     }
+
+
 }

@@ -68,7 +68,9 @@ public class LoginServlet extends HttpServlet {
 
             if (user != null) {
                 logger.info("User found with details = " + user);
+
                 HttpSession session = request.getSession();
+
                 session.setAttribute("User", user);
                 response.sendRedirect("/profile");
             } else {

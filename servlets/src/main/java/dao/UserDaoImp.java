@@ -33,6 +33,7 @@ public class UserDaoImp implements UserDao {
     private final String GET_USER_BY_EMAIL  = "SELECT * FROM user WHERE email = ?";
     private final String GET_USER_BY_ID     = "SELECT * FROM user WHERE user_id = ?";
     private final String GET_ALL_USERS      = "SELECT * FROM user";
+    private final String IS_REGISTERED      = "SELECT * FROM user WHERE user_id = ?;";
 
 
     @Override
@@ -72,6 +73,16 @@ public class UserDaoImp implements UserDao {
 
         if (userList.size() != 0) {
             return userList.get(0);
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public User isRegisteredId(int userId) {
+        List<User> user = DatabaseTemplate.executeQueryForObject(new UserRowMapper(), IS_REGISTERED, userId);
+        if (user.size() != 0) {
+            return user.get(0);
         } else {
             return null;
         }

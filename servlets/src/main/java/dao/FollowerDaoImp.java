@@ -20,4 +20,10 @@ public class FollowerDaoImp implements FollowerDao {
         String unFollow = "DELETE FROM follower WHERE user_id = ? AND follower_id = ?;";
         DatabaseTemplate.executeInsertQuery(unFollow, userId, followerId);
     }
+
+    @Override
+    public boolean isFollower(int userId, int followerId) {
+        String isFollower = "SELECT user_id, follower_id FROM follower WHERE user_id = ? AND follower_id = ?;";
+        return DatabaseTemplate.executeIsFollower(isFollower, userId, followerId);
+    }
 }

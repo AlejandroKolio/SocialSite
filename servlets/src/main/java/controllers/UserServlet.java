@@ -1,5 +1,7 @@
 package controllers;
 
+import dao.FollowerDao;
+import dao.FollowerDaoImp;
 import dao.UserDao;
 import dao.UserDaoImp;
 import model.User;
@@ -32,20 +34,44 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String[] tokens = request.getPathInfo().split("/");
+
         try {
             if (tokens != null && tokens.length >= 2) {
                 int userId = Integer.parseInt(tokens[1]);
 
                 UserDao userDao = new UserDaoImp();
-                User user = userDao.getUserByUserId(userId);
-                String userName = user.getFirstName() + " " + user.getLastName();
+                FollowerDao followerDao = new FollowerDaoImp();
 
-                request.setAttribute("userId", userId);
-                request.setAttribute("userName", userName);
+                if(userDao.isRegisteredId(userId) != null) {
 
-                RequestDispatcher rd = request.getRequestDispatcher("/user.jsp");
-                rd.forward(request, response);
+                    User user = userDao.getUserByUserId(userId);
+
+                    String userName = user.getFirstName() + " " + user.getLastName();
+
+                    request.setAttribute("userId", userId);
+                    request.setAttribute("userName", userName);
+                    request.setAttribute("followerDao", followerDao);
+
+                    RequestDispatcher rd = request.getRequestDispatcher("/user.jsp");
+                    rd.forward(request, response);
+                } else {
+                    response.setContentType("text/html");
+                    PrintWriter out = response.getWriter();
+                    out.write("<html><head>" +
+                              "<link href=\"/css/vendor/all.css\" rel=\"stylesheet\">" +
+                              "<link href=\"/css/app/app.css\" rel=\"stylesheet\">" +
+                              "<title align=\"center\">No such ID</title>" +
+                              "</head><body class=\"login\"");
+                    out.write("<strong style=\"color: papayawhip\" align = center>" +
+                              "<h5>User's page deleted or not registered yet</h5></strong><br>");
+                    out.write("<img align=\"center\" src=\"/images/people/userpic-default.png\" alt=\"people\" class=\"img-circle\"/>");
+                    out.write("<p><a style=\"color: papayawhip\" href=\"/users\">Go back to community</a></p>");
+                    out.write("</body></html>");
+                }
+            } else {
+                /*NOP*/
             }
         } catch (Exception ex) {
             ex.printStackTrace();

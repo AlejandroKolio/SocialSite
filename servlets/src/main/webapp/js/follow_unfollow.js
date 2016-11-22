@@ -34,6 +34,7 @@ $('.btn-follow').click(function(){
 		$('.following').show();
 		
 		// follow ajax here
+
 	}
 	
 });

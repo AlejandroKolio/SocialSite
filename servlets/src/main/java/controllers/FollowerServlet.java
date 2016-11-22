@@ -2,6 +2,9 @@ package controllers;
 
 import dao.FollowerDao;
 import dao.FollowerDaoImp;
+import dao.UserDao;
+import dao.UserDaoImp;
+import model.User;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,28 +26,28 @@ public class FollowerServlet extends HttpServlet {
     private FollowerDao followerDao = new FollowerDaoImp();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int followerId = 0;
-        if (request.getRequestURI().matches("/follow/\\d+;\\d+")) {
 
-            String[] id = request.getRequestURI().split(";");
-            int userId = Integer.parseInt(id[1]);
+        String[] token = request.getPathInfo().split("/");
+        int userToFollowID = Integer.parseInt(token[1]);
+        int followerId = getFollowerId(request);
 
-            followerId = getFollowerId(request);
-            followerDao.follow(userId, followerId);
+        try {
+            if (request.getRequestURI().matches("/follow/\\d+;\\d+")) {
+                followerDao.follow(userToFollowID, followerId);
+            } else if (request.getRequestURI().matches("/unfollow/\\d+;\\d+")) {
+                followerDao.unFollow(userToFollowID, followerId);
+            }
+
+            response.sendRedirect("/users");
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        PrintWriter out = response.getWriter();
-        out.write("<br><br><p>You are now following this guy</p>");
-        response.sendRedirect("/posts");
     }
 
     private int getFollowerId(HttpServletRequest req) {
-        String[] urlTokens = req.getPathInfo().split("/");
+        String[] urlTokens = req.getRequestURI().split(";");
 
         if (urlTokens != null && urlTokens.length >= 2) {
             try {
@@ -57,5 +60,4 @@ public class FollowerServlet extends HttpServlet {
         }
         return -1;
     }
-
 }

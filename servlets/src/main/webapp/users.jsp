@@ -33,7 +33,7 @@
                     <!-- User -->
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle user" data-toggle="dropdown">
-                            <img src="images/people/110/guy-5.jpg" alt="User" class="img-circle" width="40"/>
+                            <img src="/images/people/110/guy-5.jpg" alt="User" class="img-circle" width="40"/>
                             <%User user = (User) session.getAttribute("User");%>
                             <%= user.getFirstName() + " " + user.getLastName() %>
                             <span class="caret"></span>
@@ -333,10 +333,6 @@
 
                 <div class="container-fluid">
                     <h4>List of Users</h4>
-
-
-
-
 
                     <div class="panel panel-default">
                         <!-- Progress table -->

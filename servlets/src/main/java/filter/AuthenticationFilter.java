@@ -31,7 +31,7 @@ public class AuthenticationFilter implements Filter {
         HttpSession session = ((HttpServletRequest) servletRequest).getSession(false);
         String requestedUri = ((HttpServletRequest) servletRequest).getRequestURI();
 
-        if (session == null || session.getAttribute("authenticatedUser") == null) {
+        if (session == null || session.getAttribute("User") == null) {
             if (requestedUri.contains("login") || requestedUri.contains("registration")) {
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {
