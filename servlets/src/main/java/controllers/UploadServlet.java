@@ -1,5 +1,8 @@
 package controllers;
 
+import dao.UserDao;
+import dao.UserDaoImp;
+import model.User;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -29,6 +32,7 @@ public class UploadServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         int id = getUserId(request);
+        UserDao userDao = new UserDaoImp();
 
         String commonFolder = "/usr/local/Cellar/tomcat/domains/SocialSite/uploads/avatar/";
         String personFolder = commonFolder + String.valueOf(id);
@@ -47,14 +51,18 @@ public class UploadServlet extends HttpServlet {
         System.out.println("Upload File Directory = " + personal.getAbsolutePath());
 
         //Get all the parts from request and write it to the file on server
+        String fileName = "";
         for (Part part : request.getParts()) {
-            String fileName = setFileName(part);
+            fileName = setFileName(part);
 
             part.write(personal + File.separator + fileName);
         }
 
+        userDao.updateAvatar(getPathForDB(personal.getAbsolutePath()) + fileName, id);
+
         request.setAttribute("message", "Photo uploaded successfully!");
-        getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+        response.sendRedirect("/profile");
+        //getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
     private String setFileName(Part part) {
@@ -87,6 +95,13 @@ public class UploadServlet extends HttpServlet {
             }
         }
         return -1;
+    }
+
+    private String getPathForDB(String path) {
+        StringBuilder sb = new StringBuilder();
+        int begin = path.indexOf("/uploads");
+
+        return sb.append(path.substring(begin, path.length())).append("/").toString();
     }
 
 }
