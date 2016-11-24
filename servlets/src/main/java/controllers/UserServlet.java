@@ -47,12 +47,14 @@ public class UserServlet extends HttpServlet {
                 if(userDao.isRegisteredId(userId) != null) {
 
                     User user = userDao.getUserByUserId(userId);
+                    String avatar = user.getAvatar();
 
                     String userName = user.getFirstName() + " " + user.getLastName();
 
                     request.setAttribute("userId", userId);
                     request.setAttribute("userName", userName);
                     request.setAttribute("followerDao", followerDao);
+                    request.setAttribute("avatar", avatar);
 
                     RequestDispatcher rd = request.getRequestDispatcher("/user.jsp");
                     rd.forward(request, response);

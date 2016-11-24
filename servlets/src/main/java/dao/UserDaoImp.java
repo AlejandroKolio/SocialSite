@@ -30,12 +30,12 @@ public class UserDaoImp implements UserDao {
     }
 
     private final String INSERT_USER        = "INSERT INTO user(first_name, last_name, email, password) VALUES (?,?,?,?)";
-    private final String GET_USER_BY_NAME   = "SELECT * FROM user WHERE name = ?";
-    private final String GET_USER_BY_EMAIL  = "SELECT * FROM user WHERE email = ?";
-    private final String GET_USER_BY_ID     = "SELECT * FROM user WHERE user_id = ?";
+    private final String GET_USER_BY_NAME   = "SELECT * FROM user WHERE name = ?;";
+    private final String GET_USER_BY_EMAIL  = "SELECT * FROM user WHERE email = ?;";
+    private final String GET_USER_BY_ID     = "SELECT * FROM user WHERE user_id = ?;";
     private final String GET_ALL_USERS      = "SELECT * FROM user";
     private final String IS_REGISTERED      = "SELECT * FROM user WHERE user_id = ?;";
-    private final String GET_AVATAR         = "SELECT avatar FROM user WHERE user_id = ?";
+    private final String GET_AVATAR         = "SELECT avatar FROM user WHERE user_id = ?;";
     private final String SET_AVATAR         = "UPDATE user SET avatar = ? WHERE user_id = ?;";
 
 

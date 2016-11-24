@@ -30,11 +30,15 @@
 
                 <ul class="nav navbar-nav">
                     <!-- User -->
+
+                    <%User user = (User) session.getAttribute("User");%>
+                    <%String avatar = user.getAvatar();%>
+
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle user" data-toggle="dropdown">
-                            <img src="images/people/110/guy-5.jpg" alt="User" class="img-circle" width="40"/>
+                            <img src="<%=avatar%>" alt="User" class="img-circle" width="40"/>
 
-                            <%User user = (User) session.getAttribute("User");%>
+
                             <%= user.getFirstName() + " " + user.getLastName() %>
 
                             <span class="caret"></span>
@@ -64,7 +68,8 @@
         <div data-scrollable>
             <div class="sidebar-block">
                 <div class="profile">
-                    <img src="/usr/local/Cellar/tomcat/domains/SocialSite/webapps/default_user.jpg" alt="people" class="img-circle"/>
+
+                    <img src="<%=avatar%>" alt="people" class="img-circle"/>
 
                     <h4><%= user.getFirstName() + " " + user.getLastName() %>
                     </h4>

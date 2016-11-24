@@ -59,6 +59,7 @@ public class LoginServlet extends HttpServlet {
         } else {
             User user = new User();
 
+
             user.setEmail(request.getParameter("email"));
             user.setPassword(request.getParameter("password"));
 
@@ -69,7 +70,11 @@ public class LoginServlet extends HttpServlet {
 
                 HttpSession session = request.getSession();
 
+                String avatar = user.getAvatar();
+
                 session.setAttribute("User", user);
+                request.setAttribute("avatar", avatar);
+
                 response.sendRedirect("/profile");
             } else {
                 PrintWriter out = response.getWriter();
