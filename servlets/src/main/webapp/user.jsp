@@ -53,6 +53,7 @@
                             <li><a href="login.html">Logout</a></li>
                         </ul>
                     </li><!--end of User-->
+
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
