@@ -24,6 +24,7 @@ public class UserDaoImp implements UserDao {
             user.setLastName(resultSet.getString("last_name"));
             user.setPassword(resultSet.getString("password"));
             user.setEmail(resultSet.getString("email"));
+            user.setAvatar(resultSet.getString("avatar"));
             return user;
         }
     }
@@ -34,6 +35,8 @@ public class UserDaoImp implements UserDao {
     private final String GET_USER_BY_ID     = "SELECT * FROM user WHERE user_id = ?";
     private final String GET_ALL_USERS      = "SELECT * FROM user";
     private final String IS_REGISTERED      = "SELECT * FROM user WHERE user_id = ?;";
+    private final String GET_AVATAR         = "SELECT avatar FROM user WHERE user_id = ?";
+    private final String SET_AVATAR         = "UPDATE user SET avatar = ? WHERE user_id = ?;";
 
 
     @Override
@@ -86,5 +89,24 @@ public class UserDaoImp implements UserDao {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public String getPathToAvatarByUserId(int userId) {
+        String avatar = "";
+        List<User> user = DatabaseTemplate.executeQueryForObject(new UserRowMapper(), GET_AVATAR, userId);
+        for(User u : user) {
+            avatar = u.getAvatar();
+        }
+        if (!avatar.equals("")) {
+            return avatar;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public void setPathToAvatarByUserId(String path, int userId) {
+        DatabaseTemplate.executeInsertQuery(SET_AVATAR, path, userId);
     }
 }

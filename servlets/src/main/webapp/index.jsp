@@ -64,9 +64,10 @@
         <div data-scrollable>
             <div class="sidebar-block">
                 <div class="profile">
-                    <img src="images/people/110/guy-5.jpg" alt="people" class="img-circle"/>
+                    <img src="/usr/local/Cellar/tomcat/domains/SocialSite/webapps/default_user.jpg" alt="people" class="img-circle"/>
 
-                    <h4> <%= user.getFirstName() + " " + user.getLastName() %> </h4>
+                    <h4><%= user.getFirstName() + " " + user.getLastName() %>
+                    </h4>
 
                 </div>
             </div>
@@ -270,7 +271,8 @@
                 </div><!--end of split-vertical-cell-->
             </div><!--end of split-vertical-body-->
         </div><!--end of split-vertical-->
-    </div><!--end of sidebar sidebar-chat right sidebar-size-2 sidebar-offset-0 chat-skin-white sidebar-visible-mobile-->
+    </div>
+    <!--end of sidebar sidebar-chat right sidebar-size-2 sidebar-offset-0 chat-skin-white sidebar-visible-mobile-->
 
     <!--Chat Script-->
     <script id="chat-window-template" type="text/x-handlebars-template">
@@ -334,14 +336,47 @@
             <div class="st-content-inner">
 
                 <div class="container-fluid">
-                    <h1>Blank Page!</h1>
 
-                    <form action="/UploadServlet" method="post"
-                          enctype="multipart/form-data">
-                        <input type="file" name="file" size="50" />
-                        <br />
-                        <input type="submit" value="Upload File" />
-                    </form>
+
+                    <div class="row gridalicious" data-toggle="gridalicious">
+                        <div class="tabbable tabs-primary">
+
+                            <!-- Tabs -->
+                            <ul class="nav nav-tabs" tabindex="2" style="overflow: hidden; outline: none;">
+                                <li class="active"><a href="#color-profile" data-toggle="tab" aria-expanded="false">
+                                    <i class="fa fa-fw fa-home"></i> Profile</a>
+                                </li>
+                                <li class=""><a href="#color-settings" data-toggle="tab" aria-expanded="false">
+                                    <i class="fa fa-fw fa-user"></i> Picture</a>
+                                </li>
+                            </ul>
+                            <!-- // END Tabs -->
+
+                            <!-- Panes -->
+                            <div class="tab-content">
+                                <div id="color-profile" class="tab-pane active">
+
+                                    <form action="/upload/<%=user.getUserId()%>" method="post"
+                                          enctype="multipart/form-data">
+                                        <label for="fusk">Click me first to choose photo and then upload</label>
+                                        <input id="fusk" type="file" name="photo" style="display: none;">
+                                        <br/>
+                                        <button type="submit" value="Upload File" class="btn btn-info btn-xs"><i
+                                                class="fa fa-download"></i> Upload
+                                        </button>
+                                    </form>
+                                    <h5>${requestScope.message}</h5>
+                                </div>
+                                <div id="color-settings" class="tab-pane">
+                                    Test 2
+                                </div>
+                            </div>
+                            <!-- // END Panes -->
+                        </div>
+                    </div>
+
+
+
 
 
                 </div>

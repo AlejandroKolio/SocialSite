@@ -48,9 +48,10 @@ public class DatabaseConnectionPool {
         comboPooledDataSource.setUser(USER_NAME);
         comboPooledDataSource.setPassword(PASSWORD);
 
-        comboPooledDataSource.setMinPoolSize(15);
-        comboPooledDataSource.setAcquireIncrement(15);
+        comboPooledDataSource.setMinPoolSize(5);
+        comboPooledDataSource.setAcquireIncrement(5);
         comboPooledDataSource.setMaxPoolSize(50);
+        comboPooledDataSource.setMaxStatements(180);
 
         return comboPooledDataSource;
     }

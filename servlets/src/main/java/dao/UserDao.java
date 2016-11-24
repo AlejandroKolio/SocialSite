@@ -10,14 +10,12 @@ import java.util.List;
 
 public interface UserDao {
     User getUserByEmail(String email);
-
     void saveUser(User user);
-
     List<User> getUserByName(String userName);
-
     List<User> getUsers();
-
     User getUserByUserId(int userId);
-
     User isRegisteredId(int userId);
+
+    String getPathToAvatarByUserId(int userId);
+    void setPathToAvatarByUserId(String path, int userId);
 }
