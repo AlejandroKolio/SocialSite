@@ -34,6 +34,12 @@ public class DatabaseConnectionPool {
         catch (PropertyVetoException ex) {
             ex.printStackTrace();
             throw new RuntimeException(ex);
+        } finally {
+            try {
+                dataSource.getConnection().close();
+            } catch (SQLException e) {
+                e.getErrorCode();
+            }
         }
     }
 
@@ -52,9 +58,8 @@ public class DatabaseConnectionPool {
 
         cpds.setMinPoolSize(5);
         cpds.setAcquireIncrement(5);
-        cpds.setMaxPoolSize(180);
+        cpds.setMaxPoolSize(100);
         cpds.setAcquireIncrement(1);
-        cpds.setMaxIdleTime(1800);
         cpds.setUnreturnedConnectionTimeout(10);
 
         return cpds;

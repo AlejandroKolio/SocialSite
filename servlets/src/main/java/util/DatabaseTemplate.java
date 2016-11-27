@@ -89,11 +89,10 @@ public class DatabaseTemplate {
         PreparedStatement preparedStatement = null;
 
         try {
-            /*connection = ConnectionPool.create("/Users/alexandershakhov/Developer/SocialSite/servlets/src/main/resources/db.properties")
-                    .getConnectionQueue().take();*/
             connection = getConnection();
             preparedStatement = connection.prepareStatement(query);
             int i = 1;
+
             for (Object parameter : parameters) {
                 if (parameter instanceof String) {
                     preparedStatement.setString(i, (String) parameter);

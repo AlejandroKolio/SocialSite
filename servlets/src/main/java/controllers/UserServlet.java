@@ -4,8 +4,11 @@ import dao.FollowerDao;
 import dao.FollowerDaoImp;
 import dao.UserDao;
 import dao.UserDaoImp;
+import model.Post;
 import model.User;
 import org.apache.log4j.Logger;
+import services.PostService;
+import services.PostServiceImp;
 import services.UserService;
 import services.UserServiceImp;
 
@@ -18,19 +21,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 
 /**
  * Created by Aleksandr_Shakhov on 16.11.16 12:16.
  */
 
-@WebServlet(urlPatterns = "/user/*")
+@WebServlet(urlPatterns = {"/user/*"})
 public class UserServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
 
     static Logger logger = Logger.getLogger(UserServlet.class);
 
     private UserService service = new UserServiceImp();
+    private PostService postService = new PostServiceImp();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,12 +53,15 @@ public class UserServlet extends HttpServlet {
                     User user = userDao.getUserByUserId(userId);
                     String avatar = user.getAvatar();
 
+                    List<Post> posts = postService.getPostOfFriends(user);
+
                     String userName = user.getFirstName() + " " + user.getLastName();
 
                     request.setAttribute("userId", userId);
                     request.setAttribute("userName", userName);
                     request.setAttribute("followerDao", followerDao);
                     request.setAttribute("avatar", avatar);
+                    request.setAttribute("posts", posts);
 
                     RequestDispatcher rd = request.getRequestDispatcher("/user.jsp");
                     rd.forward(request, response);
@@ -72,8 +79,6 @@ public class UserServlet extends HttpServlet {
                     out.write("<p><a style=\"color: papayawhip\" href=\"/users\">Go back to community</a></p>");
                     out.write("</body></html>");
                 }
-            } else {
-                /*NOP*/
             }
         } catch (Exception ex) {
             ex.printStackTrace();

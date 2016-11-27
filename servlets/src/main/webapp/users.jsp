@@ -357,7 +357,7 @@
                                 <tr>
                                     <td></td>
                                     <td><img src="${user.avatar}" width="40" class="img-circle">
-                                        <a href="/user/${user.userId}">  ${user.firstName} ${user.lastName}</a>
+                                        <a href="/user/${user.userId}/posts">  ${user.firstName} ${user.lastName}</a>
                                     </td>
                                     <td><a href="#">${user.email}</a></td>
                                 </tr>

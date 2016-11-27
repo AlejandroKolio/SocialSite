@@ -375,6 +375,7 @@
                                         <span><i class="fa fa-photo"></i> 43</span>
                                         <span><i class="fa fa-video-camera"></i> 3</span>
                                     </div>
+                                    <a href="/friendposts">Posts</a>
                                 </div>
                             </div>
                         </div>
@@ -388,9 +389,91 @@
                                 </div>
                             </div>
 
-                        </div>
 
+
+
+                            <div class="timeline row" data-toggle="isotope" style="position: relative; height: 5866.5px;">
+                                <div class="col-xs-12 col-md-6 col-lg-4 item" style="position: absolute; left: 0px; top: 4907px;">
+
+                                    <c:forEach items="${requestScope.posts}" var="post">
+                                    <div class="timeline-block">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <div class="media">
+                                                    <div class="media-left">
+                                                        <a href="">
+                                                            <img src="${post.user.avatar}" class="media-object" width="50">
+                                                        </a>
+                                                    </div>
+
+                                                    <div class="media-body">
+                                                        <a href="#" class="pull-right text-muted"><i class="icon-reply-all-fill fa fa-2x "></i></a>
+                                                        <a href="">${post.user.firstName} ${post.user.lastName}</a>
+                                                        <span>${post.date}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="panel-body">
+                                                <p>${post.date}</p>
+                                            </div>
+
+                                            <div class="view-all-comments">
+                                                <a href="#">
+                                                    <i class="fa fa-comments-o"></i> View all
+                                                </a>
+                                                <span>10 comments</span>
+                                            </div>
+
+                                            <ul class="comments">
+
+                                                <li class="media">
+                                                    <div class="media-left">
+                                                        <a href="">
+                                                            <img src="/images/people/50/guy-5.jpg" class="media-object">
+                                                        </a>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <div class="pull-right dropdown" data-show-hover="li" style="display: none;">
+                                                            <a href="#" data-toggle="dropdown" class="toggle-button">
+                                                                <i class="fa fa-pencil"></i>
+                                                            </a>
+                                                            <ul class="dropdown-menu" role="menu">
+                                                                <li><a href="#">Edit</a></li>
+                                                                <li><a href="#">Delete</a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <a href="" class="comment-author pull-left">Bill D.</a>
+                                                        <span>Hi Mary, Nice Party</span>
+                                                        <div class="comment-date">21st September</div>
+                                                    </div>
+                                                </li>
+
+                                                <li class="comment-form">
+                                                    <div class="input-group">
+					                        <span class="input-group-btn">
+					                   			<a href="" class="btn btn-default"><i class="fa fa-photo"></i></a>
+					               			</span>
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    </c:forEach>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+                        </div>
                     </div>
+
+
 
                 </div>
 

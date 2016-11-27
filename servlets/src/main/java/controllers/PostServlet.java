@@ -22,7 +22,7 @@ import java.util.List;
  * Created by Aleksandr_Shakhov on 17.11.16 21:28.
  */
 
-@WebServlet(urlPatterns = {"/posts", "/post/"})
+@WebServlet(urlPatterns = {"/posts"})
 public class PostServlet extends HttpServlet {
 
     static Logger logger = Logger.getLogger(PostServlet.class);
@@ -32,7 +32,7 @@ public class PostServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getPathInfo() == null) {
+        if (request.getPathInfo() == null && request.getRequestURI().equals("/posts")) {
 
             User user = (User) request.getSession().getAttribute("User");
             List<Post> posts = postService.getPostOfUser(user);
@@ -42,8 +42,6 @@ public class PostServlet extends HttpServlet {
 
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/posts.jsp");
             requestDispatcher.forward(request, response);
-        } else {
-            //
         }
     }
 
@@ -83,7 +81,7 @@ public class PostServlet extends HttpServlet {
 
     private void showFollowersPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        User user = (User) request.getSession().getAttribute("User");
+        User user = (User) request.getAttribute("userId");
 
         List<Post> posts = postService.getPostOfFriends(user);
 

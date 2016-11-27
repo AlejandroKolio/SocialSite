@@ -374,8 +374,10 @@
                                                 <button type="submit" class="btn btn-primary btn-xs pull-right display-none">Post</button>
                                             </div>
                                         </form>
-
                                     </div>
+
+
+
                                 </div>
                             </div>
                         </div><!--END OF THOUGHTS-->
