@@ -12,24 +12,12 @@ import static util.DatabaseConnectionPool.getConnection;
 
 public class DatabaseTemplate {
 
-
-
     public static void execute(String query) {
-        Connection connection = null;
-        Statement statement = null;
-        try {
-            connection = getConnection();
-            statement = connection.createStatement();
+        try(Connection connection = getConnection();
+        Statement statement = connection.createStatement()) {
             statement.executeQuery(query);
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
-            try {
-                statement.close();
-            } catch (SQLException e) {
-                closeConnection(connection);
-                throw new RuntimeException(e);
-            }
         }
     }
 
@@ -45,12 +33,17 @@ public class DatabaseTemplate {
             return listOfE;
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            try {
+                closeConnection(getConnection());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     public static void executeInsertQuery(String query, Object... parameters) {
-        PreparedStatement preparedStatement = createPreparedStatement(query, parameters);
-        try {
+        try (PreparedStatement preparedStatement = createPreparedStatement(query, parameters)) {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException();
@@ -58,9 +51,8 @@ public class DatabaseTemplate {
     }
 
     public static boolean executeIsFollower(String query, int one_id, int two_id) {
-        PreparedStatement preparedStatement = createPreparedStatement(query, one_id, two_id);
-        try {
-            ResultSet resultSet = preparedStatement.executeQuery();
+        try (PreparedStatement preparedStatement = createPreparedStatement(query, one_id, two_id);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
             if (resultSet.next()) {
                 return true;
             } else {
