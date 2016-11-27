@@ -19,8 +19,11 @@ import java.io.IOException;
 @WebServlet(name = "ProfileServlet", urlPatterns = "/profile")
 public class ProfileServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("index.jsp");
-        requestDispatcher.forward(req, resp);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String avatar = (String)request.getAttribute("avatar");
+
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
+        requestDispatcher.forward(request, response);
     }
 }

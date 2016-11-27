@@ -1,4 +1,5 @@
-<%@page import="model.User" %>
+<%@ page import="model.User" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=US-ASCII" pageEncoding="US-ASCII" %>
 <!DOCTYPE html>
 <html class="st-layout ls-top-navbar ls-bottom-footer show-sidebar sidebar-l2" lang="en">
@@ -69,10 +70,19 @@
             <div class="sidebar-block">
                 <div class="profile">
 
-                    <img src="<%=avatar%>" alt="people" class="img-circle"/>
-
+                    <img src="<%=avatar%>" alt="people" class="img-circle" width="110"/>
                     <h4><%= user.getFirstName() + " " + user.getLastName() %>
                     </h4>
+
+                    <form action="/upload/<%=user.getUserId()%>" method="post"
+                          enctype="multipart/form-data">
+                        <label for="fusk" style="color: antiquewhite">Click me first to change photo</label>
+                        <input id="fusk" type="file" name="photo" style="display: none;">
+                        <br/>
+                        <button type="submit" value="Upload File" class="btn btn-info btn-xs"><i
+                                class="fa fa-download"></i> Upload
+                        </button>
+                    </form>
 
                 </div>
             </div>
@@ -82,7 +92,7 @@
                 <li><a href="#"><i class="fa fa-camera-retro"></i> <span>Photos</span></a></li>
                 <li><a href="/users"><i class="fa fa-group"></i> <span>People</span></a></li>
                 <li><a href="#"><i class="icon-comment-fill-1"></i> <span>Messages</span></a></li>
-                <li><a href="#"><i class="icon-unlock-fill"></i> <span>Logout</span></a></li>
+                <li><a href="Logout"><i class="icon-unlock-fill"></i> <span>Logout</span></a></li>
                 <li><a href="/posts"><i class="fa fa-text-width"></i> <span> Posts</span></a></li>
             </ul>
         </div>
@@ -341,51 +351,37 @@
             <div class="st-content-inner">
 
                 <div class="container-fluid">
+                    <div class="row">
 
+                        <!--SHARING THOUGHTS-->
+                        <div class="col-md-6">
+                            <div class="panel-body">
+                                <div class="timeline-block">
+                                    <div class="panel panel-default share clearfix-xs">
+                                        <div class="panel-heading panel-heading-gray title">What's new</div>
 
-                    <div class="row gridalicious" data-toggle="gridalicious">
-                        <div class="tabbable tabs-primary">
+                                        <form action="/posts" method="get" >
+                                            <div class="panel-body">
+                                                <textarea name="status" class="form-control share-text" rows="3"
+                                                          placeholder="Share your thoughts..."
+                                                          style="margin: 0px -7px 0px 0px; height: 60px; width: 338px;">
+                                                </textarea>
+                                            </div>
+                                            <div class="panel-footer share-buttons">
+                                                <a href="#"><i class="fa fa-map-marker"></i></a>
+                                                <a href="#"><i class="fa fa-photo"></i></a>
+                                                <a href="#"><i class="fa fa-video-camera"></i></a>
+                                                <button type="submit" class="btn btn-primary btn-xs pull-right display-none">Post</button>
+                                            </div>
+                                        </form>
 
-                            <!-- Tabs -->
-                            <ul class="nav nav-tabs" tabindex="2" style="overflow: hidden; outline: none;">
-                                <li class="active"><a href="#color-profile" data-toggle="tab" aria-expanded="false">
-                                    <i class="fa fa-fw fa-home"></i> Profile</a>
-                                </li>
-                                <li class=""><a href="#color-settings" data-toggle="tab" aria-expanded="false">
-                                    <i class="fa fa-fw fa-user"></i> Picture</a>
-                                </li>
-                            </ul>
-                            <!-- // END Tabs -->
-
-                            <!-- Panes -->
-                            <div class="tab-content">
-                                <div id="color-profile" class="tab-pane active">
-
-                                    <form action="/upload/<%=user.getUserId()%>" method="post"
-                                          enctype="multipart/form-data">
-                                        <label for="fusk">Click me first to choose photo and then upload</label>
-                                        <input id="fusk" type="file" name="photo" style="display: none;">
-                                        <br/>
-                                        <button type="submit" value="Upload File" class="btn btn-info btn-xs"><i
-                                                class="fa fa-download"></i> Upload
-                                        </button>
-                                    </form>
-                                    <h5>${requestScope.message}</h5>
-                                </div>
-                                <div id="color-settings" class="tab-pane">
-                                    Test 2
+                                    </div>
                                 </div>
                             </div>
-                            <!-- // END Panes -->
-                        </div>
+                        </div><!--END OF THOUGHTS-->
+
                     </div>
-
-
-
-
-
-                </div>
-
+                </div><!--container-fluid-->
             </div><!--end of st-content-inner-->
 
         </div><!--end of st-content-->
@@ -393,8 +389,7 @@
     <!-- Footer -->
     <footer class="footer">
         <strong>Social Network</strong> v1.0.0 &copy; Final Project 2016
-    </footer>
-    <!-- // Footer -->
+    </footer><!-- // Footer -->
 </div><!--end of st-container-->
 
 <!-- Inline Script for colors and config objects; used by various external scripts; -->
@@ -440,3 +435,4 @@
 <script src="/js/vendor/all.js"></script>
 <script src="/js/app/app.js"></script>
 </body>
+</html>

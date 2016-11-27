@@ -69,7 +69,7 @@
             <div class="sidebar-block">
                 <div class="profile">
 
-                    <img src="<%=avatar%>" alt="people" class="img-circle"/>
+                    <img src="<%=avatar%>" alt="people" class="img-circle" width="110"/>
                     <h4> <%= user.getFirstName() + " " + user.getLastName() %> </h4>
 
                 </div>
@@ -349,10 +349,8 @@
                                     <th width="1"></th>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    <th>Country</th>
                                 </tr>
                                 </thead>
-
 
                                 <tbody id="responsive-table-body">
                                 <c:forEach items="${requestScope.users}" var="user">
@@ -362,26 +360,11 @@
                                         <a href="/user/${user.userId}">  ${user.firstName} ${user.lastName}</a>
                                     </td>
                                     <td><a href="#">${user.email}</a></td>
-                                    <td>Miami, FL<a href="#"><i class="fa fa-map-marker fa-fw text-muted"></i></a></td>
-                                    <td></td>
                                 </tr>
                                 </c:forEach>
-
                                 </tbody>
-                            </table>
-                        </div>
-                        <!-- // Progress table -->
 
-                        <div class="panel-footer padding-none text-center">
-                            <ul class="pagination">
-                                <li class="disabled"><a href="#">?</a></li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">?</a></li>
-                            </ul>
+                            </table>
                         </div>
                     </div>
                     <table>

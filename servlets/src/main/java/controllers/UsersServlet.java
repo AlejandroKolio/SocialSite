@@ -24,8 +24,6 @@ import java.util.List;
 @WebServlet(urlPatterns = "/users")
 public class UsersServlet extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
-
     static Logger logger = Logger.getLogger(UsersServlet.class);
 
     private UserService service = new UserServiceImp();
@@ -36,6 +34,7 @@ public class UsersServlet extends HttpServlet {
         if (req.getPathInfo() == null) {
             List<User> users = service.getUsers();
 
+            logger.info(users);
             req.setAttribute("users", users);
 
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/users.jsp");

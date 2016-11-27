@@ -1,6 +1,7 @@
 package util;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.mchange.v2.c3p0.DataSources;
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
@@ -42,17 +43,20 @@ public class DatabaseConnectionPool {
 
     private static DataSource setUpDataSource() throws PropertyVetoException {
 
-        ComboPooledDataSource comboPooledDataSource = new ComboPooledDataSource();
-        comboPooledDataSource.setDriverClass(DRIVER_NAME);
-        comboPooledDataSource.setJdbcUrl(URL);
-        comboPooledDataSource.setUser(USER_NAME);
-        comboPooledDataSource.setPassword(PASSWORD);
+        ComboPooledDataSource cpds = new ComboPooledDataSource();
 
-        comboPooledDataSource.setMinPoolSize(5);
-        comboPooledDataSource.setAcquireIncrement(5);
-        comboPooledDataSource.setMaxPoolSize(50);
-        comboPooledDataSource.setMaxStatements(180);
+        cpds.setDriverClass(DRIVER_NAME);
+        cpds.setJdbcUrl(URL);
+        cpds.setUser(USER_NAME);
+        cpds.setPassword(PASSWORD);
 
-        return comboPooledDataSource;
+        cpds.setMinPoolSize(5);
+        cpds.setAcquireIncrement(5);
+        cpds.setMaxPoolSize(180);
+        cpds.setAcquireIncrement(1);
+        cpds.setMaxIdleTime(1800);
+        cpds.setUnreturnedConnectionTimeout(10);
+
+        return cpds;
     }
 }

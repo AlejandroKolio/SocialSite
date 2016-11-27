@@ -23,7 +23,7 @@ public class PostServiceImp implements PostService {
     }
 
     @Override
-    public List<Post> getPostOfUser(User user) {
+    public synchronized List<Post> getPostOfUser(User user) {
         List<Post> posts = postDao.getPostByUserID(user.getUserId());
         for (Post post : posts) {
             post.setUser(userDao.getUserByUserId(post.getUserID()));

@@ -61,8 +61,8 @@ public class UploadServlet extends HttpServlet {
         userDao.updateAvatar(getPathForDB(personal.getAbsolutePath()) + fileName, id);
 
         request.setAttribute("message", "Photo uploaded successfully!");
-        response.sendRedirect("/profile");
-        //getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+        response.sendRedirect("/users");
+        //getServletContext().getRequestDispatcher("/profile").forward(request, response);
     }
 
     private String setFileName(Part part) {

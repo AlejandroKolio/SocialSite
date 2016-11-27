@@ -70,7 +70,7 @@
         <div data-scrollable>
             <div class="sidebar-block">
                 <div class="profile">
-                    <img src="<%=avatar%>" alt="people" class="img-circle"/>
+                    <img src="<%=avatar%>" alt="people" class="img-circle" width="110"/>
                     <h4><%= user.getFirstName() + " " + user.getLastName() %></h4>
                 </div>
             </div>
@@ -348,7 +348,7 @@
                                 <div class="panel panel-default widget-user-1 text-center">
                                     <div class="avatar">
 
-                                        <img src="<%=request.getAttribute("avatar")%>" alt="" class="img-circle">
+                                        <img src="<%=request.getAttribute("avatar")%>" alt="" class="img-circle" width="110">
 
                                         <h3><%=request.getAttribute("userName")%></h3>
 

@@ -59,7 +59,6 @@ public class LoginServlet extends HttpServlet {
         } else {
             User user = new User();
 
-
             user.setEmail(request.getParameter("email"));
             user.setPassword(request.getParameter("password"));
 

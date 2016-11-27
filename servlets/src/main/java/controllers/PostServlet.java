@@ -22,10 +22,8 @@ import java.util.List;
  * Created by Aleksandr_Shakhov on 17.11.16 21:28.
  */
 
-@WebServlet(urlPatterns = {"/posts/*", "/post"})
+@WebServlet(urlPatterns = {"/posts", "/post/"})
 public class PostServlet extends HttpServlet {
-
-    private static final long serialVersionUID = 1L;
 
     static Logger logger = Logger.getLogger(PostServlet.class);
 
@@ -33,44 +31,24 @@ public class PostServlet extends HttpServlet {
     private CommentService commentService = new CommentServiceImp();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getRequestURI().equals("/posts")) {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getPathInfo() == null) {
 
-            showFollowersPost(req, resp);
+            User user = (User) request.getSession().getAttribute("User");
+            List<Post> posts = postService.getPostOfUser(user);
 
-        } else if (req.getRequestURI().matches("/posts/\\d+")) {
+            logger.info(posts);
+            request.setAttribute("posts", posts);
 
-            int postId = getPostId(req);
-
-            Post post = postService.getPostById(postId);
-
-            if (post != null) {
-
-                req.setAttribute("post", post);
-
-                RequestDispatcher requestDispatcher = req.getRequestDispatcher("/singlePost.jsp");
-                requestDispatcher.forward(req, resp);
-            }
-        }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getRequestURI().matches("posts/\\d+/comment")) {
-            saveComment(req);
-            resp.sendRedirect("/posts/" + getPostId(req));
-
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/singlePost.jsp");
-            requestDispatcher.forward(req,resp);
-
-        } else if (req.getRequestURI().matches("/posts/newPost")) {
-            savePost(req);
-            resp.sendRedirect("/home");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/posts.jsp");
+            requestDispatcher.forward(request, response);
+        } else {
+            //
         }
     }
 
     private void savePost(HttpServletRequest request) {
-        User user = (User)request.getSession().getAttribute("User");
+        User user = (User) request.getSession().getAttribute("User");
         Post post = new Post();
         post.setBody(request.getParameter("post-text"));
         post.setUser(user);
@@ -79,7 +57,7 @@ public class PostServlet extends HttpServlet {
 
     private void saveComment(HttpServletRequest req) {
 
-        User user = (User) req.getSession().getAttribute("authenticatedUser");
+        User user = (User) req.getSession().getAttribute("User");
 
         int postId = getPostId(req);
 
@@ -103,15 +81,15 @@ public class PostServlet extends HttpServlet {
         }
     }
 
-    private void showFollowersPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void showFollowersPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        User user = (User)req.getSession().getAttribute("User");
+        User user = (User) request.getSession().getAttribute("User");
 
         List<Post> posts = postService.getPostOfFriends(user);
 
-        req.setAttribute("posts", posts);
+        request.setAttribute("posts", posts);
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/posts.jsp");
-        requestDispatcher.forward(req, resp);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/posts.jsp");
+        requestDispatcher.forward(request, response);
     }
 }
