@@ -1,11 +1,8 @@
 package util;
 
-import common.BlockingQueueConnectionPool;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import static util.DatabaseConnectionPool.getConnection;
 
@@ -14,6 +11,8 @@ import static util.DatabaseConnectionPool.getConnection;
  */
 
 public class DatabaseTemplate {
+
+
 
     public static void execute(String query) {
         Connection connection = null;
@@ -36,27 +35,17 @@ public class DatabaseTemplate {
 
     public static <E> List<E> executeQueryForObject(ObjectRowMapper<E> objectRowMapper, String query, Object... objects) {
 
-        PreparedStatement preparedStatement = createPreparedStatement(query, objects);
+        try (PreparedStatement preparedStatement = createPreparedStatement(query, objects);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
 
-        ResultSet resultSet = null;
-        List<E> listOfE = new ArrayList<>();
-        try {
-            resultSet = preparedStatement.executeQuery();
+            List<E> listOfE = new ArrayList<>();
             while (resultSet.next()) {
                 listOfE.add(objectRowMapper.mapRowToObject(resultSet));
             }
+            return listOfE;
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
         }
-        return listOfE;
     }
 
     public static void executeInsertQuery(String query, Object... parameters) {
@@ -72,7 +61,7 @@ public class DatabaseTemplate {
         PreparedStatement preparedStatement = createPreparedStatement(query, one_id, two_id);
         try {
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()) {
+            if (resultSet.next()) {
                 return true;
             } else {
                 return false;

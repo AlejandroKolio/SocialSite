@@ -53,7 +53,7 @@ public class UserServlet extends HttpServlet {
                     User user = userDao.getUserByUserId(userId);
                     String avatar = user.getAvatar();
 
-                    List<Post> posts = postService.getPostOfFriends(user);
+                    List<Post> posts = postService.getPostOfUser(user);
 
                     String userName = user.getFirstName() + " " + user.getLastName();
 
