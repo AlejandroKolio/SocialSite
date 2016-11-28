@@ -375,7 +375,6 @@
                                         <span><i class="fa fa-photo"></i> 43</span>
                                         <span><i class="fa fa-video-camera"></i> 3</span>
                                     </div>
-                                    <a href="/friendposts">Posts</a>
                                 </div>
                             </div>
                         </div>
@@ -415,7 +414,7 @@
                                             </div>
 
                                             <div class="panel-body">
-                                                <p>${post.date}</p>
+                                                <p>${post.body}</p>
                                             </div>
 
                                             <div class="view-all-comments">

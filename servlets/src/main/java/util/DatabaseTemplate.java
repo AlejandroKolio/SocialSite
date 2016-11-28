@@ -12,9 +12,11 @@ import static util.DatabaseConnectionPool.getConnection;
 
 public class DatabaseTemplate {
 
+    private static Connection connection = null;
+
     public static void execute(String query) {
-        try(Connection connection = getConnection();
-        Statement statement = connection.createStatement()) {
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement()) {
             statement.executeQuery(query);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -34,11 +36,7 @@ public class DatabaseTemplate {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            try {
-                closeConnection(getConnection());
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            closeConnection(connection);
         }
     }
 
@@ -47,6 +45,8 @@ public class DatabaseTemplate {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException();
+        } finally {
+            closeConnection(connection);
         }
     }
 
@@ -61,17 +61,15 @@ public class DatabaseTemplate {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException();
+        } finally {
+            closeConnection(connection);
         }
     }
 
     private static PreparedStatement createPreparedStatement(String query, Object... parameters) {
-
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-
         try {
             connection = getConnection();
-            preparedStatement = connection.prepareStatement(query);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             int i = 1;
 
             for (Object parameter : parameters) {
@@ -92,10 +90,10 @@ public class DatabaseTemplate {
                 }
                 i++;
             }
+            return preparedStatement;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return preparedStatement;
     }
 
     private static void closeConnection(Connection conToClose) {
