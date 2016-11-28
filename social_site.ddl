@@ -29,8 +29,6 @@ CREATE TABLE user
 ALTER TABLE follower ADD FOREIGN KEY (user_id) REFERENCES user (user_id);
 ALTER TABLE follower ADD FOREIGN KEY (follower_id) REFERENCES user (user_id);
 CREATE UNIQUE INDEX unique_index ON follower (user_id, follower_id);
-ALTER TABLE friend_request ADD FOREIGN KEY (sender_id) REFERENCES user (user_id);
-ALTER TABLE friend_request ADD FOREIGN KEY (receiver_id) REFERENCES user (user_id);
 ALTER TABLE post ADD FOREIGN KEY (user_id) REFERENCES user (user_id);
 ALTER TABLE post_comment ADD FOREIGN KEY (user_id) REFERENCES user (user_id);
 ALTER TABLE post_comment ADD FOREIGN KEY (post_id) REFERENCES post (post_id);
