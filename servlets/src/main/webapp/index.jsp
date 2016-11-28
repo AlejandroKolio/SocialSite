@@ -360,7 +360,7 @@
                                     <div class="panel panel-default share clearfix-xs">
                                         <div class="panel-heading panel-heading-gray title">What's new</div>
 
-                                        <form action="/posts" method="get" >
+                                        <form action="/post/newpost" method="post" >
                                             <div class="panel-body">
                                                 <textarea name="status" class="form-control share-text" rows="3"
                                                           placeholder="Share your thoughts..."

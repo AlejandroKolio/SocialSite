@@ -31,7 +31,7 @@ public class PostDaoImp implements PostDao {
     }
 
     private final String POST_INSERT      = "INSERT INTO post(user_id,body) VALUES(?,?)";
-    private final String GET_USER_POST    = "SELECT * FROM post WHERE user_id=?";
+    private final String GET_USER_POST    = "SELECT post_id, user_id, body, post_time FROM mini_soc_network.post WHERE user_id=? ORDER BY post_time DESC;";
     private final String GET_POST_BY_ID   = "SELECT * FROM post WHERE post_id=?";
     private final String GET_FRIENDS_POST = "SELECT * FROM post WHERE user_id IN (SELECT follower_id from follower WHERE user_id=?)";
 

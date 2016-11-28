@@ -358,21 +358,23 @@
                             <div class="panel-body">
                                 <div class="timeline-block">
                                     <div class="panel panel-default share clearfix-xs">
-                                        <div class="panel-heading panel-heading-gray title">What?s new</div>
+                                        <div class="panel-heading panel-heading-gray title">What's new</div>
 
-                                        <div class="panel-body">
-                                            <textarea name="status" class="form-control share-text" rows="3"
-                                                      placeholder="Share your thoughts..."
-                                                      style="margin: 0px -7px 0px 0px; height: 60px; width: 338px;">
-                                            </textarea>
-                                        </div>
+                                        <form action="/post/newpost" method="post" >
+                                            <div class="panel-body">
+                                                <textarea name="status" class="form-control share-text" rows="3"
+                                                          placeholder="Share your thoughts..."
+                                                          style="margin: 0px -7px 0px 0px; height: 60px; width: 338px;">
+                                                </textarea>
+                                            </div>
+                                            <div class="panel-footer share-buttons">
+                                                <a href="#"><i class="fa fa-map-marker"></i></a>
+                                                <a href="#"><i class="fa fa-photo"></i></a>
+                                                <a href="#"><i class="fa fa-video-camera"></i></a>
+                                                <button type="submit" class="btn btn-primary btn-xs pull-right display-none">Post</button>
+                                            </div>
+                                        </form>
 
-                                        <div class="panel-footer share-buttons">
-                                            <a href="#"><i class="fa fa-map-marker"></i></a>
-                                            <a href="#"><i class="fa fa-photo"></i></a>
-                                            <a href="#"><i class="fa fa-video-camera"></i></a>
-                                            <button type="submit" class="btn btn-primary btn-xs pull-right display-none" href="#">Post</button>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

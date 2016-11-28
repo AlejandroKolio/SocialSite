@@ -22,7 +22,7 @@ import java.util.List;
  * Created by Aleksandr_Shakhov on 17.11.16 21:28.
  */
 
-@WebServlet(urlPatterns = {"/posts"})
+@WebServlet(urlPatterns = {"/posts", "/post/newpost"})
 public class PostServlet extends HttpServlet {
 
     static Logger logger = Logger.getLogger(PostServlet.class);
@@ -36,19 +36,29 @@ public class PostServlet extends HttpServlet {
 
             User user = (User) request.getSession().getAttribute("User");
             List<Post> posts = postService.getPostOfUser(user);
+            int postSize = posts.size();
 
             logger.info(posts);
             request.setAttribute("posts", posts);
+            request.setAttribute("postSize", postSize);
 
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/posts.jsp");
             requestDispatcher.forward(request, response);
         }
     }
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(request.getRequestURI().matches("/post/newpost")) {
+            savePost(request);
+            response.sendRedirect("/posts");
+        }
+    }
+
     private void savePost(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("User");
         Post post = new Post();
-        post.setBody(request.getParameter("post-text"));
+        post.setBody(request.getParameter("status"));
         post.setUser(user);
         postService.savePost(post);
     }

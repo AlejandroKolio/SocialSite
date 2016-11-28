@@ -80,7 +80,7 @@
                 <li><a href="#"><i class="fa fa-camera-retro"></i> <span>Photos</span></a></li>
                 <li class="active"><a href="/users"><i class="fa fa-group"></i> <span>Friends</span></a></li>
                 <li><a href="#"><i class="icon-comment-fill-1"></i> <span>Messages</span></a></li>
-                <li><a href="#"><i class="icon-unlock-fill"></i> <span>Logout</span></a></li>
+                <li><a href="/Logout"><i class="icon-unlock-fill"></i> <span>Logout</span></a></li>
             </ul>
         </div>
     </div>
@@ -353,7 +353,12 @@
                                 </thead>
 
                                 <tbody id="responsive-table-body">
+
+
+
                                 <c:forEach items="${requestScope.users}" var="user">
+
+                                    <c:if test="${user.userId != currentUserId}">
                                 <tr>
                                     <td></td>
                                     <td><img src="${user.avatar}" width="40" class="img-circle">
@@ -361,6 +366,8 @@
                                     </td>
                                     <td><a href="#">${user.email}</a></td>
                                 </tr>
+                                    </c:if>
+
                                 </c:forEach>
                                 </tbody>
 

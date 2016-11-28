@@ -394,6 +394,8 @@
                             <div class="timeline row" data-toggle="isotope" style="position: relative; height: 5866.5px;">
                                 <div class="col-xs-12 col-md-6 col-lg-4 item" style="position: absolute; left: 0px; top: 4907px;">
 
+                                    <%if(followerDao.isFollower((Integer)request.getAttribute("userId"), user.getUserId())) {%>
+
                                     <c:forEach items="${requestScope.posts}" var="post">
                                     <div class="timeline-block">
                                         <div class="panel panel-default">
@@ -460,14 +462,12 @@
                                         </div>
                                     </div>
                                     </c:forEach>
+
+                                    <% } else {%>
+                                    <p style="color: #b2b2b2">cannot see posts, you are not follower yet</p>
+                                    <% } %>
                                 </div>
                             </div>
-
-
-
-
-
-
 
                         </div>
                     </div>

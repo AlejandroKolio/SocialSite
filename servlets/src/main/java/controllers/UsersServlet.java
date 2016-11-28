@@ -35,6 +35,11 @@ public class UsersServlet extends HttpServlet {
             List<User> users = service.getUsers();
 
             logger.info(users);
+
+            User user = (User) req.getSession().getAttribute("User");
+            int currentUserId = user.getUserId();
+
+            req.setAttribute("currentUserId", currentUserId);
             req.setAttribute("users", users);
 
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/users.jsp");
