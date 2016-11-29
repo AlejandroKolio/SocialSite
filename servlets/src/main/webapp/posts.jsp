@@ -422,13 +422,12 @@
                                             <li class="media">
                                                 <div class="media-left">
                                                     <a href="#">
-                                                        <img src="" class="media-object">
+                                                        <img src="${comment.user.avatar}" class="media-object" width="50">
                                                     </a>
                                                 </div>
 
                                                 <div class="media-body">
-                                                    <div class="pull-right dropdown" data-show-hover="li"
-                                                         style="display: none;">
+                                                    <div class="pull-right dropdown" data-show-hover="li" style="display: none;">
                                                         <a href="#" data-toggle="dropdown" class="toggle-button">
                                                             <i class="fa fa-pencil"></i>
                                                         </a>
@@ -439,7 +438,9 @@
                                                         </ul>
                                                     </div>
 
-                                                    <a href="" class="comment-author pull-left">${comment.user.firstName} ${comment.user.lastName}</a>
+                                                    <a href="/user/${comment.userId}/posts" class="comment-author pull-left">
+                                                        ${comment.user.firstName} ${comment.user.lastName}
+                                                    </a>
                                                     <span>${comment.commentBody}</span>
                                                     <div class="comment-date">${comment.time}</div>
                                                 </div>

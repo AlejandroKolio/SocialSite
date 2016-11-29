@@ -1,5 +1,6 @@
 package model;
 
+import dao.UserDaoImp;
 import lombok.Data;
 
 import java.sql.Timestamp;
@@ -16,4 +17,8 @@ public class Comment {
     private String commentBody;
     private Timestamp time;
     private User user;
+
+    public User getUser(){
+        return new UserDaoImp().getUserByUserId(userId);
+    }
 }

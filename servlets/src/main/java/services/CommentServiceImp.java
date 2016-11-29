@@ -1,9 +1,9 @@
 package services;
 
-import dao.CommentDao;
-import dao.CommentDaoImp;
+import dao.*;
 import model.Comment;
 import model.Post;
+import model.User;
 
 import java.util.List;
 
@@ -14,6 +14,7 @@ import java.util.List;
 
 public class CommentServiceImp implements CommentService {
 
+    UserDao userDao = new UserDaoImp();
     CommentDao commentDao = new CommentDaoImp();
 
     @Override

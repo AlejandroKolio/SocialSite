@@ -1,6 +1,7 @@
 package dao;
 
 import model.Comment;
+import model.User;
 import util.DatabaseTemplate;
 import util.ObjectRowMapper;
 

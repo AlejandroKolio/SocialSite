@@ -2,6 +2,7 @@ package services;
 
 import model.Comment;
 import model.Post;
+import model.User;
 
 import java.util.List;
 
