@@ -57,6 +57,7 @@ public class UserDaoImp implements UserDao {
                 user.getLastName(),
                 user.getEmail(),
                 user.getPassword());
+
     }
 
     @Override

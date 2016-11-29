@@ -21,9 +21,9 @@ import java.util.UUID;
  */
 
 @WebServlet(name = "UploadServlet", urlPatterns = "/upload/*")
-@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10,  // 10 MB
-                 maxFileSize       = 1024 * 1024 * 50,  // 50 MB
-                 maxRequestSize    = 1024 * 1024 * 100) // 100 MB
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2,  // 2 MB
+                 maxFileSize       = 1024 * 1024 * 5,  // 5 MB
+                 maxRequestSize    = 1024 * 1024 * 10) // 10 MB
 public class UploadServlet extends HttpServlet {
 
     static Logger logger = Logger.getLogger(LoginServlet.class);
@@ -61,7 +61,7 @@ public class UploadServlet extends HttpServlet {
         userDao.updateAvatar(getPathForDB(personal.getAbsolutePath()) + fileName, id);
 
         request.setAttribute("message", "Photo uploaded successfully!");
-        response.sendRedirect("/users");
+        response.sendRedirect("/profile");
         //getServletContext().getRequestDispatcher("/profile").forward(request, response);
     }
 

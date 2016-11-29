@@ -38,9 +38,11 @@ public class UsersServlet extends HttpServlet {
 
             User user = (User) req.getSession().getAttribute("User");
             int currentUserId = user.getUserId();
+            String avaPath = user.getAvatar();
 
             req.setAttribute("currentUserId", currentUserId);
             req.setAttribute("users", users);
+            req.setAttribute("avaPath", avaPath);
 
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/users.jsp");
             requestDispatcher.forward(req, resp);

@@ -1,13 +1,11 @@
 package controllers;
 
+import dao.*;
 import model.Comment;
 import model.Post;
 import model.User;
 import org.apache.log4j.Logger;
-import services.CommentService;
-import services.CommentServiceImp;
-import services.PostService;
-import services.PostServiceImp;
+import services.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,18 +28,22 @@ public class PostServlet extends HttpServlet {
 
     private PostService postService = new PostServiceImp();
     private CommentService commentService = new CommentServiceImp();
+    private UserService userService = new UserServiceImp();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getPathInfo() == null && request.getRequestURI().equals("/posts")) {
+            List<User> users = userService.getUsers();
 
             User user = (User) request.getSession().getAttribute("User");
             List<Post> posts = postService.getPostOfUser(user);
+
             int postSize = posts.size();
 
             logger.info(posts);
             request.setAttribute("posts", posts);
             request.setAttribute("postSize", postSize);
+            request.setAttribute("users", users);
 
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/posts.jsp");
             requestDispatcher.forward(request, response);
@@ -49,10 +52,18 @@ public class PostServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(request.getRequestURI().matches("/post/newpost")) {
+        if (request.getRequestURI().matches("/post/newpost")) {
             savePost(request);
             response.sendRedirect("/posts");
+        } else if (request.getRequestURI().matches("/posts/\\d+/comment")) {
+            saveComment(request);
+            response.sendRedirect("/posts");
         }
+    }
+    
+    private void killPost(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("User");
+        // TODO: 29.11.16
     }
 
     private void savePost(HttpServletRequest request) {
@@ -66,12 +77,9 @@ public class PostServlet extends HttpServlet {
     private void saveComment(HttpServletRequest req) {
 
         User user = (User) req.getSession().getAttribute("User");
-
         int postId = getPostId(req);
-
         Comment comment = new Comment();
-
-        comment.setCommentBody(req.getParameter("comment-text"));
+        comment.setCommentBody(req.getParameter("comment"));
         comment.setUserId(user.getUserId());
         comment.setPostId(postId);
 

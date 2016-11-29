@@ -15,4 +15,5 @@ public class Comment {
     private int postId;
     private String commentBody;
     private Timestamp time;
+    private User user;
 }

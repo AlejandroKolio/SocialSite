@@ -1,4 +1,6 @@
 <%@ page import="model.User" %>
+<%@ page import="dao.UserDao" %>
+<%@ page import="dao.UserDaoImp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=US-ASCII" pageEncoding="US-ASCII" %>
 <!DOCTYPE html>
@@ -396,7 +398,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="media-body">
-                                                    <a href="/posts/${post.postId}" class="pull-right text-muted"><i class="icon-reply-all-fill fa fa-2x "></i></a>
+                                                    <a href="/post/${post.postId}/kill" class="pull-right text-muted"><i class="fa fa-fw fa-trash-o fa-2x"></i>
                                                     <a href="">${post.user.firstName} ${post.user.lastName}</a>
 
                                                     <span>${post.date}</span>
@@ -415,10 +417,12 @@
 
 
                                         <ul class="comments">
+
+                                            <c:forEach items="${post.comments}" var="comment">
                                             <li class="media">
                                                 <div class="media-left">
-                                                    <a href="">
-                                                        <img src="images/people/50/guy-5.jpg" class="media-object">
+                                                    <a href="#">
+                                                        <img src="" class="media-object">
                                                     </a>
                                                 </div>
 
@@ -435,12 +439,13 @@
                                                         </ul>
                                                     </div>
 
-                                                    <a href="" class="comment-author pull-left">Bill D.</a>
-                                                    <span>Hi Mary, Nice Party</span>
-                                                    <div class="comment-date">21st September</div>
+                                                    <a href="" class="comment-author pull-left">${comment.user.firstName} ${comment.user.lastName}</a>
+                                                    <span>${comment.commentBody}</span>
+                                                    <div class="comment-date">${comment.time}</div>
                                                 </div>
-                                            </li>
 
+                                            </li>
+                                            </c:forEach>
 
                                             <li class="comment-form">
                                                 <div class="input-group">
@@ -454,6 +459,8 @@
                                                 <button type="submit" class="btn btn-primary btn-xs pull-right display-none" href="#">Post</button>
                                             </li>
                                         </ul>
+
+
                                     </div>
                                 </div>
                                 </c:forEach>

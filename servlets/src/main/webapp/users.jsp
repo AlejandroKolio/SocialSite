@@ -69,7 +69,7 @@
             <div class="sidebar-block">
                 <div class="profile">
 
-                    <img src="<%=avatar%>" alt="people" class="img-circle" width="110"/>
+                    <img src="${requestScope.avaPath}" alt="people" class="img-circle" width="110"/>
                     <h4> <%= user.getFirstName() + " " + user.getLastName() %> </h4>
 
                 </div>
