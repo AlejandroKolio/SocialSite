@@ -1,6 +1,5 @@
 package controllers;
 
-import dao.*;
 import model.Comment;
 import model.Post;
 import model.User;
@@ -14,14 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Aleksandr_Shakhov on 17.11.16 21:28.
  */
 
-@WebServlet(urlPatterns = {"/posts", "/post/newpost"})
+@WebServlet(urlPatterns = {"/posts/*", "/post/newpost"})
 public class PostServlet extends HttpServlet {
 
     static Logger logger = Logger.getLogger(PostServlet.class);
@@ -58,12 +56,12 @@ public class PostServlet extends HttpServlet {
         } else if (request.getRequestURI().matches("/posts/\\d+/comment")) {
             saveComment(request);
             response.sendRedirect("/posts");
+        } else if (request.getRequestURI().matches("/posts/\\d+/comment/\\d+")) {
+            String[] tokens = request.getPathInfo().split("/");
+            int userId = Integer.parseInt(tokens[3]);
+            saveComment(request);
+            response.sendRedirect("/user/" + userId);
         }
-    }
-    
-    private void killPost(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("User");
-        // TODO: 29.11.16
     }
 
     private void savePost(HttpServletRequest request) {
@@ -75,11 +73,10 @@ public class PostServlet extends HttpServlet {
     }
 
     private void saveComment(HttpServletRequest req) {
-
         User user = (User) req.getSession().getAttribute("User");
         int postId = getPostId(req);
         Comment comment = new Comment();
-        comment.setCommentBody(req.getParameter("comment"));
+        comment.setCommentBody(req.getParameter("newComment"));
         comment.setUserId(user.getUserId());
         comment.setPostId(postId);
 

@@ -11,6 +11,7 @@ import java.util.List;
 
 public interface PostDao {
     void savePost(Post post);
+    /*void killPost(Post post);*/
     List<Post> getPostByUserID(int userId);
     List<Post> getPostsOfFriends(int userId);
     Post getPostByPostId(int postId);

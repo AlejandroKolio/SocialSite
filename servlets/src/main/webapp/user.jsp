@@ -71,7 +71,8 @@
             <div class="sidebar-block">
                 <div class="profile">
                     <img src="<%=avatar%>" alt="people" class="img-circle" width="110"/>
-                    <h4><%= user.getFirstName() + " " + user.getLastName() %></h4>
+                    <h4><%= user.getFirstName() + " " + user.getLastName() %>
+                    </h4>
                 </div>
             </div>
             <h4 align="center" class="category">Account</h4>
@@ -348,20 +349,24 @@
                                 <div class="panel panel-default widget-user-1 text-center">
                                     <div class="avatar">
 
-                                        <img src="<%=request.getAttribute("avatar")%>" alt="" class="img-circle" width="110">
+                                        <img src="<%=request.getAttribute("avatar")%>" alt="" class="img-circle"
+                                             width="110">
 
-                                        <h3><%=request.getAttribute("userName")%></h3>
+                                        <h3><%=request.getAttribute("userName")%>
+                                        </h3>
 
                                         <%FollowerDao followerDao = (FollowerDao) request.getAttribute("followerDao");%>
 
-                                        <%if(!followerDao.isFollower((Integer)request.getAttribute("userId"), user.getUserId())) {%>
-                                            <form action="/follow/<%=(Integer)request.getAttribute("userId")%>;<%=user.getUserId()%>" method="post">
-                                                <button class="btn btn-primary btn-follow">
-                                                    <span class="follow"><i class="fa fa-chain"></i> Follow</span>
-                                                </button>
-                                            </form>
+                                        <%if (!followerDao.isFollower((Integer) request.getAttribute("userId"), user.getUserId())) {%>
+                                        <form action="/follow/<%=(Integer)request.getAttribute("userId")%>;<%=user.getUserId()%>"
+                                              method="post">
+                                            <button class="btn btn-primary btn-follow">
+                                                <span class="follow"><i class="fa fa-chain"></i> Follow</span>
+                                            </button>
+                                        </form>
                                         <%} else { %>
-                                        <form action="/unfollow/<%=(Integer)request.getAttribute("userId")%>;<%=user.getUserId()%>" method="post">
+                                        <form action="/unfollow/<%=(Integer)request.getAttribute("userId")%>;<%=user.getUserId()%>"
+                                              method="post">
                                             <button class="btn btn-danger btn-follow">
                                                 <span class="follow"><i class="fa fa-chain-broken"></i> Unfollow</span>
                                             </button>
@@ -389,78 +394,97 @@
                             </div>
 
 
+                            <div class="timeline row" data-toggle="isotope"
+                                 style="position: relative; height: 5866.5px;">
+                                <div class="col-xs-12 col-md-6 col-lg-4 item"
+                                     style="position: absolute; left: 0px; top: 4907px;">
 
-
-                            <div class="timeline row" data-toggle="isotope" style="position: relative; height: 5866.5px;">
-                                <div class="col-xs-12 col-md-6 col-lg-4 item" style="position: absolute; left: 0px; top: 4907px;">
-
-                                    <%if(followerDao.isFollower((Integer)request.getAttribute("userId"), user.getUserId())) {%>
+                                    <%if (followerDao.isFollower((Integer) request.getAttribute("userId"), user.getUserId())) {%>
 
                                     <c:forEach items="${requestScope.posts}" var="post">
-                                    <div class="timeline-block">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <div class="media">
-                                                    <div class="media-left">
-                                                        <a href="">
-                                                            <img src="${post.user.avatar}" class="media-object" width="50">
-                                                        </a>
-                                                    </div>
+                                        <div class="timeline-block">
+                                            <div class="panel panel-default">
 
-                                                    <div class="media-body">
-                                                        <a href="#" class="pull-right text-muted"><i class="icon-reply-all-fill fa fa-2x "></i></a>
-                                                        <a href="">${post.user.firstName} ${post.user.lastName}</a>
-                                                        <span>${post.date}</span>
+                                                <!--HEADER-->
+                                                <div class="panel-heading">
+                                                    <div class="media">
+                                                        <div class="media-left">
+                                                            <a href="">
+                                                                <img src="${post.user.avatar}" class="media-object"
+                                                                     width="50">
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="media-body">
+                                                            <a href="#" class="pull-right text-muted"><i class="icon-reply-all-fill fa fa-2x "></i></a>
+                                                            <a href="">${post.user.firstName} ${post.user.lastName}</a>
+
+                                                            <span>${post.date}</span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="panel-body">
-                                                <p>${post.body}</p>
-                                            </div>
+                                                <div class="panel-body">
+                                                    <p>${post.body}</p>
+                                                </div>
 
-                                            <div class="view-all-comments">
-                                                <a href="#">
-                                                    <i class="fa fa-comments-o"></i> View all
-                                                </a>
-                                                <span>10 comments</span>
-                                            </div>
+                                                <div class="view-all-comments">
+                                                    <a href="#">
+                                                        <i class="fa fa-comments-o"></i> View all
+                                                    </a>
+                                                    <span> Comments</span>
+                                                </div>
 
-                                            <ul class="comments">
+                                                <ul class="comments">
 
-                                                <li class="media">
-                                                    <div class="media-left">
-                                                        <a href="">
-                                                            <img src="/images/people/50/guy-5.jpg" class="media-object">
-                                                        </a>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <div class="pull-right dropdown" data-show-hover="li" style="display: none;">
-                                                            <a href="#" data-toggle="dropdown" class="toggle-button">
-                                                                <i class="fa fa-pencil"></i>
-                                                            </a>
-                                                            <ul class="dropdown-menu" role="menu">
-                                                                <li><a href="#">Edit</a></li>
-                                                                <li><a href="#">Delete</a></li>
-                                                            </ul>
+                                                    <c:forEach items="${post.comments}" var="comment">
+                                                        <li class="media">
+                                                            <div class="media-left">
+                                                                <a href="#">
+                                                                    <img src="${comment.user.avatar}" class="media-object" width="50">
+                                                                </a>
+                                                            </div>
+
+                                                            <div class="media-body">
+                                                                <div class="pull-right dropdown" data-show-hover="li"
+                                                                     style="display: none;">
+                                                                    <a href="#" data-toggle="dropdown"
+                                                                       class="toggle-button">
+                                                                        <i class="fa fa-pencil"></i>
+                                                                    </a>
+
+                                                                    <ul class="dropdown-menu" role="menu">
+                                                                        <li><a href="#">Edit</a></li>
+                                                                        <li><a href="#">Delete</a></li>
+                                                                    </ul>
+                                                                </div>
+
+                                                                <a href="/user/${comment.userId}/posts"
+                                                                   class="comment-author pull-left">
+                                                                        ${comment.user.firstName} ${comment.user.lastName}
+                                                                </a><br>
+                                                                <span>${comment.commentBody}</span>
+                                                                <div class="comment-date">${comment.time}</div>
+                                                            </div>
+
+                                                        </li>
+                                                    </c:forEach>
+
+                                                    <li class="comment-form">
+                                                        <div class="input-group">
+                                                            <form action="/posts/${post.postId}/comment/<%=request.getAttribute("userId")%>" method="post">
+                                                                <div class="input-group-btn">
+                                                                    <textarea name="newComment" class="form-control share-text" rows="1" placeholder="Comment..." style="width: 75%; height: 25px;"></textarea>
+
+                                                                    <button style="position: initial; margin: 5px;" class="btn btn-primary btn-sm pull-right" type="submit"><i class="fa fa-comment-o"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </form>
                                                         </div>
-                                                        <a href="" class="comment-author pull-left">Bill D.</a>
-                                                        <span>Hi Mary, Nice Party</span>
-                                                        <div class="comment-date">21st September</div>
-                                                    </div>
-                                                </li>
-
-                                                <li class="comment-form">
-                                                    <div class="input-group">
-					                        <span class="input-group-btn">
-					                   			<a href="" class="btn btn-default"><i class="fa fa-photo"></i></a>
-					               			</span>
-                                                        <input type="text" class="form-control">
-                                                    </div>
-                                                </li>
-                                            </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
                                     </c:forEach>
 
                                     <% } else {%>
@@ -471,7 +495,6 @@
 
                         </div>
                     </div>
-
 
 
                 </div>

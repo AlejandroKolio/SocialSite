@@ -432,6 +432,6 @@
     };
 </script>
 
-<script src="js/vendor/all.js"></script>
-<script src="js/app/app.js"></script>
+<script src="/js/vendor/all.js"></script>
+<script src="/js/app/app.js"></script>
 </body>

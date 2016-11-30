@@ -362,18 +362,22 @@
                                     <div class="panel panel-default share clearfix-xs">
                                         <div class="panel-heading panel-heading-gray title">What's new</div>
 
-                                        <form action="/post/newpost" method="post" >
+                                        <form action="/post/newpost" method="post">
+
                                             <div class="panel-body">
                                                 <textarea name="status" class="form-control share-text" rows="3"
                                                           placeholder="Share your thoughts..."
                                                           style="margin: 0px -7px 0px 0px; height: 60px; width: 338px;">
                                                 </textarea>
                                             </div>
+
                                             <div class="panel-footer share-buttons">
                                                 <a href="#"><i class="fa fa-map-marker"></i></a>
                                                 <a href="#"><i class="fa fa-photo"></i></a>
                                                 <a href="#"><i class="fa fa-video-camera"></i></a>
-                                                <button type="submit" class="btn btn-primary btn-xs pull-right display-none">Post</button>
+                                                <button type="submit"
+                                                        class="btn btn-primary btn-xs pull-right display-none">Post
+                                                </button>
                                             </div>
                                         </form>
 
@@ -386,84 +390,86 @@
                             <div class="panel-body">
 
                                 <c:forEach items="${requestScope.posts}" var="post">
-                                <div class="timeline-block">
-                                    <div class="panel panel-default">
+                                    <div class="timeline-block">
+                                        <div class="panel panel-default">
 
-                                        <!--HEADER-->
-                                        <div class="panel-heading">
-                                            <div class="media">
-                                                <div class="media-left">
-                                                    <a href="">
-                                                        <img src="${post.user.avatar}" class="media-object" width="50">
-                                                    </a>
-                                                </div>
-                                                <div class="media-body">
-                                                    <a href="/post/${post.postId}/kill" class="pull-right text-muted"><i class="fa fa-fw fa-trash-o fa-2x"></i>
-                                                    <a href="">${post.user.firstName} ${post.user.lastName}</a>
-
-                                                    <span>${post.date}</span>
-                                                </div>
-                                            </div>
-                                        </div><!--END OF HEADER-->
-
-                                        <div class="panel-body">
-                                            <p>${post.body}</p>
-                                        </div>
-
-                                        <div class="view-all-comments">
-                                            <a href="#"><i class="fa fa-comments-o"></i> Comments</a>
-                                            <span></span>
-                                        </div>
-
-
-                                        <ul class="comments">
-
-                                            <c:forEach items="${post.comments}" var="comment">
-                                            <li class="media">
-                                                <div class="media-left">
-                                                    <a href="#">
-                                                        <img src="${comment.user.avatar}" class="media-object" width="50">
-                                                    </a>
-                                                </div>
-
-                                                <div class="media-body">
-                                                    <div class="pull-right dropdown" data-show-hover="li" style="display: none;">
-                                                        <a href="#" data-toggle="dropdown" class="toggle-button">
-                                                            <i class="fa fa-pencil"></i>
+                                            <!--HEADER-->
+                                            <div class="panel-heading">
+                                                <div class="media">
+                                                    <div class="media-left">
+                                                        <a href="">
+                                                            <img src="${post.user.avatar}" class="media-object"
+                                                                 width="50">
                                                         </a>
-
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="#">Edit</a></li>
-                                                            <li><a href="#">Delete</a></li>
-                                                        </ul>
                                                     </div>
+                                                    <div class="media-body">
+                                                        <a href="#" class="pull-right text-muted"><i class="fa fa-fw fa-trash-o fa-2x"></i></a>
+                                                            <a href="">${post.user.firstName} ${post.user.lastName}</a>
 
-                                                    <a href="/user/${comment.userId}/posts" class="comment-author pull-left">
-                                                        ${comment.user.firstName} ${comment.user.lastName}
-                                                    </a>
-                                                    <span>${comment.commentBody}</span>
-                                                    <div class="comment-date">${comment.time}</div>
+                                                            <span>${post.date}</span>
+                                                    </div>
                                                 </div>
+                                            </div><!--END OF HEADER-->
 
-                                            </li>
-                                            </c:forEach>
+                                            <div class="panel-body">
+                                                <p>${post.body}</p>
+                                            </div>
 
-                                            <li class="comment-form">
-                                                <div class="input-group">
-                          		                    <span class="input-group-btn">
-                   				                        <a href="" class="btn btn-default"><i class="fa fa-photo"></i></a>
-                                                    </span>
-
-                                                    <input type="text" class="form-control">
-                                                </div>
-
-                                                <button type="submit" class="btn btn-primary btn-xs pull-right display-none" href="#">Post</button>
-                                            </li>
-                                        </ul>
+                                            <div class="view-all-comments">
+                                                <a href="#"><i class="fa fa-comments-o"></i> All Comments</a>
+                                                <a href="#"><i class="fa fa-photo" style="alignment: right"></i> Add
+                                                    Picture</a>
+                                                <span></span>
+                                            </div>
 
 
+                                            <ul class="comments">
+
+                                                <c:forEach items="${post.comments}" var="comment">
+                                                    <li class="media">
+                                                        <div class="media-left">
+                                                            <a href="#">
+                                                                <img src="${comment.user.avatar}" class="media-object" width="50">
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="media-body">
+                                                            <div class="pull-right dropdown" data-show-hover="li" style="display: none;">
+                                                                <a href="#" data-toggle="dropdown" class="toggle-button"><i class="fa fa-pencil"></i></a>
+
+                                                                <ul class="dropdown-menu" role="menu">
+                                                                    <li><a href="#">Edit</a></li>
+                                                                    <li><a href="#">Delete</a></li>
+                                                                </ul>
+                                                            </div>
+
+                                                            <a href="/user/${comment.userId}/posts"
+                                                               class="comment-author pull-left">
+                                                                    ${comment.user.firstName} ${comment.user.lastName}
+                                                            </a><br>
+                                                            <span>${comment.commentBody}</span>
+                                                            <div class="comment-date">${comment.time}</div>
+                                                        </div>
+
+                                                    </li>
+                                                </c:forEach>
+
+                                                <li class="comment-form">
+                                                    <div class="input-group">
+                                                        <form action="/posts/${post.postId}/comment" method="post">
+                                                            <div class="input-group-btn">
+                                                                <textarea name="newComment" class="form-control share-text" rows="1" placeholder="Comment..." style="width: 75%; height: 25px;"></textarea>
+
+                                                                <button style="position: initial; margin: 5px;" class="btn btn-primary btn-sm pull-right" type="submit"><i class="fa fa-comment-o"></i>
+                                                                </button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </li>
+
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
                                 </c:forEach>
 
                             </div>

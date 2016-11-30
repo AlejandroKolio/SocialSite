@@ -22,6 +22,9 @@ public class PostServiceImp implements PostService {
         postDao.savePost(post);
     }
 
+    /*@Override
+    public void killPost(Post post) { postDao.killPost(post); }*/
+
     @Override
     public List<Post> getPostOfUser(User user) {
         List<Post> posts = postDao.getPostByUserID(user.getUserId());

@@ -12,6 +12,7 @@ import java.util.List;
 
 public interface PostService {
     void savePost(Post post);
+    /*void killPost(Post post);*/
     List<Post> getPostOfUser(User user);
     List<Post> getPostOfFriends(User user);
     Post getPostById(int postId);
