@@ -31,7 +31,7 @@ public class PostDaoImp implements PostDao {
     }
 
     private final String POST_INSERT      = "INSERT INTO post(user_id,body) VALUES(?,?)";
-    //private final String POST_KILL        = "DELETE FROM post WHERE post_id = ? and user_id = ?;";
+    private final String POST_KILL        = "DELETE FROM post WHERE post_id = ? and user_id = ?;";
     private final String GET_USER_POST    = "SELECT post_id, user_id, body, post_time FROM mini_soc_network.post WHERE user_id=? ORDER BY post_time DESC;";
     private final String GET_POST_BY_ID   = "SELECT * FROM post WHERE post_id=?";
     private final String GET_FRIENDS_POST = "SELECT * FROM post WHERE user_id IN (SELECT follower_id from follower WHERE user_id=?)";
@@ -41,10 +41,10 @@ public class PostDaoImp implements PostDao {
         DatabaseTemplate.executeInsertQuery(POST_INSERT, post.getUser().getUserId(), post.getBody());
     }
 
-    /*@Override
+    @Override
     public void killPost(Post post) {
-        DatabaseTemplate.executeQueryForObject(new PostRowMapper(), POST_KILL, post.getPostId(), post.getUserID());
-    }*/
+        DatabaseTemplate.executeInsertQuery(POST_KILL, post.getPostId(), post.getUserID());
+    }
 
     @Override
     public List<Post> getPostByUserID(int userId) {

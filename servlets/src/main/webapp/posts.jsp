@@ -90,12 +90,13 @@
             </div>
             <h4 align="center" class="category">Account</h4>
             <ul class="sidebar-menu">
-                <li class="active"><a href="/profile"><i class="icon-user-1"></i> <span>Profile</span></a></li>
+                <li><a href="/profile"><i class="icon-user-1"></i> <span>Profile</span></a></li>
+                <li class="active"><a href="/posts"><i class="fa fa-fw fa-th-list"></i> <span> Posts</span></a></li>
                 <li><a href="#"><i class="fa fa-camera-retro"></i> <span>Photos</span></a></li>
                 <li><a href="/users"><i class="fa fa-group"></i> <span>People</span></a></li>
                 <li><a href="#"><i class="icon-comment-fill-1"></i> <span>Messages</span></a></li>
                 <li><a href="Logout"><i class="icon-unlock-fill"></i> <span>Logout</span></a></li>
-                <li><a href="/posts"><i class="fa fa-text-width"></i> <span> Posts</span></a></li>
+
             </ul>
         </div>
     </div>
@@ -365,19 +366,12 @@
                                         <form action="/post/newpost" method="post">
 
                                             <div class="panel-body">
-                                                <textarea name="status" class="form-control share-text" rows="3"
-                                                          placeholder="Share your thoughts..."
-                                                          style="margin: 0px -7px 0px 0px; height: 60px; width: 338px;">
-                                                </textarea>
+                                                <textarea name="status" class="form-control share-text" rows="3" placeholder="Share your thoughts..." style="margin: 0px -7px 0px 0px; height: 60px; width: 338px;"></textarea>
                                             </div>
 
                                             <div class="panel-footer share-buttons">
-                                                <a href="#"><i class="fa fa-map-marker"></i></a>
                                                 <a href="#"><i class="fa fa-photo"></i></a>
-                                                <a href="#"><i class="fa fa-video-camera"></i></a>
-                                                <button type="submit"
-                                                        class="btn btn-primary btn-xs pull-right display-none">Post
-                                                </button>
+                                                <button type="submit" class="btn btn-primary btn-xs pull-right display-none">Post</button>
                                             </div>
                                         </form>
 
@@ -402,12 +396,17 @@
                                                                  width="50">
                                                         </a>
                                                     </div>
-                                                    <div class="media-body">
-                                                        <a href="#" class="pull-right text-muted"><i class="fa fa-fw fa-trash-o fa-2x"></i></a>
-                                                            <a href="">${post.user.firstName} ${post.user.lastName}</a>
 
+                                                    <%--<form action="/post/${post.postId}/kill" method="post"></form>--%>
+                                                    <div class="media-body">
+                                                        <form action="/postkill/${post.postId}" method="post">
+                                                            <button type="submit" class="btn btn-primary btn-xs pull-right"><i class="fa fa-fw fa-trash-o fa-2x"></i></button>
+                                                        </form>
+                                                            <%--<a href="#" class="pull-right text-muted"><i class="fa fa-fw fa-trash-o fa-1x "></i></a>--%>
+                                                            <a href="">${post.user.firstName} ${post.user.lastName}</a>
                                                             <span>${post.date}</span>
                                                     </div>
+
                                                 </div>
                                             </div><!--END OF HEADER-->
 
@@ -417,8 +416,7 @@
 
                                             <div class="view-all-comments">
                                                 <a href="#"><i class="fa fa-comments-o"></i> All Comments</a>
-                                                <a href="#"><i class="fa fa-photo" style="alignment: right"></i> Add
-                                                    Picture</a>
+                                                <a href="#"><i class="fa fa-photo" style="alignment: right"></i> Add Picture</a>
                                                 <span></span>
                                             </div>
 
@@ -444,8 +442,7 @@
                                                             </div>
 
                                                             <a href="/user/${comment.userId}/posts"
-                                                               class="comment-author pull-left">
-                                                                    ${comment.user.firstName} ${comment.user.lastName}
+                                                               class="comment-author pull-left">${comment.user.firstName} ${comment.user.lastName}
                                                             </a><br>
                                                             <span>${comment.commentBody}</span>
                                                             <div class="comment-date">${comment.time}</div>

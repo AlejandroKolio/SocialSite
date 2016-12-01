@@ -78,10 +78,11 @@
             <h4 align="center" class="category">Account</h4>
             <ul class="sidebar-menu">
                 <li class="active"><a href="/profile"><i class="icon-user-1"></i> <span>Profile</span></a></li>
-                <li><a href="#"><i class="fa fa-camera-retro"></i> <span>Photos</span></a></li>
-                <li><a href="/users"><i class="fa fa-group"></i> <span>Friends</span></a></li>
-                <li><a href="#"><i class="icon-comment-fill-1"></i> <span>Messages</span></a></li>
-                <li><a href="/logout"><i class="icon-unlock-fill"></i> <span>Logout</span></a></li>
+                <li><a href="/posts"><i class="fa fa-fw fa-th-list"></i><span> Posts</span></a></li>
+                <li><a href="#"><i class="fa fa-camera-retro"></i><span> Photos</span></a></li>
+                <li><a href="/users"><i class="fa fa-group"></i><span> People</span></a></li>
+                <li><a href="#"><i class="icon-comment-fill-1"></i><span> Messages</span></a></li>
+                <li><a href="/logout"><i class="icon-unlock-fill"></i><span> Logout</span></a></li>
             </ul>
         </div>
     </div>

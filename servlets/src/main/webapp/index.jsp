@@ -89,11 +89,11 @@
             <h4 align="center" class="category">Account</h4>
             <ul class="sidebar-menu">
                 <li class="active"><a href="/profile"><i class="icon-user-1"></i> <span>Profile</span></a></li>
+                <li><a href="/posts"><i class="fa fa-text-width"></i> <span> Posts</span></a></li>
                 <li><a href="#"><i class="fa fa-camera-retro"></i> <span>Photos</span></a></li>
                 <li><a href="/users"><i class="fa fa-group"></i> <span>People</span></a></li>
                 <li><a href="#"><i class="icon-comment-fill-1"></i> <span>Messages</span></a></li>
                 <li><a href="Logout"><i class="icon-unlock-fill"></i> <span>Logout</span></a></li>
-                <li><a href="/posts"><i class="fa fa-text-width"></i> <span> Posts</span></a></li>
             </ul>
         </div>
     </div>
@@ -362,10 +362,7 @@
 
                                         <form action="/post/newpost" method="post" >
                                             <div class="panel-body">
-                                                <textarea name="status" class="form-control share-text" rows="3"
-                                                          placeholder="Share your thoughts..." autofocus
-                                                          style="margin: 0px -7px 0px 0px; height: 60px; width: 338px;">
-                                                </textarea>
+                                                <textarea name="status" class="form-control share-text" rows="3" placeholder="Share your thoughts..." autofocus style="margin: 0px -7px 0px 0px; height: 60px; width: 338px;"></textarea>
                                             </div>
                                             <div class="panel-footer share-buttons">
                                                 <a href="#"><i class="fa fa-photo"></i></a>

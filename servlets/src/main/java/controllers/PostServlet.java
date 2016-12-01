@@ -19,7 +19,7 @@ import java.util.List;
  * Created by Aleksandr_Shakhov on 17.11.16 21:28.
  */
 
-@WebServlet(urlPatterns = {"/posts/*", "/post/newpost"})
+@WebServlet(urlPatterns = {"/posts/*", "/post/newpost", "/postkill/*"})
 public class PostServlet extends HttpServlet {
 
     static Logger logger = Logger.getLogger(PostServlet.class);
@@ -61,6 +61,9 @@ public class PostServlet extends HttpServlet {
             int userId = Integer.parseInt(tokens[3]);
             saveComment(request);
             response.sendRedirect("/user/" + userId);
+        } else if (request.getRequestURI().matches("/postkill/\\d+")) {
+            deletePost(request);
+            response.sendRedirect("/posts");
         }
     }
 
@@ -70,6 +73,12 @@ public class PostServlet extends HttpServlet {
         post.setBody(request.getParameter("status"));
         post.setUser(user);
         postService.savePost(post);
+    }
+
+    private void deletePost(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("User");
+        int postId = getPostId(request);
+        postService.killPost(postService.getPostById(postId));
     }
 
     private void saveComment(HttpServletRequest req) {
