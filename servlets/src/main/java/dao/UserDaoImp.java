@@ -19,12 +19,14 @@ public class UserDaoImp implements UserDao {
         @Override
         public User mapRowToObject(ResultSet resultSet) throws SQLException {
             User user = new User();
+
             user.setUserId(resultSet.getInt("user_id"));
             user.setFirstName(resultSet.getString("first_name"));
             user.setLastName(resultSet.getString("last_name"));
             user.setPassword(resultSet.getString("password"));
             user.setEmail(resultSet.getString("email"));
             user.setAvatar(resultSet.getString("avatar"));
+
             return user;
         }
     }

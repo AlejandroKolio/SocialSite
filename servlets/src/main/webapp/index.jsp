@@ -74,14 +74,11 @@
                     <h4><%= user.getFirstName() + " " + user.getLastName() %>
                     </h4>
 
-                    <form action="/upload/<%=user.getUserId()%>" method="post"
-                          enctype="multipart/form-data">
+                    <form action="/upload/<%=user.getUserId()%>" method="post" enctype="multipart/form-data">
                         <label for="fusk" style="color: antiquewhite">Click me first to change photo</label>
                         <input id="fusk" type="file" name="photo" style="display: none;">
                         <br/>
-                        <button type="submit" value="Upload File" class="btn btn-info btn-xs"><i
-                                class="fa fa-download"></i> Upload
-                        </button>
+                        <button type="submit" value="Upload File" class="btn btn-info btn-xs"><i class="fa fa-download"></i> Upload</button>
                     </form>
 
                 </div>
@@ -89,7 +86,7 @@
             <h4 align="center" class="category">Account</h4>
             <ul class="sidebar-menu">
                 <li class="active"><a href="/profile"><i class="icon-user-1"></i> <span>Profile</span></a></li>
-                <li><a href="/posts"><i class="fa fa-text-width"></i> <span> Posts</span></a></li>
+                <li><a href="/posts"><i class="fa fa-fw fa-th-list"></i> <span> Posts</span></a></li>
                 <li><a href="#"><i class="fa fa-camera-retro"></i> <span>Photos</span></a></li>
                 <li><a href="/users"><i class="fa fa-group"></i> <span>People</span></a></li>
                 <li><a href="#"><i class="icon-comment-fill-1"></i> <span>Messages</span></a></li>
@@ -357,6 +354,7 @@
                         <div class="col-md-6">
                             <div class="panel-body">
                                 <div class="timeline-block">
+
                                     <div class="panel panel-default share clearfix-xs">
                                         <div class="panel-heading panel-heading-gray title">What's new</div>
 
@@ -366,7 +364,7 @@
                                             </div>
                                             <div class="panel-footer share-buttons">
                                                 <a href="#"><i class="fa fa-photo"></i></a>
-                                                <button type="submit" class="btn btn-primary btn-xs pull-right display-none">Post</button>
+                                                <button type="submit" class="btn btn-primary btn-xs pull-right display-none"> Post</button>
                                             </div>
                                         </form>
                                     </div>

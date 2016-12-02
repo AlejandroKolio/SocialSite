@@ -1,7 +1,10 @@
 package model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -10,11 +13,13 @@ import java.util.List;
  */
 
 @Data
-public class Post {
+public class Post implements Serializable {
     private int postId;
     private int userID;
     private String body;
     private Timestamp date;
+    private String picture;
+
     private List<Comment> comments;
     private User user;
 }

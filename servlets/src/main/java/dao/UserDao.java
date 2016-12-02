@@ -15,6 +15,5 @@ public interface UserDao {
     List<User> getUsers();
     User getUserByUserId(int userId);
     User isRegisteredId(int userId);
-
     void updateAvatar(String path, int userId);
 }

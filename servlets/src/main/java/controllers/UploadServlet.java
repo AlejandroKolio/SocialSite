@@ -1,5 +1,7 @@
 package controllers;
 
+import dao.PostDao;
+import dao.PostDaoImp;
 import dao.UserDao;
 import dao.UserDaoImp;
 import model.User;
@@ -20,7 +22,7 @@ import java.util.UUID;
  * Created by Aleksandr_Shakhov on 22.11.16 19:45.
  */
 
-@WebServlet(name = "UploadServlet", urlPatterns = "/upload/*")
+@WebServlet(name = "UploadServlet", urlPatterns = {"/upload/*", "/uploadpostpic/*"})
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2,  // 2 MB
                  maxFileSize       = 1024 * 1024 * 5,  // 5 MB
                  maxRequestSize    = 1024 * 1024 * 10) // 10 MB
@@ -33,36 +35,58 @@ public class UploadServlet extends HttpServlet {
 
         int id = getUserId(request);
         UserDao userDao = new UserDaoImp();
+        PostDao postDao = new PostDaoImp();
 
-        String commonFolder = "/usr/local/Cellar/tomcat/domains/SocialSite/uploads/avatar/";
-        String personFolder = commonFolder + String.valueOf(id);
+        if (request.getRequestURI().matches("/upload/\\d+")) {
+            String commonFolder = "/usr/local/Cellar/tomcat/domains/SocialSite/uploads/avatar/";
+            String personFolder = commonFolder + String.valueOf(id);
+            // creates the save directory if it does not exists
+            File common = new File(commonFolder);
+            File personal = new File(personFolder);
 
-        // creates the save directory if it does not exists
-        File common = new File(commonFolder);
-        File personal = new File(personFolder);
-
-        if (common.exists()) {
-            if(!personal.exists()) {
-                personal.mkdir();
+            if (common.exists()) {
+                if (!personal.exists()) {
+                    personal.mkdir();
+                }
+            } else {
+                common.mkdir();
             }
-        } else {
-            common.mkdir();
+            System.out.println("Upload File Directory = " + personal.getAbsolutePath());
+            //Get all the parts from request and write it to the file on server
+            String fileName = "";
+            for (Part part : request.getParts()) {
+                fileName = setFileName(part);
+                part.write(personal + File.separator + fileName);
+            }
+
+            userDao.updateAvatar(getPathForDB(personal.getAbsolutePath()) + fileName, id);
+            response.sendRedirect("/profile");
+        } else if(request.getRequestURI().matches("/uploadpostpic/\\d+")) {
+            String commonFolderPosts = "/usr/local/Cellar/tomcat/domains/SocialSite/uploads/posts/";
+            String personalFolder = commonFolderPosts + String.valueOf(id);
+            // creates the save directory if it does not exists
+            File common = new File(commonFolderPosts);
+            File personal = new File(personalFolder);
+
+            if (common.exists()) {
+                if (!personal.exists()) {
+                    personal.mkdir();
+                }
+            } else {
+                common.mkdir();
+            }
+
+            System.out.println("Upload File Directory = " + personal.getAbsolutePath());
+            //Get all the parts from request and write it to the file on server
+            String fileName = "";
+            for (Part part : request.getParts()) {
+                fileName = setFileName(part);
+                part.write(personal + File.separator + fileName);
+            }
+            postDao.doPicture(getPathForDB(personal.getAbsolutePath()) + fileName, id);
+            //pos.updateAvatar(getPathForDB(personal.getAbsolutePath()) + fileName, id);
+            response.sendRedirect("/posts");
         }
-        System.out.println("Upload File Directory = " + personal.getAbsolutePath());
-
-        //Get all the parts from request and write it to the file on server
-        String fileName = "";
-        for (Part part : request.getParts()) {
-            fileName = setFileName(part);
-
-            part.write(personal + File.separator + fileName);
-        }
-
-        userDao.updateAvatar(getPathForDB(personal.getAbsolutePath()) + fileName, id);
-
-        request.setAttribute("message", "Photo uploaded successfully!");
-        response.sendRedirect("/profile");
-        //getServletContext().getRequestDispatcher("/profile").forward(request, response);
     }
 
     private String setFileName(Part part) {

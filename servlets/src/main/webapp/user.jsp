@@ -82,7 +82,7 @@
                 <li><a href="#"><i class="fa fa-camera-retro"></i><span> Photos</span></a></li>
                 <li><a href="/users"><i class="fa fa-group"></i><span> People</span></a></li>
                 <li><a href="#"><i class="icon-comment-fill-1"></i><span> Messages</span></a></li>
-                <li><a href="/logout"><i class="icon-unlock-fill"></i><span> Logout</span></a></li>
+                <li><a href="Logout"><i class="icon-unlock-fill"></i><span> Logout</span></a></li>
             </ul>
         </div>
     </div>
@@ -395,10 +395,9 @@
                             </div>
 
 
-                            <div class="timeline row" data-toggle="isotope"
-                                 style="position: relative; height: 5866.5px;">
-                                <div class="col-xs-12 col-md-6 col-lg-4 item"
-                                     style="position: absolute; left: 0px; top: 4907px;">
+                            <div class="timeline row" data-toggle="isotope" style="position: relative; height: 5866.5px;">
+
+                                <div class="col-xs-12 col-md-6 col-lg-6 item" style="position: absolute; left: 0px; top: 0px;">
 
                                     <%if (followerDao.isFollower((Integer) request.getAttribute("userId"), user.getUserId())) {%>
 
@@ -423,6 +422,9 @@
                                                             <span>${post.date}</span>
                                                         </div>
                                                     </div>
+                                                    <c:if test="${post.picture != null}">
+                                                        <img src="${post.picture}" class="img-responsive">
+                                                    </c:if>
                                                 </div>
 
                                                 <div class="panel-body">

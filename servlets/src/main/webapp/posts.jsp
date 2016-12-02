@@ -81,9 +81,7 @@
                         <label for="fusk" style="color: antiquewhite">Click me first to change photo</label>
                         <input id="fusk" type="file" name="photo" style="display: none;">
                         <br/>
-                        <button type="submit" value="Upload File" class="btn btn-info btn-xs"><i
-                                class="fa fa-download"></i> Upload
-                        </button>
+                        <button type="submit" value="Upload File" class="btn btn-info btn-xs"><i class="fa fa-download"></i> Upload</button>
                     </form>
 
                 </div>
@@ -96,13 +94,12 @@
                 <li><a href="/users"><i class="fa fa-group"></i> <span>People</span></a></li>
                 <li><a href="#"><i class="icon-comment-fill-1"></i> <span>Messages</span></a></li>
                 <li><a href="Logout"><i class="icon-unlock-fill"></i> <span>Logout</span></a></li>
-
             </ul>
         </div>
     </div>
     <!--end of sidebar left sidebar-size-2 sidebar-offset-0 sidebar-visible-desktop sidebar-visible-mobile sidebar-skin-dark-->
 
-    <!-- Sidebar component with st-effect-1 (set on the toggle button within the navbar) -->
+<%--    <!-- Sidebar component with st-effect-1 (set on the toggle button within the navbar) -->
     <div class="sidebar sidebar-chat right sidebar-size-2 sidebar-offset-0 chat-skin-white sidebar-visible-mobile"
          id=sidebar-chat>
         <div class="split-vertical">
@@ -344,7 +341,7 @@
     </script><!--end of Chat Script-->
 
     <!--Window for Chat-->
-    <div class="chat-window-container"></div>
+    <div class="chat-window-container"></div>--%>
 
     <!--content push wrapper-->
     <div class="st-pusher" id="content">
@@ -363,15 +360,13 @@
                                     <div class="panel panel-default share clearfix-xs">
                                         <div class="panel-heading panel-heading-gray title">What's new</div>
 
-                                        <form action="/post/newpost" method="post">
-
+                                        <form action="/post/newpost" method="post" >
                                             <div class="panel-body">
-                                                <textarea name="status" class="form-control share-text" rows="3" placeholder="Share your thoughts..." style="margin: 0px -7px 0px 0px; height: 60px; width: 338px;"></textarea>
+                                                <textarea name="status" class="form-control share-text" rows="3" placeholder="Share your thoughts..." autofocus style="margin: 0px -7px 0px 0px; height: 60px; width: 338px;"></textarea>
                                             </div>
-
                                             <div class="panel-footer share-buttons">
                                                 <a href="#"><i class="fa fa-photo"></i></a>
-                                                <button type="submit" class="btn btn-primary btn-xs pull-right display-none">Post</button>
+                                                <button type="submit" class="btn btn-primary btn-xs pull-right display-none"> Post</button>
                                             </div>
                                         </form>
 
@@ -392,12 +387,10 @@
                                                 <div class="media">
                                                     <div class="media-left">
                                                         <a href="">
-                                                            <img src="${post.user.avatar}" class="media-object"
-                                                                 width="50">
+                                                            <img src="${post.user.avatar}" class="media-object" width="50">
                                                         </a>
                                                     </div>
 
-                                                    <%--<form action="/post/${post.postId}/kill" method="post"></form>--%>
                                                     <div class="media-body">
                                                         <form action="/postkill/${post.postId}" method="post">
                                                             <button type="submit" class="btn btn-primary btn-xs pull-right"><i class="fa fa-fw fa-trash-o fa-2x"></i></button>
@@ -406,8 +399,10 @@
                                                             <a href="">${post.user.firstName} ${post.user.lastName}</a>
                                                             <span>${post.date}</span>
                                                     </div>
-
                                                 </div>
+                                                <c:if test="${post.picture != null}">
+                                                    <img src="${post.picture}" class="img-responsive">
+                                                </c:if>
                                             </div><!--END OF HEADER-->
 
                                             <div class="panel-body">
@@ -415,8 +410,18 @@
                                             </div>
 
                                             <div class="view-all-comments">
-                                                <a href="#"><i class="fa fa-comments-o"></i> All Comments</a>
-                                                <a href="#"><i class="fa fa-photo" style="alignment: right"></i> Add Picture</a>
+
+                                                <%--<form action="/postlike/${post.postId}" method="post">
+                                                    <button type="submit" class="btn btn-default btn-sm btn-circle"><i class="fa fa-thumbs-o-up"></i> 0</button>
+                                                </form>--%>
+                                                <form action="/uploadpostpic/${post.postId}" method="post" enctype="multipart/form-data">
+                                                    <input id="uploadpic" type="file" name="photo" style="display: none;">
+                                                    <button type="submit" value="Upload Picture" class="btn btn-primary btn-xs "><i class="fa fa-photo"></i></button>
+                                                    <label for="uploadpic" style="color: darkgrey"> choose picture...</label>
+
+                                                </form>
+                                                <button type="submit" class="btn btn-primary btn-xs display-none"> Post</button>
+                                                    <a href="#"><i class="fa fa-comments-o"></i> All Comments</a>
                                                 <span></span>
                                             </div>
 
