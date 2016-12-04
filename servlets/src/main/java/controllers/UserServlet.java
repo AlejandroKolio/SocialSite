@@ -1,9 +1,6 @@
 package controllers;
 
-import dao.FollowerDao;
-import dao.FollowerDaoImp;
-import dao.UserDao;
-import dao.UserDaoImp;
+import dao.*;
 import model.Post;
 import model.User;
 import org.apache.log4j.Logger;
@@ -45,6 +42,7 @@ public class UserServlet extends HttpServlet {
             if (tokens != null && tokens.length >= 2) {
                 int userId = Integer.parseInt(tokens[1]);
 
+                PostDao postDao = new PostDaoImp();
                 UserDao userDao = new UserDaoImp();
                 FollowerDao followerDao = new FollowerDaoImp();
 
@@ -56,12 +54,16 @@ public class UserServlet extends HttpServlet {
                     List<Post> posts = postService.getPostOfUser(user);
 
                     String userName = user.getFirstName() + " " + user.getLastName();
+                    int followerCounter = followerDao.followerCounter(userId);
+                    int postCounter     = postDao.postCounter(userId);
 
                     request.setAttribute("userId", userId);
                     request.setAttribute("userName", userName);
                     request.setAttribute("followerDao", followerDao);
                     request.setAttribute("avatar", avatar);
                     request.setAttribute("posts", posts);
+                    request.setAttribute("followerCounter", followerCounter);
+                    request.setAttribute("postCounter", postCounter);
 
                     RequestDispatcher rd = request.getRequestDispatcher("/user.jsp");
                     rd.forward(request, response);

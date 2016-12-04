@@ -1,6 +1,4 @@
 <%@ page import="model.User" %>
-<%@ page import="dao.UserDao" %>
-<%@ page import="dao.UserDaoImp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=US-ASCII" pageEncoding="US-ASCII" %>
 <!DOCTYPE html>
@@ -400,12 +398,13 @@
                                                             <span>${post.date}</span>
                                                     </div>
                                                 </div>
-                                                <c:if test="${post.picture != null}">
-                                                    <img src="${post.picture}" class="img-responsive">
-                                                </c:if>
                                             </div><!--END OF HEADER-->
 
+
                                             <div class="panel-body">
+                                                <c:if test="${post.picture != 'null'}">
+                                                    <img src="${post.picture}" class="img-responsive">
+                                                </c:if>
                                                 <p>${post.body}</p>
                                             </div>
 

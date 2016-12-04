@@ -377,9 +377,8 @@
                                     </div>
 
                                     <div class="profile-icons margin-none">
-                                        <span><i class="fa fa-users"></i> 372</span>
-                                        <span><i class="fa fa-photo"></i> 43</span>
-                                        <span><i class="fa fa-video-camera"></i> 3</span>
+                                        <span><i class="fa fa-users"></i> <%=request.getAttribute("followerCounter")%></span>
+                                        <span><i class="fa fa-twitter"></i> <%=request.getAttribute("postCounter")%></span>
                                     </div>
                                 </div>
                             </div>
@@ -422,7 +421,7 @@
                                                             <span>${post.date}</span>
                                                         </div>
                                                     </div>
-                                                    <c:if test="${post.picture != null}">
+                                                    <c:if test="${post.picture != 'null'}">
                                                         <img src="${post.picture}" class="img-responsive">
                                                     </c:if>
                                                 </div>

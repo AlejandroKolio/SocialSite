@@ -26,4 +26,10 @@ public class FollowerDaoImp implements FollowerDao {
         String isFollower = "SELECT user_id, follower_id FROM follower WHERE user_id = ? AND follower_id = ?;";
         return DatabaseTemplate.executeIsFollower(isFollower, userId, followerId);
     }
+
+    @Override
+    public int followerCounter(int userId) {
+        String counter = "SELECT follower_id FROM follower WHERE user_id = ?;";
+        return DatabaseTemplate.executeCount(counter, userId);
+    }
 }

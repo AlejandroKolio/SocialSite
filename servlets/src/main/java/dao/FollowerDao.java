@@ -9,4 +9,5 @@ public interface FollowerDao {
     void follow(int userID, int followerId);
     void unFollow(int userId, int followerId);
     boolean isFollower(int userId, int followerId);
+    int followerCounter(int userdId);
 }

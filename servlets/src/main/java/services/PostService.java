@@ -16,4 +16,5 @@ public interface PostService {
     List<Post> getPostOfUser(User user);
     List<Post> getPostOfFriends(User user);
     Post getPostById(int postId);
+    int hasPicture(int postId);
 }

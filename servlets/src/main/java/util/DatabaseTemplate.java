@@ -1,5 +1,7 @@
 package util;
 
+import model.User;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +66,22 @@ public class DatabaseTemplate {
         } finally {
             closeConnection(connection);
         }
+    }
+
+    public static int executeCount(String query, int user_id) {
+        int counter = 0;
+        try(PreparedStatement ps = createPreparedStatement(query, user_id);
+        ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                counter++;
+            }
+        } catch (SQLException e) {
+            e.getErrorCode();
+            throw new RuntimeException();
+        } finally {
+            closeConnection(connection);
+        }
+        return counter;
     }
 
     private static PreparedStatement createPreparedStatement(String query, Object... parameters) {

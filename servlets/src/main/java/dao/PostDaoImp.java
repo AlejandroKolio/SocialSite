@@ -38,6 +38,7 @@ public class PostDaoImp implements PostDao {
     private final String GET_POST_BY_ID   = "SELECT * FROM post WHERE post_id=?";
     private final String GET_FRIENDS_POST = "SELECT * FROM post WHERE user_id IN (SELECT follower_id from follower WHERE user_id=?)";
     private final String POST_PICTURE     = "UPDATE post SET picture = ? WHERE post_id = ?;";
+    private final String HAS_PICTURE      = "SELECT picture FROM post WHERE post_id = ?;";
 
     @Override
     public void savePost(Post post) {
@@ -72,5 +73,21 @@ public class PostDaoImp implements PostDao {
     @Override
     public void doPicture(String path, int postId) {
         DatabaseTemplate.executeInsertQuery(POST_PICTURE, path, postId);
+    }
+
+    @Override
+    public int hasPicture(int postId) {
+        List<Post> pictures = DatabaseTemplate.executeQueryForObject(new PostRowMapper(), HAS_PICTURE, postId);
+        if(pictures != null) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    @Override
+    public int postCounter(int userId) {
+        String counter = "SELECT post_id FROM post WHERE user_id = ?;";
+        return DatabaseTemplate.executeCount(counter, userId);
     }
 }

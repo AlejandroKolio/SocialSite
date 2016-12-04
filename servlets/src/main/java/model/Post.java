@@ -3,6 +3,8 @@ package model;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import services.PostService;
+import services.PostServiceImp;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -19,7 +21,6 @@ public class Post implements Serializable {
     private String body;
     private Timestamp date;
     private String picture;
-
     private List<Comment> comments;
     private User user;
 }

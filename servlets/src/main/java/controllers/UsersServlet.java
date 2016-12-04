@@ -63,4 +63,8 @@ public class UsersServlet extends HttpServlet {
             }
         }
     }
+
+    private int folowerCounter(int userId, int followerId) {
+        return 0;
+    }
 }
