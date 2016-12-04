@@ -84,6 +84,22 @@ public class DatabaseTemplate {
         return counter;
     }
 
+    public static List<Integer> executeFollowing(String query, int user_id) {
+        List<Integer> list = new ArrayList<>();
+        try(PreparedStatement ps = createPreparedStatement(query, user_id);
+            ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                list.add(rs.getInt("follower_id"));
+            }
+        } catch (SQLException e) {
+            e.getErrorCode();
+            throw new RuntimeException();
+        } finally {
+            closeConnection(connection);
+        }
+        return list;
+    }
+
     private static PreparedStatement createPreparedStatement(String query, Object... parameters) {
         try {
             connection = getConnection();

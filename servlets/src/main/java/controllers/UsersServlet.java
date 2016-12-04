@@ -1,9 +1,13 @@
 package controllers;
 
+import dao.FollowerDao;
+import dao.FollowerDaoImp;
 import dao.UserDao;
 import dao.UserDaoImp;
 import model.User;
 import org.apache.log4j.Logger;
+import services.FollowerService;
+import services.FollowerServiceImp;
 import services.UserService;
 import services.UserServiceImp;
 
@@ -27,6 +31,8 @@ public class UsersServlet extends HttpServlet {
     static Logger logger = Logger.getLogger(UsersServlet.class);
 
     private UserService service = new UserServiceImp();
+    private FollowerService followerService = new FollowerServiceImp();
+    private FollowerDao followerDao = new FollowerDaoImp();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -34,15 +40,18 @@ public class UsersServlet extends HttpServlet {
         if (req.getPathInfo() == null) {
             List<User> users = service.getUsers();
 
+
             logger.info(users);
 
             User user = (User) req.getSession().getAttribute("User");
             int currentUserId = user.getUserId();
             String avaPath = user.getAvatar();
 
+            List<User> following = followerService.following(followerDao.following(currentUserId));
             req.setAttribute("currentUserId", currentUserId);
             req.setAttribute("users", users);
             req.setAttribute("avaPath", avaPath);
+            req.setAttribute("following", following);
 
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/users.jsp");
             requestDispatcher.forward(req, resp);
@@ -62,9 +71,5 @@ public class UsersServlet extends HttpServlet {
                 ex.printStackTrace();
             }
         }
-    }
-
-    private int folowerCounter(int userId, int followerId) {
-        return 0;
     }
 }

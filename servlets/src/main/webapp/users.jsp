@@ -338,42 +338,82 @@
             <div class="st-content-inner">
 
                 <div class="container-fluid">
-                    <h4>List of Users</h4>
+                    <h4>List of All Users</h4>
 
-                    <div class="panel panel-default">
-                        <!-- Progress table -->
-                        <div class="table-responsive">
-                            <table class="table v-middle">
+                        <div class="tabbable">
 
-                                <thead>
-                                <tr>
-                                    <th width="1"></th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                </tr>
-                                </thead>
-
-                                <tbody id="responsive-table-body">
+                        <ul class="nav nav-tabs" tabindex="1" style="overflow: hidden; outline: none;">
+                            <li class="active"><a href="#home" data-toggle="tab" aria-expanded="true"><i class="fa fa-fw fa-users"></i> People</a></li>
+                            <li class=""><a href="#profile" data-toggle="tab" aria-expanded="false"><i class="fa fa-fw fa-user"></i> Following</a></li>
+                        </ul>
 
 
+                        <div class="tab-content">
+                            <div id="home" class="tab-pane active">
+                                <!-- Progress table -->
+                                <div class="table-responsive">
+                                    <table class="table v-middle">
 
-                                <c:forEach items="${requestScope.users}" var="user">
+                                        <thead>
+                                        <tr>
+                                            <th width="1"></th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                        </tr>
+                                        </thead>
 
-                                    <c:if test="${user.userId != currentUserId}">
-                                <tr>
-                                    <td></td>
-                                    <td><img src="${user.avatar}" width="40" class="img-circle">
-                                        <a href="/user/${user.userId}/posts">  ${user.firstName} ${user.lastName}</a>
-                                    </td>
-                                    <td><a href="#">${user.email}</a></td>
-                                </tr>
-                                    </c:if>
+                                        <tbody id="responsive-table-body">
+                                        <c:forEach items="${requestScope.users}" var="user">
 
-                                </c:forEach>
-                                </tbody>
+                                            <c:if test="${user.userId != currentUserId}">
+                                                <tr>
+                                                    <td></td>
+                                                    <td><img src="${user.avatar}" width="40" class="img-circle">
+                                                        <a href="/user/${user.userId}/posts">  ${user.firstName} ${user.lastName}</a>
+                                                    </td>
+                                                    <td><a href="#">${user.email}</a></td>
+                                                </tr>
+                                            </c:if>
 
-                            </table>
+                                        </c:forEach>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                            <div id="profile" class="tab-pane">
+                                <!-- Progress table -->
+                                <div class="table-responsive">
+                                    <table class="table v-middle">
+
+                                        <thead>
+                                        <tr>
+                                            <th width="1"></th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody id="responsive-table">
+                                        <c:forEach items="${requestScope.following}" var="following">
+
+                                                <tr>
+                                                    <td></td>
+                                                    <td><img src="${following.avatar}" width="40" class="img-circle">
+                                                        <a href="/user/${following.userId}/posts">  ${following.firstName} ${following.lastName}</a>
+                                                    </td>
+                                                    <td><a href="#">${following.email}</a></td>
+                                                </tr>
+
+                                        </c:forEach>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+
+                            </div>
                         </div>
+
                     </div>
                     <table>
                             <tr>

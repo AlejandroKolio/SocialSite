@@ -46,29 +46,31 @@ public class AppErrorHandler extends HttpServlet {
 
         PrintWriter out = response.getWriter();
 
-        out.write("<html><head>" +
-                  "<link href=\"/css/vendor/all.css\" rel=\"stylesheet\">" +
-                  "<link href=\"/css/app/app.css\" rel=\"stylesheet\">" +
-                  "<title align=\"center\">Exception/Error Details</title>" +
-                  "</head><body class=\"login\"");
-
-        if (statusCode != 500) {
-            out.write("<strong align = center><h3>Error Details</h3></strong><br>");
-            out.write("<strong align = center>Status Code</strong>:" + statusCode + "<br>");
-            out.write("<strong align = center>Requested URI</strong>:" + requestUri);
+        try {
+            out.write("<html><head>" +
+                    "<link href=\"/css/vendor/all.css\" rel=\"stylesheet\">" +
+                    "<link href=\"/css/app/app.css\" rel=\"stylesheet\">" +
+                    "<title align=\"center\">Exception/Error Details</title>" +
+                    "</head><body class=\"login\"");
+            if (statusCode != 500) {
+                out.write("<strong align = center><h3>Error Details</h3></strong><br>");
+                out.write("<strong align = center>Status Code</strong>:" + statusCode + "<br>");
+                out.write("<strong align = center>Requested URI</strong>:" + requestUri);
+                out.write("</body></html>");
+            } else {
+                out.write("<strong align = center><h3>Exception Details</h3></strong><br>");
+                out.write("<strong style=\"color: papayawhip\" align = center><h4>Not authorised access</h4></strong>");
+                out.write("<strong align = center>Servlet Name:" + servletName + "</strong><br>");
+                out.write("<strong align = center>Exception Name:" + throwable.getClass().getName() + "</strong><br>");
+                out.write("<strong align = center>Requested URI:" + requestUri + " cannot be accessed</strong><br>");
+                out.write("<strong align = center>Exception Message:" + throwable.getMessage() + "</strong><br>");
+                out.write("</body></html>");
+            }
+            out.write("<p><a style=\"color: papayawhip\" href=\"/profile\">Main Page</a></p>");
+            out.write("<p><a style=\"color: papayawhip\" href=\"/login\">Login</a></p>");
             out.write("</body></html>");
-        } else {
-            out.write("<strong align = center><h3>Exception Details</h3></strong><br>");
-            out.write("<strong style=\"color: papayawhip\" align = center><h4>Not authorised access</h4></strong>");
-            out.write("<strong align = center>Servlet Name:" + servletName + "</strong><br>");
-            out.write("<strong align = center>Exception Name:" + throwable.getClass().getName() + "</strong><br>");
-            out.write("<strong align = center>Requested URI:" + requestUri + " cannot be accessed</strong><br>");
-            out.write("<strong align = center>Exception Message:" + throwable.getMessage() + "</strong><br>");
-            out.write("</body></html>");
+        } finally {
+            out.close();
         }
-
-        out.write("<p><a style=\"color: papayawhip\" href=\"/profile\">Main Page</a></p>");
-        out.write("<p><a style=\"color: papayawhip\" href=\"/login\">Login</a></p>");
-        out.write("</body></html>");
     }
 }

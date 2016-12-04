@@ -37,7 +37,7 @@
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle user" data-toggle="dropdown">
-                            <img src="<%=avatar%>" alt="User" class="img-circle" width="40"/>
+                            <img src="${avatar}" alt="User" class="img-circle" width="40"/>
 
 
                             <%= user.getFirstName() + " " + user.getLastName() %>
@@ -70,9 +70,10 @@
             <div class="sidebar-block">
                 <div class="profile">
 
-                    <img src="<%=avatar%>" alt="people" class="img-circle" width="110"/>
-                    <h4><%= user.getFirstName() + " " + user.getLastName() %>
-                    </h4>
+
+                    <img src="${avatar}" alt="people" class="img-circle" width="110"/>
+
+                    <h4><%= user.getFirstName() + " " + user.getLastName() %></h4>
 
                     <form action="/upload/<%=user.getUserId()%>" method="post" enctype="multipart/form-data">
                         <label for="fusk" style="color: antiquewhite">Click me first to change photo</label>

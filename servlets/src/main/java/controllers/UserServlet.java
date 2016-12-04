@@ -70,16 +70,20 @@ public class UserServlet extends HttpServlet {
                 } else {
                     response.setContentType("text/html");
                     PrintWriter out = response.getWriter();
-                    out.write("<html><head>" +
-                              "<link href=\"/css/vendor/all.css\" rel=\"stylesheet\">" +
-                              "<link href=\"/css/app/app.css\" rel=\"stylesheet\">" +
-                              "<title align=\"center\">No such ID</title>" +
-                              "</head><body class=\"login\"");
-                    out.write("<strong style=\"color: papayawhip\" align = center>" +
-                              "<h5>User's page deleted or not registered yet</h5></strong><br>");
-                    out.write("<img align=\"center\" src=\"/images/people/userpic-default.png\" alt=\"people\" class=\"img-circle\"/>");
-                    out.write("<p><a style=\"color: papayawhip\" href=\"/users\">Go back to community</a></p>");
-                    out.write("</body></html>");
+                    try {
+                        out.write("<html><head>" +
+                                "<link href=\"/css/vendor/all.css\" rel=\"stylesheet\">" +
+                                "<link href=\"/css/app/app.css\" rel=\"stylesheet\">" +
+                                "<title align=\"center\">No such ID</title>" +
+                                "</head><body class=\"login\"");
+                        out.write("<strong style=\"color: papayawhip\" align = center>" +
+                                "<h5>User's page deleted or not registered yet</h5></strong><br>");
+                        out.write("<img align=\"center\" src=\"/images/people/userpic-default.png\" alt=\"people\" class=\"img-circle\"/>");
+                        out.write("<p><a style=\"color: papayawhip\" href=\"/users\">Go back to community</a></p>");
+                        out.write("</body></html>");
+                    } finally {
+                        out.close();
+                    }
                 }
             }
         } catch (Exception ex) {

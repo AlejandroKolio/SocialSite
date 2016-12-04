@@ -1,6 +1,9 @@
 package dao;
 
+import model.User;
 import util.DatabaseTemplate;
+
+import java.util.List;
 
 /**
  * Created by Aleksandr_Shakhov on 15.11.16 18:23.
@@ -31,5 +34,12 @@ public class FollowerDaoImp implements FollowerDao {
     public int followerCounter(int userId) {
         String counter = "SELECT follower_id FROM follower WHERE user_id = ?;";
         return DatabaseTemplate.executeCount(counter, userId);
+    }
+
+    @Override
+    public List<Integer> following(int userId) {
+        String counter = "SELECT follower_id FROM follower WHERE user_id = ?;";
+        return DatabaseTemplate.executeFollowing(counter, userId);
+
     }
 }

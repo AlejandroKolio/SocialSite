@@ -36,12 +36,14 @@ public class PostServlet extends HttpServlet {
             User user = (User) request.getSession().getAttribute("User");
             List<Post> posts = postService.getPostOfUser(user);
 
+            String avatar = user.getAvatar();
             int postSize = posts.size();
 
             logger.info(posts);
             request.setAttribute("posts", posts);
             request.setAttribute("postSize", postSize);
             request.setAttribute("users", users);
+            request.setAttribute("avatar", avatar);
 
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/posts.jsp");
             requestDispatcher.forward(request, response);

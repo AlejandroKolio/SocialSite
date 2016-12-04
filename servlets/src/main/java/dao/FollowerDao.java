@@ -1,5 +1,9 @@
 package dao;
 
+import model.User;
+
+import java.util.List;
+
 /**
  * Created by Aleksandr_Shakhov on 15.11.16 18:21.
  */
@@ -10,4 +14,6 @@ public interface FollowerDao {
     void unFollow(int userId, int followerId);
     boolean isFollower(int userId, int followerId);
     int followerCounter(int userdId);
+
+    List<Integer> following(int userId);
 }
