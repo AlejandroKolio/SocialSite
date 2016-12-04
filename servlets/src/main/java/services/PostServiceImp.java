@@ -29,7 +29,7 @@ public class PostServiceImp implements PostService {
     public List<Post> getPostOfUser(User user) {
         List<Post> posts = postDao.getPostByUserID(user.getUserId());
         for (Post post : posts) {
-            post.setUser(userDao.getUserByUserId(post.getUserID()));
+            post.setUser(userDao.getUserByUserId(post.getUserId()));
             post.setComments(commentDao.getCommentByPostId(post.getPostId()));
         }
         return posts;
@@ -39,7 +39,7 @@ public class PostServiceImp implements PostService {
     public List<Post> getPostOfFriends(User user) {
         List<Post> posts = postDao.getPostsOfFriends(user.getUserId());
         for (Post post : posts) {
-            post.setUser(userDao.getUserByUserId(post.getUserID()));
+            post.setUser(userDao.getUserByUserId(post.getUserId()));
         }
         return posts;
     }
@@ -49,7 +49,7 @@ public class PostServiceImp implements PostService {
         Post post = postDao.getPostByPostId(postId);
 
         post.setComments(commentDao.getCommentByPostId(postId));
-        post.setUser(userDao.getUserByUserId(post.getUserID()));
+        post.setUser(userDao.getUserByUserId(post.getUserId()));
 
         return post;
     }

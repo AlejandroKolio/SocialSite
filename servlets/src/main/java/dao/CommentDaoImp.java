@@ -29,7 +29,7 @@ public class CommentDaoImp implements CommentDao {
             comment.setPostId(resultSet.getInt("post_id"));
             comment.setUserId(resultSet.getInt("user_id"));
             comment.setCommentBody(resultSet.getString("body"));
-            comment.setTime(resultSet.getTimestamp("comment_time"));
+            comment.setDate(resultSet.getTimestamp("comment_time"));
             return comment;
         }
     }

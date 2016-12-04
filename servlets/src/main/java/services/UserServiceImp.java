@@ -32,8 +32,7 @@ public class UserServiceImp implements UserService {
     @Override
     public User verifyUser(User user) {
         User verifiedUser = userDao.getUserByEmail(user.getEmail());
-        if (verifiedUser != null
-                && verifiedUser.getPassword().equals(user.getPassword())) {
+        if (verifiedUser != null && verifiedUser.getPassword().equals(user.getPassword())) {
             return verifiedUser;
         }
         return null;

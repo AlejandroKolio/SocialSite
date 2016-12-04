@@ -344,7 +344,7 @@
 
                         <ul class="nav nav-tabs" tabindex="1" style="overflow: hidden; outline: none;">
                             <li class="active"><a href="#home" data-toggle="tab" aria-expanded="true"><i class="fa fa-fw fa-users"></i> People</a></li>
-                            <li class=""><a href="#profile" data-toggle="tab" aria-expanded="false"><i class="fa fa-fw fa-user"></i> Following</a></li>
+                            <li class=""><a href="#profile" data-toggle="tab" aria-expanded="false"><i class="fa fa-fw fa-user"></i> My Followers</a></li>
                         </ul>
 
 

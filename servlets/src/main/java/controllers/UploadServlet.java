@@ -65,7 +65,7 @@ public class UploadServlet extends HttpServlet {
             String avatar = user.getAvatar();
             request.setAttribute("avatar", avatar);
 
-            response.sendRedirect("/profile");
+            response.sendRedirect("/posts");
 
         } else if(request.getRequestURI().matches("/uploadpostpic/\\d+")) {
             String commonFolderPosts = "/usr/local/Cellar/tomcat/domains/SocialSite/uploads/posts/";
@@ -90,7 +90,7 @@ public class UploadServlet extends HttpServlet {
                 part.write(personal + File.separator + fileName);
             }
             postDao.doPicture(getPathForDB(personal.getAbsolutePath()) + fileName, id);
-            response.sendRedirect("/profile");
+            response.sendRedirect("/posts");
         }
     }
 

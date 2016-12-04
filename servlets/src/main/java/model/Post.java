@@ -1,5 +1,6 @@
 package model;
 
+import dao.UserDaoImp;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +20,7 @@ import java.util.Locale;
 @Data
 public class Post implements Serializable {
     private int postId;
-    private int userID;
+    private int userId;
     private String body;
     private Timestamp date;
     private String picture;

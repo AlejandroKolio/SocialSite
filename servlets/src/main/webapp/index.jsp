@@ -38,18 +38,52 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle user" data-toggle="dropdown">
                             <img src="${avatar}" alt="User" class="img-circle" width="40"/>
-
-
                             <%= user.getFirstName() + " " + user.getLastName() %>
-
                             <span class="caret"></span>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Profile</a></li>
+                                <li><a href="#">Messages</a></li>
+                                <li><a href="Logout">Logout</a></li>
+                            </ul>
                         </a>
+
+                        <!--Notifications-->
+                        <li class="dropdown notifications updates hidden-xs hidden-sm">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-bell-o"></i>
+                            </a>
+
+
+                            <ul class="dropdown-menu" role="notification">
+
+                                <li class="dropdown-header">Notifications</li>
+
+                                <c:forEach items="${requestScope.postOfFriends}" var="friendPost">
+                                <li class="media">
+                                    <div class="media-left">
+                                        <img src="${friendPost.user.avatar}" alt="people" class="img-circle" width="30">
+                                    </div>
+                                    <div class="media-body">
+                                        <a href="#">${friendPost.user.firstName} ${friendPost.user.lastName} </a> posted on timeline.
+                                        <br>
+                                        <span class="text-caption text-muted">${friendPost.date}</span>
+                                    </div>
+                                </li>
+                                </c:forEach>
+
+                            </ul>
+
+
+                        </li>
+                        <!--End of Notifications-->
+
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="#">Profile</a></li>
                             <li><a href="#">Messages</a></li>
                             <li><a href="Logout">Logout</a></li>
                         </ul>
                     </li><!--end of User-->
+
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">

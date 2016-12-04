@@ -46,7 +46,7 @@ public class UserServlet extends HttpServlet {
                 UserDao userDao = new UserDaoImp();
                 FollowerDao followerDao = new FollowerDaoImp();
 
-                if(userDao.isRegisteredId(userId) != null) {
+                if (userDao.isRegisteredId(userId) != null) {
 
                     User user = userDao.getUserByUserId(userId);
                     String avatar = user.getAvatar();
@@ -55,7 +55,7 @@ public class UserServlet extends HttpServlet {
 
                     String userName = user.getFirstName() + " " + user.getLastName();
                     int followerCounter = followerDao.followerCounter(userId);
-                    int postCounter     = postDao.postCounter(userId);
+                    int postCounter = postDao.postCounter(userId);
 
                     request.setAttribute("userId", userId);
                     request.setAttribute("userName", userName);
@@ -70,20 +70,17 @@ public class UserServlet extends HttpServlet {
                 } else {
                     response.setContentType("text/html");
                     PrintWriter out = response.getWriter();
-                    try {
-                        out.write("<html><head>" +
-                                "<link href=\"/css/vendor/all.css\" rel=\"stylesheet\">" +
-                                "<link href=\"/css/app/app.css\" rel=\"stylesheet\">" +
-                                "<title align=\"center\">No such ID</title>" +
-                                "</head><body class=\"login\"");
-                        out.write("<strong style=\"color: papayawhip\" align = center>" +
-                                "<h5>User's page deleted or not registered yet</h5></strong><br>");
-                        out.write("<img align=\"center\" src=\"/images/people/userpic-default.png\" alt=\"people\" class=\"img-circle\"/>");
-                        out.write("<p><a style=\"color: papayawhip\" href=\"/users\">Go back to community</a></p>");
-                        out.write("</body></html>");
-                    } finally {
-                        out.close();
-                    }
+
+                    out.write("<html><head>" +
+                            "<link href=\"/css/vendor/all.css\" rel=\"stylesheet\">" +
+                            "<link href=\"/css/app/app.css\" rel=\"stylesheet\">" +
+                            "<title align=\"center\">No such ID</title>" +
+                            "</head><body class=\"login\"");
+                    out.write("<strong style=\"color: papayawhip\" align = center>" +
+                            "<h5>User's page deleted or not registered yet</h5></strong><br>");
+                    out.write("<img align=\"center\" src=\"/images/people/userpic-default.png\" alt=\"people\" class=\"img-circle\"/>");
+                    out.write("<p><a style=\"color: papayawhip\" href=\"/users\">Go back to community</a></p>");
+                    out.write("</body></html>");
                 }
             }
         } catch (Exception ex) {

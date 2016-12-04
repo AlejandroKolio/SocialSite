@@ -25,7 +25,7 @@ public class PostDaoImp implements PostDao {
             post.setPostId(resultSet.getInt("post_id"));
             post.setBody(resultSet.getString("body"));
             post.setDate(resultSet.getTimestamp("post_time"));
-            post.setUserID(resultSet.getInt("user_id"));
+            post.setUserId(resultSet.getInt("user_id"));
             post.setPicture(resultSet.getString("picture"));
 
             return post;
@@ -47,7 +47,7 @@ public class PostDaoImp implements PostDao {
 
     @Override
     public void killPost(Post post) {
-        DatabaseTemplate.executeInsertQuery(POST_KILL, post.getPostId(), post.getUserID());
+        DatabaseTemplate.executeInsertQuery(POST_KILL, post.getPostId(), post.getUserId());
     }
 
     @Override
