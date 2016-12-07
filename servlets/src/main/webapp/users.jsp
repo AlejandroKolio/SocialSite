@@ -156,6 +156,7 @@
                                             <th width="1"></th>
                                             <th>Name</th>
                                             <th>Email</th>
+                                            <th>Posts</th>
                                         </tr>
                                         </thead>
 
@@ -168,7 +169,7 @@
                                                 </td>
                                                 <td><a href="#">${following.email}</a></td>
                                                 <td><i class="fa fa-fw fa-twitter"></i><span class="muted"></span>
-                                                        ${user.posts}
+                                                        ${following.posts}
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -183,57 +184,24 @@
                                 <div class="table-responsive">
                                     <table class="table v-middle">
 
-                                        <tbody id="leader-board">
+                                        <thead>
+                                        <tr>
+                                            <th width="1"></th>
+                                            <th>Name</th>
+                                            <th>Post #</th>
+                                            <th>Likes Quantity</th>
+                                        </tr>
+                                        </thead>
 
-                                        <div class="item col-md-6 col-sm-6 col-xs-12"
-                                             style="position: absolute; left: 0px; top: 0px;">
-                                            <!-- Leaderboard -->
-                                            <div class="panel panel-default">
-
-                                                <table class="table table-leaderboard margin-none">
-                                                    <tbody>
-
-                                                    <h4 class="panel-title">Top 5</h4>
-                                                    <br>
-                                                    <c:set var="count" value="0" />
-
-                                                    <c:forEach items="${requestScope.leaders}" var="leader">
-                                                    <tr>
-                                                        <td width="20"></td>
-
-                                                        <td><a href="#">
-                                                            <i class="fa fa-flag text-muted"></i>
-                                                            ${leader.key.friend.firstName} ${leader.key.friend.lastName}
-                                                            ${leader.key.postId}
-                                                        </a></td>
-                                                        <td><span class="pull-right">${leader.value}</span></td>
-                                                    </tr>
-                                                    </c:forEach>
-
-                                                    </tbody>
-                                                </table>
-
-                                                <div class="panel-footer padding-none">
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <div class="score-block">
-                                                                <div class="title">Min</div>
-                                                                <div class="score">126</div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <div class="score-block">
-                                                                <div class="title">Max</div>
-                                                                <div class="score">11,421</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- // Leaderboard -->
-                                        </div>
-
-
+                                        <tbody id="leader-table">
+                                        <c:forEach items="${requestScope.leaders}" var="leader">
+                                            <tr>
+                                                <td></td>
+                                                <td><img src="${leader.key.friend.avatar}" width="40" class="img-circle"><a href="/user/${leader.key.friend.userId}/posts">${leader.key.friend.firstName} ${leader.key.friend.lastName}</a></td>
+                                                <td><a href="#">${leader.key.postId}</a></td>
+                                                <td><i class="fa fa-fw fa-thumbs-o-up"></i><span class="muted"></span>${leader.value}</td>
+                                            </tr>
+                                        </c:forEach>
                                         </tbody>
 
                                     </table>
@@ -242,7 +210,6 @@
 
 
                         </div>
-
                     </div>
                     <table>
                         <tr>

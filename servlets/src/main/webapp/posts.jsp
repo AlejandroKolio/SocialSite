@@ -148,6 +148,8 @@
                                                         <form action="/postkill/${post.postId}" method="post">
                                                             <button type="submit" class="btn btn-primary btn-xs pull-right"><i class="fa fa-fw fa-trash-o fa-2x"></i></button>
                                                         </form>
+                                                        <div class="pull-right"><i class="fa fa-fw fa-thumbs-o-up fa-2x"></i> ${post.likes} </div>
+                                                        <div class="pull-right"><i class="fa fa-fw fa-thumbs-o-down fa-2x"></i> ${post.dislikes} </div>
                                                             <a href="">${post.user.firstName} ${post.user.lastName}</a>
                                                             <span>${post.date}</span>
                                                     </div>
