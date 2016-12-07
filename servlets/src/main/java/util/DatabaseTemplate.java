@@ -1,10 +1,14 @@
 package util;
 
+import model.Like;
+import model.Post;
 import model.User;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static util.DatabaseConnectionPool.getConnection;
 
@@ -98,6 +102,24 @@ public class DatabaseTemplate {
             closeConnection(connection);
         }
         return list;
+    }
+
+    public static Map<Integer, Integer> executeLikesCounter(String query) {
+        Map<Integer, Integer> map = new HashMap<>();
+        try(PreparedStatement ps = createPreparedStatement(query);
+            ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                int postId = rs.getInt("post_id");
+                int likesQ = rs.getInt("likesQuantity");
+                map.put(postId, likesQ);
+            }
+        } catch (SQLException e) {
+            e.getErrorCode();
+            throw new RuntimeException();
+        } finally {
+            closeConnection(connection);
+        }
+        return map;
     }
 
     private static PreparedStatement createPreparedStatement(String query, Object... parameters) {

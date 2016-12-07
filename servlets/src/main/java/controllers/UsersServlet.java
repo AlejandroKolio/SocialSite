@@ -1,12 +1,11 @@
 package controllers;
 
 import dao.*;
+import model.Like;
+import model.Post;
 import model.User;
 import org.apache.log4j.Logger;
-import services.FollowerService;
-import services.FollowerServiceImp;
-import services.UserService;
-import services.UserServiceImp;
+import services.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,7 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Aleksandr_Shakhov on 14.11.16 20:51.
@@ -30,13 +31,14 @@ public class UsersServlet extends HttpServlet {
     private UserService service = new UserServiceImp();
     private FollowerService followerService = new FollowerServiceImp();
     private FollowerDao followerDao = new FollowerDaoImp();
-    private PostDao postDao = new PostDaoImp();
+    private LikeDao likeDao = new LikeDaoImp();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         if (req.getPathInfo() == null) {
             List<User> users = service.getUsers();
+            Map<Post, Integer> leaders = likeDao.getAllCountLikes();
 
             logger.info(users);
 
@@ -45,10 +47,12 @@ public class UsersServlet extends HttpServlet {
             String avaPath = user.getAvatar();
 
             List<User> following = followerService.following(followerDao.following(currentUserId));
+
             req.setAttribute("currentUserId", currentUserId);
             req.setAttribute("users", users);
             req.setAttribute("avaPath", avaPath);
             req.setAttribute("following", following);
+            req.setAttribute("leaders", leaders);
 
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/users.jsp");
             requestDispatcher.forward(req, resp);

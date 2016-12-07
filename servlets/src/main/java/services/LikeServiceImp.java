@@ -2,7 +2,10 @@ package services;
 
 import dao.LikeDao;
 import dao.LikeDaoImp;
+import model.Like;
 import model.Post;
+
+import java.util.List;
 
 /**
  * Created by Aleksandr_Shakhov on 06.12.16 22:27.

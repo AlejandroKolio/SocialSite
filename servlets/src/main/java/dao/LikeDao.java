@@ -5,6 +5,7 @@ import model.Like;
 import model.Post;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Aleksandr_Shakhov on 06.12.16 20:44.
@@ -14,9 +15,8 @@ import java.util.List;
 public interface LikeDao {
     void like(Post post, int followerId);
     void dislike(Post post, int followerId);
-    List<Like> getLikes(int postId);
-    List<Like> getDislikes(int postId);
-    int getCountLikes(int postId);
-    int getCountDislikes(int postId);
-    List<Like> getLikeByUserID(int userId);
+    List<Like> getLikesByPostId(int postId);
+    List<Like> getDislikesByPostId(int postId);
+    Map<Post,Integer> getAllCountLikes();
+    List<Like> getAllCountDislikes();
 }

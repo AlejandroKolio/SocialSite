@@ -1,6 +1,7 @@
 package dao;
 
 import model.Post;
+import model.User;
 import util.DatabaseTemplate;
 import util.ObjectRowMapper;
 
@@ -43,6 +44,7 @@ public class PostDaoImp implements PostDao {
                                             "ORDER BY post_time DESC;";
     private final String POST_PICTURE     = "UPDATE post SET picture = ? WHERE post_id = ?;";
     private final String HAS_PICTURE      = "SELECT picture FROM post WHERE post_id = ?;";
+    private final String GET_ALL_POSTS    = "SELECT * FROM post";
 
     @Override
     public void savePost(Post post) {
@@ -98,5 +100,10 @@ public class PostDaoImp implements PostDao {
     public int postCounter(int userId) {
         String counter = "SELECT post_id FROM post WHERE user_id = ?;";
         return DatabaseTemplate.executeCount(counter, userId);
+    }
+
+    @Override
+    public List<Post> getPosts() {
+        return DatabaseTemplate.executeQueryForObject(new PostRowMapper(), GET_ALL_POSTS);
     }
 }

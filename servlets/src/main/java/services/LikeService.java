@@ -1,6 +1,9 @@
 package services;
 
+import model.Like;
 import model.Post;
+
+import java.util.List;
 
 
 /**

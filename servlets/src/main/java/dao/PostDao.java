@@ -19,4 +19,5 @@ public interface PostDao {
     void doPicture(String path, int postId);
     int hasPicture(int postId);
     int postCounter(int userId);
+    List<Post> getPosts();
 }

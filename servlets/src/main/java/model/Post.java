@@ -39,11 +39,11 @@ public class Post implements Serializable {
     }
 
     public int getLikes() {
-        return new LikeDaoImp().getLikes(postId).size();
+        return new LikeDaoImp().getLikesByPostId(postId).size();
     }
 
     public int getDislikes() {
-        return new LikeDaoImp().getDislikes(postId).size();
+        return new LikeDaoImp().getDislikesByPostId(postId).size();
     }
 
     public String getDate() {

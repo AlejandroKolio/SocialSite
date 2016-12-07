@@ -69,7 +69,8 @@
                 <div class="profile">
 
                     <img src="${requestScope.avaPath}" alt="people" class="img-circle" width="110"/>
-                    <h4> <%= user.getFirstName() + " " + user.getLastName() %> </h4>
+                    <h4><%= user.getFirstName() + " " + user.getLastName() %>
+                    </h4>
 
                 </div>
             </div>
@@ -85,7 +86,6 @@
     <!--end of sidebar left sidebar-size-2 sidebar-offset-0 sidebar-visible-desktop sidebar-visible-mobile sidebar-skin-dark-->
 
 
-
     <!--content push wrapper-->
     <div class="st-pusher" id="content">
         <!-- this is the wrapper for the content -->
@@ -96,11 +96,15 @@
                 <div class="container-fluid">
                     <h4>List of All Users</h4>
 
-                        <div class="tabbable">
+                    <div class="tabbable">
 
                         <ul class="nav nav-tabs" tabindex="1" style="overflow: hidden; outline: none;">
-                            <li class="active"><a href="#home" data-toggle="tab" aria-expanded="true"><i class="fa fa-fw fa-users"></i> People</a></li>
-                            <li class=""><a href="#profile" data-toggle="tab" aria-expanded="false"><i class="fa fa-fw fa-user"></i> My Followers</a></li>
+                            <li class="active"><a href="#home" data-toggle="tab" aria-expanded="true"><i
+                                    class="fa fa-fw fa-users"></i> People</a></li>
+                            <li class=""><a href="#followers" data-toggle="tab" aria-expanded="false"><i
+                                    class="fa fa-fw fa-user"></i> My Followers</a></li>
+                            <li class=""><a href="#leaders" data-toggle="tab" aria-expanded="false"><i
+                                    class="fa fa-fw fa-user"></i> Leaders</a></li>
                         </ul>
 
 
@@ -130,7 +134,7 @@
                                                     </td>
                                                     <td><a href="#">${user.email}</a></td>
                                                     <td><i class="fa fa-fw fa-twitter"></i><span class="muted"></span>
-                                                    ${user.posts}
+                                                            ${user.posts}
                                                     </td>
                                                 </tr>
                                             </c:if>
@@ -141,7 +145,8 @@
                                     </table>
                                 </div>
                             </div>
-                            <div id="profile" class="tab-pane">
+
+                            <div id="followers" class="tab-pane">
                                 <!-- Progress table -->
                                 <div class="table-responsive">
                                     <table class="table v-middle">
@@ -156,30 +161,93 @@
 
                                         <tbody id="responsive-table">
                                         <c:forEach items="${requestScope.following}" var="following">
-                                                <tr>
-                                                    <td></td>
-                                                    <td><img src="${following.avatar}" width="40" class="img-circle">
-                                                        <a href="/user/${following.userId}/posts">  ${following.firstName} ${following.lastName}</a>
-                                                    </td>
-                                                    <td><a href="#">${following.email}</a></td>
-                                                    <td><i class="fa fa-fw fa-twitter"></i><span class="muted"></span>
-                                                    ${user.posts}
-                                                    </td>
-                                                </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td><img src="${following.avatar}" width="40" class="img-circle">
+                                                    <a href="/user/${following.userId}/posts">  ${following.firstName} ${following.lastName}</a>
+                                                </td>
+                                                <td><a href="#">${following.email}</a></td>
+                                                <td><i class="fa fa-fw fa-twitter"></i><span class="muted"></span>
+                                                        ${user.posts}
+                                                </td>
+                                            </tr>
                                         </c:forEach>
                                         </tbody>
 
                                     </table>
                                 </div>
-
                             </div>
+
+                            <div id="leaders" class="tab-pane">
+                                <!-- Progress table -->
+                                <div class="table-responsive">
+                                    <table class="table v-middle">
+
+                                        <tbody id="leader-board">
+
+                                        <div class="item col-md-6 col-sm-6 col-xs-12"
+                                             style="position: absolute; left: 0px; top: 0px;">
+                                            <!-- Leaderboard -->
+                                            <div class="panel panel-default">
+
+                                                <table class="table table-leaderboard margin-none">
+                                                    <tbody>
+
+                                                    <h4 class="panel-title">Top 5</h4>
+                                                    <br>
+                                                    <c:set var="count" value="0" />
+
+                                                    <c:forEach items="${requestScope.leaders}" var="leader">
+                                                    <tr>
+                                                        <td width="20"></td>
+
+                                                        <td><a href="#">
+                                                            <i class="fa fa-flag text-muted"></i>
+                                                            ${leader.key.friend.firstName} ${leader.key.friend.lastName}
+                                                            ${leader.key.postId}
+                                                        </a></td>
+                                                        <td><span class="pull-right">${leader.value}</span></td>
+                                                    </tr>
+                                                    </c:forEach>
+
+                                                    </tbody>
+                                                </table>
+
+                                                <div class="panel-footer padding-none">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="score-block">
+                                                                <div class="title">Min</div>
+                                                                <div class="score">126</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="score-block">
+                                                                <div class="title">Max</div>
+                                                                <div class="score">11,421</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- // Leaderboard -->
+                                        </div>
+
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+
+
                         </div>
 
                     </div>
                     <table>
-                            <tr>
-                                <br>
-                            </tr>
+                        <tr>
+                            <br>
+                        </tr>
                     </table>
                 </div>
 

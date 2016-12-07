@@ -1,5 +1,8 @@
 package model;
 
+import dao.PostDao;
+import dao.PostDaoImp;
+import dao.UserDaoImp;
 import lombok.Data;
 
 /**
@@ -12,4 +15,11 @@ public class Like {
     private int userId;
     private int postId;
     private int likeType;
+    private User user;
+
+    public User getUser() {
+        Post post = new PostDaoImp().getPostByPostId(postId);
+        int userId = post.getUserId();
+        return user = new UserDaoImp().getUserByUserId(userId);
+    }
 }

@@ -4,12 +4,15 @@ import controllers.RegistrationServlet;
 import model.Comment;
 import model.Like;
 import model.Post;
+import model.User;
 import util.DatabaseTemplate;
 import util.ObjectRowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 /**
@@ -25,7 +28,7 @@ public class LikeDaoImp implements LikeDao {
     private final String INSERT_DISLIKE = "INSERT INTO likes(follower_id, user_id, post_id, like_type) values(?,?,?,0)";
     private final String GET_LIKES      = "SELECT * FROM likes WHERE post_id = ? AND like_type = 1;";
     private final String GET_DISLIKE    = "SELECT * FROM likes WHERE post_id = ? AND like_type = 0;";
-    private final String COUNT_LIKES    = "SELECT COUNT(like_type) FROM likes WHERE like_type = 1 AND post_id = ?;";
+    private final String COUNT_LIKES    = "SELECT post_id, COUNT(*) AS likesQuantity FROM likes WHERE like_type = 1 GROUP BY post_id ORDER BY likesQuantity DESC;";
     private final String COUNT_DISLIKES = "SELECT COUNT(like_type) FROM likes WHERE like_type = 0 AND post_id = ?;";
     private final String GET_LIKE_POST  = "SELECT * FROM likes WHERE user_id=?;";
 
@@ -63,27 +66,30 @@ public class LikeDaoImp implements LikeDao {
     }
 
     @Override
-    public List<Like> getLikes(int postId) {
+    public List<Like> getLikesByPostId(int postId) {
         return DatabaseTemplate.executeQueryForObject(new LikeRowMapper(), GET_LIKES, postId);
     }
 
     @Override
-    public List<Like> getDislikes(int postId) {
+    public List<Like> getDislikesByPostId(int postId) {
         return DatabaseTemplate.executeQueryForObject(new LikeRowMapper(), GET_DISLIKE, postId);
     }
 
     @Override
-    public int getCountLikes(int postId) {
-        return DatabaseTemplate.executeCount(COUNT_LIKES, postId);
+    public Map<Post,Integer> getAllCountLikes() {
+        Map<Integer, Integer> map = DatabaseTemplate.executeLikesCounter(COUNT_LIKES);
+        Map<Post, Integer> result = new HashMap<>();
+        PostDao postDao = new PostDaoImp();
+        for(Map.Entry<Integer, Integer> m : map.entrySet()) {
+            Post post = postDao.getPostByPostId(m.getKey());
+            int like = m.getValue();
+            result.put(post, like);
+        }
+        return result;
     }
 
     @Override
-    public int getCountDislikes(int postId) {
-        return DatabaseTemplate.executeCount(COUNT_DISLIKES, postId);
-    }
-
-    @Override
-    public List<Like> getLikeByUserID(int userId) {
-        return DatabaseTemplate.executeQueryForObject(new LikeRowMapper(), GET_LIKE_POST, userId);
+    public List<Like> getAllCountDislikes() {
+        return DatabaseTemplate.executeQueryForObject(new LikeRowMapper(), COUNT_DISLIKES);
     }
 }
