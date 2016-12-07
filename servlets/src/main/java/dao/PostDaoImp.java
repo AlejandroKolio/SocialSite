@@ -36,7 +36,11 @@ public class PostDaoImp implements PostDao {
     private final String POST_KILL        = "DELETE FROM post WHERE post_id = ? and user_id = ?;";
     private final String GET_USER_POST    = "SELECT post_id, user_id, body, post_time, picture FROM mini_soc_network.post WHERE user_id=? ORDER BY post_time DESC;";
     private final String GET_POST_BY_ID   = "SELECT * FROM post WHERE post_id=?";
-    private final String GET_FRIENDS_POST = "SELECT * FROM post WHERE user_id IN (SELECT follower_id from follower WHERE user_id=?)";
+    private final String GET_FRIENDS_POST = "SELECT * FROM post WHERE user_id IN (SELECT follower_id from follower WHERE user_id=?) ORDER BY post_time DESC";
+    private final String GET_LATEST_POSTS = "SELECT t1.* FROM post t1 WHERE user_id IN (SELECT follower_id FROM follower WHERE user_id = ?) " +
+                                            "AND t1.post_time = (SELECT MAX(t2.post_time) " +
+                                            "FROM post t2 WHERE t2.user_id = t1.user_id) " +
+                                            "ORDER BY post_time DESC;";
     private final String POST_PICTURE     = "UPDATE post SET picture = ? WHERE post_id = ?;";
     private final String HAS_PICTURE      = "SELECT picture FROM post WHERE post_id = ?;";
 
@@ -68,6 +72,11 @@ public class PostDaoImp implements PostDao {
     @Override
     public List<Post> getPostsOfFriends(int userId) {
         return DatabaseTemplate.executeQueryForObject(new PostRowMapper(), GET_FRIENDS_POST, userId);
+    }
+
+    @Override
+    public List<Post> getLatestFriendsPosts(int userId) {
+        return DatabaseTemplate.executeQueryForObject(new PostRowMapper(), GET_LATEST_POSTS, userId);
     }
 
     @Override

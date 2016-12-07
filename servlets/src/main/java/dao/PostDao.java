@@ -14,6 +14,7 @@ public interface PostDao {
     void killPost(Post post);
     List<Post> getPostByUserID(int userId);
     List<Post> getPostsOfFriends(int userId);
+    List<Post> getLatestFriendsPosts(int userId);
     Post getPostByPostId(int postId);
     void doPicture(String path, int postId);
     int hasPicture(int postId);

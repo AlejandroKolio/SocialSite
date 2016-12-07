@@ -1,10 +1,15 @@
 package services;
 
 import dao.*;
+import javafx.collections.transformation.SortedList;
 import model.Post;
 import model.User;
 
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Aleksandr_Shakhov on 20.11.16 21:02.
@@ -23,7 +28,9 @@ public class PostServiceImp implements PostService {
     }
 
     @Override
-    public void killPost(Post post) { postDao.killPost(post); }
+    public void killPost(Post post) {
+        postDao.killPost(post);
+    }
 
     @Override
     public List<Post> getPostOfUser(User user) {
@@ -42,6 +49,11 @@ public class PostServiceImp implements PostService {
             post.setUser(userDao.getUserByUserId(post.getUserId()));
         }
         return posts;
+    }
+
+    @Override
+    public List<Post> getLatestPosts(int userId) {
+        return postDao.getLatestFriendsPosts(userId);
     }
 
     @Override

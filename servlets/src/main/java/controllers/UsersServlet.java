@@ -1,9 +1,6 @@
 package controllers;
 
-import dao.FollowerDao;
-import dao.FollowerDaoImp;
-import dao.UserDao;
-import dao.UserDaoImp;
+import dao.*;
 import model.User;
 import org.apache.log4j.Logger;
 import services.FollowerService;
@@ -33,13 +30,13 @@ public class UsersServlet extends HttpServlet {
     private UserService service = new UserServiceImp();
     private FollowerService followerService = new FollowerServiceImp();
     private FollowerDao followerDao = new FollowerDaoImp();
+    private PostDao postDao = new PostDaoImp();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         if (req.getPathInfo() == null) {
             List<User> users = service.getUsers();
-
 
             logger.info(users);
 

@@ -1,13 +1,11 @@
 package controllers;
 
 import dao.*;
+import model.Like;
 import model.Post;
 import model.User;
 import org.apache.log4j.Logger;
-import services.PostService;
-import services.PostServiceImp;
-import services.UserService;
-import services.UserServiceImp;
+import services.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,6 +30,8 @@ public class UserServlet extends HttpServlet {
 
     private UserService service = new UserServiceImp();
     private PostService postService = new PostServiceImp();
+    private LikeService likeService = new LikeServiceImp();
+    private LikeDao likeDao = new LikeDaoImp();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -57,6 +57,7 @@ public class UserServlet extends HttpServlet {
                     int followerCounter = followerDao.followerCounter(userId);
                     int postCounter = postDao.postCounter(userId);
 
+                    request.setAttribute("user", user);
                     request.setAttribute("userId", userId);
                     request.setAttribute("userName", userName);
                     request.setAttribute("followerDao", followerDao);

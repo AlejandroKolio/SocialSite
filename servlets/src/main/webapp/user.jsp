@@ -45,9 +45,8 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="user-private-profile.html">Profile</a></li>
-                            <li><a href="user-private-messages.html">Messages</a></li>
-                            <li><a href="login.html">Logout</a></li>
+                            <li><a href="/profile">Profile</a></li>
+                            <li><a href="Logout">Logout</a></li>
                         </ul>
                     </li><!--end of User-->
 
@@ -77,260 +76,16 @@
             </div>
             <h4 align="center" class="category">Account</h4>
             <ul class="sidebar-menu">
-                <li class="active"><a href="/profile"><i class="icon-user-1"></i> <span>Profile</span></a></li>
-                <li><a href="/posts"><i class="fa fa-fw fa-th-list"></i><span> Posts</span></a></li>
-                <li><a href="#"><i class="fa fa-camera-retro"></i><span> Photos</span></a></li>
-                <li><a href="/users"><i class="fa fa-group"></i><span> People</span></a></li>
-                <li><a href="#"><i class="icon-comment-fill-1"></i><span> Messages</span></a></li>
-                <li><a href="Logout"><i class="icon-unlock-fill"></i><span> Logout</span></a></li>
+                <li class="active"><a href="/profile"><i class="icon-user-1"></i> <span> Profile</span></a></li>
+                <li><a href="/posts"><i class="fa fa-fw fa-th-list"></i> <span> Posts</span></a></li>
+                <li><a href="/users"><i class="fa fa-group"></i> <span> People</span></a></li>
+                <li><a href="/Logout"><i class="icon-unlock-fill"></i> <span> Logout</span></a></li>
             </ul>
         </div>
     </div>
     <!--end of sidebar left sidebar-size-2 sidebar-offset-0 sidebar-visible-desktop sidebar-visible-mobile sidebar-skin-dark-->
 
-    <!-- Sidebar component with st-effect-1 (set on the toggle button within the navbar) -->
-    <div class="sidebar sidebar-chat right sidebar-size-2 sidebar-offset-0 chat-skin-white sidebar-visible-mobile"
-         id=sidebar-chat>
-        <div class="split-vertical">
 
-            <div class="chat-search">
-                <input type="text" class="form-control" placeholder="Search"/>
-            </div><!--end chat-search-->
-
-            <ul class="chat-filter nav nav-pills ">
-                <li class="active"><a href="#" data-target="li">All</a></li>
-                <li><a href="#" data-target=".online">Online</a></li>
-                <li><a href="#" data-target=".offline">Offline</a></li>
-            </ul>
-
-            <div class="split-vertical-body">
-                <div class="split-vertical-cell">
-                    <div data-scrollable>
-                        <ul class="chat-contacts">
-                            <li class="online" data-user-id="1">
-                                <a href="#">
-                                    <div class="media">
-                                        <div class="pull-left">
-                                            <span class="status"></span>
-                                            <img src="/images/people/110/guy-6.jpg" width="40" class="img-circle"/>
-                                        </div>
-                                        <div class="media-body">
-                                            <div class="contact-name">Jonathan S.</div>
-                                            <small>"Free Today"</small>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <li class="online away" data-user-id="2">
-                                <a href="#">
-
-                                    <div class="media">
-                                        <div class="pull-left">
-                                            <span class="status"></span>
-                                            <img src="/images/people/110/woman-5.jpg" width="40" class="img-circle"/>
-                                        </div>
-                                        <div class="media-body">
-                                            <div class="contact-name">Mary A.</div>
-                                            <small>"Feeling Groovy"</small>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <li class="online" data-user-id="3">
-                                <a href="#">
-                                    <div class="media">
-                                        <div class="pull-left ">
-                                            <span class="status"></span>
-                                            <img src="/images/people/110/guy-3.jpg" width="40" class="img-circle"/>
-                                        </div>
-                                        <div class="media-body">
-                                            <div class="contact-name">Adrian D.</div>
-                                            <small>Busy</small>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <li class="offline" data-user-id="4">
-                                <a href="#">
-                                    <div class="media">
-                                        <div class="pull-left">
-                                            <img src="/images/people/110/woman-6.jpg" width="40" class="img-circle"/>
-                                        </div>
-                                        <div class="media-body">
-                                            <div class="contact-name">Michelle S.</div>
-                                            <small>Offline</small>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <li class="offline" data-user-id="5">
-                                <a href="#">
-                                    <div class="media">
-                                        <div class="pull-left">
-                                            <img src="/images/people/110/woman-7.jpg" width="40" class="img-circle"/>
-                                        </div>
-                                        <div class="media-body">
-                                            <div class="contact-name">Daniele A.</div>
-                                            <small>Offline</small>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="online" data-user-id="6">
-                                <a href="#">
-                                    <div class="media">
-                                        <div class="pull-left">
-                                            <span class="status"></span>
-                                            <img src="/images/people/110/guy-4.jpg" width="40" class="img-circle"/>
-                                        </div>
-                                        <div class="media-body">
-                                            <div class="contact-name">Jake F.</div>
-                                            <small>Busy</small>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <li class="online away" data-user-id="7">
-                                <a href="#">
-                                    <div class="media">
-                                        <div class="pull-left">
-                                            <span class="status"></span>
-                                            <img src="/images/people/110/woman-6.jpg" width="40" class="img-circle"/>
-                                        </div>
-                                        <div class="media-body">
-                                            <div class="contact-name">Jane A.</div>
-                                            <small>"Custom Status"</small>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <li class="offline" data-user-id="8">
-                                <a href="#">
-                                    <div class="media">
-                                        <div class="pull-left">
-                                            <span class="status"></span>
-                                            <img src="/images/people/110/woman-8.jpg" width="40" class="img-circle"/>
-                                        </div>
-                                        <div class="media-body">
-                                            <div class="contact-name">Sabine J.</div>
-                                            <small>"Offline right now"</small>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <li class="online away" data-user-id="9">
-                                <a href="#">
-                                    <div class="media">
-                                        <div class="pull-left">
-                                            <span class="status"></span>
-                                            <img src="/images/people/110/woman-9.jpg" width="40" class="img-circle"/>
-                                        </div>
-                                        <div class="media-body">
-                                            <div class="contact-name">Danny B.</div>
-                                            <small>Be Right Back</small>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <li class="online" data-user-id="10">
-                                <a href="#">
-                                    <div class="media">
-                                        <div class="pull-left">
-                                            <span class="status"></span>
-                                            <img src="/images/people/110/woman-8.jpg" width="40" class="img-circle"/>
-                                        </div>
-                                        <div class="media-body">
-                                            <div class="contact-name">Elise J.</div>
-                                            <small>My Status</small>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <li class="online" data-user-id="11">
-                                <a href="#">
-                                    <div class="media">
-                                        <div class="pull-left">
-                                            <span class="status"></span>
-                                            <img src="/images/people/110/guy-3.jpg" width="40" class="img-circle"/>
-                                        </div>
-                                        <div class="media-body">
-                                            <div class="contact-name">John J.</div>
-                                            <small>My Status #1</small>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul><!--end of chat-contacts-->
-
-                    </div><!--end of data scrollable-->
-                </div><!--end of split-vertical-cell-->
-            </div><!--end of split-vertical-body-->
-        </div><!--end of split-vertical-->
-    </div>
-    <!--end of sidebar sidebar-chat right sidebar-size-2 sidebar-offset-0 chat-skin-white sidebar-visible-mobile-->
-
-    <!--Chat Script-->
-    <script id="chat-window-template" type="text/x-handlebars-template">
-
-        <div class="panel panel-default">
-            <div class="panel-heading" data-toggle="chat-collapse" data-target="#chat-bill">
-                <a href="#" class="close"><i class="fa fa-times"></i></a>
-                <a href="#">
-            <span class="pull-left">
-                    <img src="{{ user_image }}" width="40">
-                </span>
-                    <span class="contact-name">{{user}}</span>
-                </a>
-            </div>
-            <div class="panel-body" id="chat-bill">
-                <div class="media">
-                    <div class="media-left">
-                        <img src="{{ user_image }}" width="25" class="img-circle" alt="people"/>
-                    </div>
-                    <div class="media-body">
-                        <span class="message">Feeling Groovy?</span>
-                    </div>
-                </div>
-                <div class="media">
-                    <div class="media-left">
-                        <img src="{{ user_image }}" width="25" class="img-circle" alt="people"/>
-                    </div>
-                    <div class="media-body">
-                        <span class="message">Yep.</span>
-                    </div>
-                </div>
-                <div class="media">
-                    <div class="media-left">
-                        <img src="{{ user_image }}" width="25" class="img-circle" alt="people"/>
-                    </div>
-                    <div class="media-body">
-                        <span class="message">This chat window looks amazing.</span>
-                    </div>
-                </div>
-                <div class="media">
-                    <div class="media-left">
-                        <img src="{{ user_image }}" width="25" class="img-circle" alt="people"/>
-                    </div>
-                    <div class="media-body">
-                        <span class="message">Thanks!</span>
-                    </div>
-                </div>
-            </div>
-            <input type="text" class="form-control" placeholder="Type message..."/>
-        </div>
-    </script><!--end of Chat Script-->
-
-    <!--Window for Chat-->
-    <div class="chat-window-container"></div>
 
     <!--content push wrapper-->
     <div class="st-pusher" id="content">
@@ -377,26 +132,31 @@
                                     </div>
 
                                     <div class="profile-icons margin-none">
-                                        <span><i class="fa fa-users"></i> <%=request.getAttribute("followerCounter")%></span>
-                                        <span><i class="fa fa-twitter"></i> <%=request.getAttribute("postCounter")%></span>
+                                        <span><i
+                                                class="fa fa-users"></i> <%=request.getAttribute("followerCounter")%></span>
+                                        <span><i
+                                                class="fa fa-twitter"></i> <%=request.getAttribute("postCounter")%></span>
                                     </div>
+
+
+                                    <div class="panel-heading">
+                                        Contact
+                                    </div>
+                                    <ul class="icon-list icon-list-block">
+                                        <li><i class="fa fa-envelope fa-fw"></i> <a href="#">${user.email}</a></li>
+                                    </ul>
+
+
                                 </div>
                             </div>
                         </div>
                         <div class="media-body">
-                            <div class="panel panel-default share">
-                                <div class="input-group">
-                                    <div class="input-group-btn">
-                                        <a class="btn btn-primary" href="#"><i class="fa fa-envelope"></i> Send</a>
-                                    </div>
-                                    <input type="text" class="form-control share-text" placeholder="Write message...">
-                                </div>
-                            </div>
 
+                            <div class="timeline row" data-toggle="isotope"
+                                 style="position: relative; height: 5866.5px;">
 
-                            <div class="timeline row" data-toggle="isotope" style="position: relative; height: 5866.5px;">
-
-                                <div class="col-xs-12 col-md-6 col-lg-6 item" style="position: absolute; left: 0px; top: 0px;">
+                                <div class="col-xs-12 col-md-6 col-lg-7 item"
+                                     style="position: absolute; left: 0px; top: 0px;">
 
                                     <%if (followerDao.isFollower((Integer) request.getAttribute("userId"), user.getUserId())) {%>
 
@@ -409,24 +169,27 @@
                                                     <div class="media">
                                                         <div class="media-left">
                                                             <a href="">
-                                                                <img src="${post.user.avatar}" class="media-object"
-                                                                     width="50">
+                                                                <img src="${post.user.avatar}" class="media-object" width="50">
                                                             </a>
                                                         </div>
 
                                                         <div class="media-body">
-                                                            <a href="#" class="pull-right text-muted"><i class="icon-reply-all-fill fa fa-2x "></i></a>
+                                                            <form action="/postlike/${post.postId}/${post.user.userId}/<%=user.getUserId()%>" method="post">
+                                                                <button type="submit" class="btn btn-primary btn-xs pull-right"><i class="fa fa-fw fa-thumbs-o-up fa-2x"></i> ${post.likes}</button>
+                                                            </form>
+                                                            <form action="/postdislike/${post.postId}/${post.user.userId}/<%=user.getUserId()%>" method="post">
+                                                                <button type="submit" class="btn btn-primary btn-xs pull-right"><i class="fa fa-fw fa-thumbs-o-down fa-2x"></i> ${post.dislikes}</button>
+                                                            </form>
                                                             <a href="">${post.user.firstName} ${post.user.lastName}</a>
-
                                                             <span>${post.date}</span>
                                                         </div>
                                                     </div>
-                                                    <c:if test="${post.picture != 'null'}">
-                                                        <img src="${post.picture}" class="img-responsive">
-                                                    </c:if>
                                                 </div>
 
                                                 <div class="panel-body">
+                                                    <c:if test="${post.picture != 'null'}">
+                                                        <img src="${post.picture}" class="img-responsive">
+                                                    </c:if>
                                                     <p>${post.body}</p>
                                                 </div>
 
@@ -443,7 +206,8 @@
                                                         <li class="media">
                                                             <div class="media-left">
                                                                 <a href="#">
-                                                                    <img src="${comment.user.avatar}" class="media-object" width="50">
+                                                                    <img src="${comment.user.avatar}"
+                                                                         class="media-object" width="50">
                                                                 </a>
                                                             </div>
 
@@ -474,11 +238,18 @@
 
                                                     <li class="comment-form">
                                                         <div class="input-group">
-                                                            <form action="/posts/${post.postId}/comment/<%=request.getAttribute("userId")%>" method="post">
+                                                            <form action="/posts/${post.postId}/comment/<%=request.getAttribute("userId")%>"
+                                                                  method="post">
                                                                 <div class="input-group-btn">
-                                                                    <textarea name="newComment" class="form-control share-text" rows="1" placeholder="Comment..." style="width: 75%; height: 25px;"></textarea>
+                                                                    <textarea name="newComment"
+                                                                              class="form-control share-text" rows="1"
+                                                                              placeholder="Comment..."
+                                                                              style="width: 75%; height: 25px;"></textarea>
 
-                                                                    <button style="position: initial; margin: 5px;" class="btn btn-primary btn-sm pull-right" type="submit"><i class="fa fa-comment-o"></i>
+                                                                    <button style="position: initial; margin: 5px;"
+                                                                            class="btn btn-primary btn-sm pull-right"
+                                                                            type="submit"><i
+                                                                            class="fa fa-comment-o"></i>
                                                                     </button>
                                                                 </div>
                                                             </form>

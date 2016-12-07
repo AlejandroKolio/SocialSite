@@ -15,6 +15,7 @@ public interface PostService {
     void killPost(Post post);
     List<Post> getPostOfUser(User user);
     List<Post> getPostOfFriends(User user);
+    List<Post> getLatestPosts(int userId);
     Post getPostById(int postId);
     int hasPicture(int postId);
 }

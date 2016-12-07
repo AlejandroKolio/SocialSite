@@ -19,7 +19,7 @@ import java.util.List;
  * Created by Aleksandr_Shakhov on 17.11.16 21:28.
  */
 
-@WebServlet(urlPatterns = {"/posts/*", "/post/newpost", "/postkill/*"})
+@WebServlet(urlPatterns = {"/posts/*", "/post/newpost", "/postkill/*", "/postlike/*", "/postdislike/*"})
 public class PostServlet extends HttpServlet {
 
     static Logger logger = Logger.getLogger(PostServlet.class);
@@ -27,6 +27,7 @@ public class PostServlet extends HttpServlet {
     private PostService postService = new PostServiceImp();
     private CommentService commentService = new CommentServiceImp();
     private UserService userService = new UserServiceImp();
+    private LikeService likeService = new LikeServiceImp();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -66,6 +67,16 @@ public class PostServlet extends HttpServlet {
         } else if (request.getRequestURI().matches("/postkill/\\d+")) {
             deletePost(request);
             response.sendRedirect("/posts");
+        } else if(request.getRequestURI().matches("/postlike/\\d+/\\d+/\\d+")) {
+            String[] tokens = request.getPathInfo().split("/");
+            int userId = Integer.parseInt(tokens[2]);
+            likePost(request);
+            response.sendRedirect("/user/" + userId);
+        } else if(request.getRequestURI().matches("/postdislike/\\d+/\\d+/\\d+")) {
+            String[] tokens = request.getPathInfo().split("/");
+            int userId = Integer.parseInt(tokens[2]);
+            dislikePost(request);
+            response.sendRedirect("/user/" + userId);
         }
     }
 
@@ -94,8 +105,20 @@ public class PostServlet extends HttpServlet {
         commentService.saveComment(comment);
     }
 
-    private int getPostId(HttpServletRequest req) {
-        String[] urlTokens = req.getPathInfo().split("/");
+    private void likePost(HttpServletRequest request) {
+        int postId = getPostId(request);
+        Post post = postService.getPostById(postId);
+        likeService.likePost(post, getFollowerId(request));
+    }
+
+    private void dislikePost(HttpServletRequest request) {
+        int postId = getPostId(request);
+        Post post = postService.getPostById(postId);
+        likeService.dislikePost(post, getFollowerId(request));
+    }
+
+    private int getPostId(HttpServletRequest request) {
+        String[] urlTokens = request.getPathInfo().split("/");
         if (urlTokens != null && urlTokens.length >= 2) {
 
             int postId = Integer.parseInt(urlTokens[1]);
@@ -105,15 +128,14 @@ public class PostServlet extends HttpServlet {
         }
     }
 
-    private void showFollowersPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private int getFollowerId(HttpServletRequest request) {
+        String[] urlTokens = request.getPathInfo().split("/");
+        if (urlTokens != null && urlTokens.length >= 2) {
 
-        User user = (User) request.getAttribute("userId");
-
-        List<Post> posts = postService.getPostOfFriends(user);
-
-        request.setAttribute("posts", posts);
-
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/posts.jsp");
-        requestDispatcher.forward(request, response);
+            int followerId = Integer.parseInt(urlTokens[3]);
+            return followerId;
+        } else {
+            return -1;
+        }
     }
 }

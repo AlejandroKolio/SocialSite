@@ -4,6 +4,8 @@ import dao.PostDao;
 import dao.PostDaoImp;
 import model.Post;
 import model.User;
+import services.PostService;
+import services.PostServiceImp;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,12 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.security.Timestamp;
-import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.Locale;
-import java.util.logging.SimpleFormatter;
 
 
 /**
@@ -33,13 +31,16 @@ public class ProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         PostDao postDao = new PostDaoImp();
+        PostService postService = new PostServiceImp();
 
         User user = (User)request.getSession().getAttribute("User");
         String avatar = user.getAvatar();
         List<Post> postsOfFriends = postDao.getPostsOfFriends(user.getUserId());
+        List<Post> latestPosts    = postService.getLatestPosts(user.getUserId());
 
         request.setAttribute("avatar", avatar);
         request.setAttribute("postOfFriends", postsOfFriends);
+        request.setAttribute("latestPosts", latestPosts);
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
         requestDispatcher.forward(request, response);

@@ -1,0 +1,89 @@
+package dao;
+
+import controllers.RegistrationServlet;
+import model.Comment;
+import model.Like;
+import model.Post;
+import util.DatabaseTemplate;
+import util.ObjectRowMapper;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Logger;
+
+/**
+ * Created by Aleksandr_Shakhov on 06.12.16 20:45.
+ */
+
+
+public class LikeDaoImp implements LikeDao {
+
+    private org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(LikeDaoImp.class);
+
+    private final String INSERT_LIKE    = "INSERT INTO likes(follower_id, user_id, post_id, like_type) values(?,?,?,1)";
+    private final String INSERT_DISLIKE = "INSERT INTO likes(follower_id, user_id, post_id, like_type) values(?,?,?,0)";
+    private final String GET_LIKES      = "SELECT * FROM likes WHERE post_id = ? AND like_type = 1;";
+    private final String GET_DISLIKE    = "SELECT * FROM likes WHERE post_id = ? AND like_type = 0;";
+    private final String COUNT_LIKES    = "SELECT COUNT(like_type) FROM likes WHERE like_type = 1 AND post_id = ?;";
+    private final String COUNT_DISLIKES = "SELECT COUNT(like_type) FROM likes WHERE like_type = 0 AND post_id = ?;";
+    private final String GET_LIKE_POST  = "SELECT * FROM likes WHERE user_id=?;";
+
+    private class LikeRowMapper implements ObjectRowMapper<Like> {
+
+        @Override
+        public Like mapRowToObject(ResultSet resultSet) throws SQLException {
+            Like like = new Like();
+            like.setFollowerId(resultSet.getInt("follower_id"));
+            like.setUserId(resultSet.getInt("user_id"));
+            like.setPostId(resultSet.getInt("post_id"));
+            like.setLikeType(resultSet.getInt("like_type"));
+            return like;
+        }
+    }
+
+    @Override
+    public void like(Post post, int followerId) {
+        try {
+            DatabaseTemplate.executeInsertQuery(INSERT_LIKE, followerId, post.getUserId(), post.getPostId());
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.trace("Duplicate like entry");
+        }
+    }
+
+    @Override
+    public void dislike(Post post, int followerId) {
+        try {
+            DatabaseTemplate.executeInsertQuery(INSERT_DISLIKE, followerId, post.getUserId(), post.getPostId());
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.trace("Duplicate dislike entry");
+        }
+    }
+
+    @Override
+    public List<Like> getLikes(int postId) {
+        return DatabaseTemplate.executeQueryForObject(new LikeRowMapper(), GET_LIKES, postId);
+    }
+
+    @Override
+    public List<Like> getDislikes(int postId) {
+        return DatabaseTemplate.executeQueryForObject(new LikeRowMapper(), GET_DISLIKE, postId);
+    }
+
+    @Override
+    public int getCountLikes(int postId) {
+        return DatabaseTemplate.executeCount(COUNT_LIKES, postId);
+    }
+
+    @Override
+    public int getCountDislikes(int postId) {
+        return DatabaseTemplate.executeCount(COUNT_DISLIKES, postId);
+    }
+
+    @Override
+    public List<Like> getLikeByUserID(int userId) {
+        return DatabaseTemplate.executeQueryForObject(new LikeRowMapper(), GET_LIKE_POST, userId);
+    }
+}

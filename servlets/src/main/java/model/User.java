@@ -1,8 +1,13 @@
 package model;
 
+import dao.PostDao;
+import dao.PostDaoImp;
+import dao.UserDaoImp;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import services.PostService;
+import services.PostServiceImp;
 
 import java.io.Serializable;
 
@@ -18,4 +23,9 @@ public class User implements Serializable {
     private String email;
     private String password;
     private String avatar;
+    private int posts;
+
+    public int getPosts() {
+        return new PostDaoImp().postCounter(getUserId());
+    }
 }
