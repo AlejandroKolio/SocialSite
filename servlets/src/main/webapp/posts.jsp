@@ -22,7 +22,6 @@
         <div class="container-fluid">
 
             <div class="navbar-header">
-
                 <a class="navbar-brand" href="#"><p align="center">Social Network</p></a>
             </div><!--end of navbar-header-->
 
@@ -70,7 +69,7 @@
                 <div class="profile">
 
                     <img src="<%=avatar%>" alt="people" class="img-circle" width="110"/>
-                    <h4><%= user.getFirstName() + " " + user.getLastName() %>
+                    <h4><%= user.getFirstName() + " " + user.getLastName()%>
                     </h4>
 
                     <form action="/upload/<%=user.getUserId()%>" method="post"
@@ -166,9 +165,6 @@
 
                                             <div class="view-all-comments">
 
-                                                <%--<form action="/postlike/${post.postId}" method="post">
-                                                    <button type="submit" class="btn btn-default btn-sm btn-circle"><i class="fa fa-thumbs-o-up"></i> 0</button>
-                                                </form>--%>
                                                 <form action="/uploadpostpic/${post.postId}" method="post" enctype="multipart/form-data">
                                                     <input id="uploadpic" type="file" name="photo" style="display: none;">
                                                     <button type="submit" value="Upload Picture" class="btn btn-primary btn-xs "><i class="fa fa-photo"></i></button>
