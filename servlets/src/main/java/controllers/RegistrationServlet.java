@@ -5,6 +5,8 @@ import org.apache.log4j.Logger;
 import services.UserService;
 import services.UserServiceImp;
 
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Aleksandr_Shakhov on 13.11.16 19:29.
@@ -39,23 +43,23 @@ public class RegistrationServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
+        String errorMsg = null;
+
+        if (firstName == null || firstName.equals("") || !validateFirstName(firstName))
+            errorMsg = "Your name can't be null or empty or does not meet the requirements.";
+        if (lastName == null || lastName.equals("") || !validateLastName(lastName))
+            errorMsg = "Your surname can't be null or empty does not meet the requirements.";
+        if (email == null || email.equals("") || !validateEmail(email))
+            errorMsg = "Email ID can't be null or empty or does not exist.";
+        if (password == null || password.equals("") || !validatePassword(password))
+            errorMsg = "Password can't be null or empty or does not meet the requirements.";
+
         User user = new User();
 
         user.setFirstName(req.getParameter("firstName"));
         user.setLastName(req.getParameter("lastName"));
         user.setPassword(req.getParameter("password"));
         user.setEmail(req.getParameter("email"));
-
-        String errorMsg = null;
-
-        if (firstName == null || firstName.equals(""))
-            errorMsg = "Your name can't be null or empty.";
-        if (lastName == null || lastName.equals(""))
-            errorMsg = "Your surname can't be null or empty.";
-        if (email == null || email.equals(""))
-            errorMsg = "Email ID can't be null or empty.";
-        if (password == null || password.equals(""))
-            errorMsg = "Password can't be null or empty.";
 
         boolean isNewUser = service.verifyNewUser(user);
 
@@ -79,4 +83,34 @@ public class RegistrationServlet extends HttpServlet {
             }
         }
     }
+
+    // validate first name
+    private static boolean validateFirstName( String firstName ) {
+        return firstName.matches( "[A-Z][a-zA-Z]*" );
+    }
+
+    // validate last name
+    private static boolean validateLastName( String lastName ) {
+        return lastName.matches( "[a-zA-z]+([ '-][a-zA-Z]+)*" );
+    }
+
+    //validate email
+    private static boolean validateEmail(String email) {
+        boolean result = true;
+        try {
+            InternetAddress mailbox = new InternetAddress(email);
+            mailbox.validate();
+        } catch (AddressException ex) {
+            result = false;
+        }
+        return result;
+    }
+
+    //validate password
+    private static boolean validatePassword(String pass) {
+        String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})";
+        Matcher check = Pattern.compile(PASSWORD_PATTERN).matcher(pass);
+        return check.matches();
+    }
+
 }

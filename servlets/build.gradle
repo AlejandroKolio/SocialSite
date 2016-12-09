@@ -13,7 +13,6 @@ dependencies {
     // https://mvnrepository.com/artifact/mysql/mysql-connector-java
     compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.38'
 
-    // https://mvnrepository.com/artifact/javax.websocket/javax.websocket-api
-    //compile group: 'javax.websocket', name: 'javax.websocket-api', version: '1.0'
-
+    // https://mvnrepository.com/artifact/javax.mail/mail
+    compile group: 'javax.mail', name: 'mail', version: '1.4'
 }
