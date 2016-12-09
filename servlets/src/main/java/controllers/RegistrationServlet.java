@@ -51,8 +51,15 @@ public class RegistrationServlet extends HttpServlet {
             errorMsg = "Your surname can't be null or empty does not meet the requirements.";
         if (email == null || email.equals("") || !validateEmail(email))
             errorMsg = "Email ID can't be null or empty or does not exist.";
-        if (password == null || password.equals("") || !validatePassword(password))
-            errorMsg = "Password can't be null or empty or does not meet the requirements.";
+        if (password == null || password.equals("")) {
+            errorMsg = "Password can't be null or empty";
+            if(!validatePassword(password)) {
+                errorMsg = "Password does not meet requirements:" +
+                        "1. Make sure you have 1 capital letter" +
+                        "2. Use special characters: @#%$ for security purposes" +
+                        "3. It should not be shorter then 6 and longer then 20 characters.";
+            }
+        }
 
         User user = new User();
 
