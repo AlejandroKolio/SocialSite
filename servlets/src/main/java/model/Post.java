@@ -22,7 +22,7 @@ import java.util.logging.SimpleFormatter;
  */
 
 @Data
-public class Post implements Serializable {
+public class Post implements Serializable, Comparable<Post> {
     private int postId;
     private int userId;
     private String body;
@@ -50,4 +50,15 @@ public class Post implements Serializable {
         return new SimpleDateFormat("MMMM d, yyyy hh:mm a", Locale.ENGLISH).format(date);
     }
 
+    @Override
+    public int compareTo(Post post) {
+        if(this.getLikes() >= post.getLikes()) {
+            return -1;
+        }
+        if(this.getLikes() <= post.getLikes()) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }

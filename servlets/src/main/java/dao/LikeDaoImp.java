@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.logging.Logger;
 
 /**
@@ -78,7 +79,7 @@ public class LikeDaoImp implements LikeDao {
     @Override
     public Map<Post,Integer> getAllCountLikes() {
         Map<Integer, Integer> map = DatabaseTemplate.executeLikesCounter(COUNT_LIKES);
-        Map<Post, Integer> result = new HashMap<>();
+        Map<Post, Integer> result = new TreeMap<>();
         PostDao postDao = new PostDaoImp();
         for(Map.Entry<Integer, Integer> m : map.entrySet()) {
             Post post = postDao.getPostByPostId(m.getKey());
