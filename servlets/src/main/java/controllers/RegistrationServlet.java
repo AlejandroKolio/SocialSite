@@ -51,14 +51,12 @@ public class RegistrationServlet extends HttpServlet {
             errorMsg = "Your surname can't be null or empty does not meet the requirements.";
         if (email == null || email.equals("") || !validateEmail(email))
             errorMsg = "Email ID can't be null or empty or does not exist.";
-        if (password == null || password.equals("")) {
-            errorMsg = "Password can't be null or empty";
-            if(!validatePassword(password)) {
-                errorMsg = "Password does not meet requirements:" +
+        if (password == null || password.equals("") || !validatePassword(password)) {
+            errorMsg = "Password might be null or empty." +
+                        "Or Password does not meet the requirements:" +
                         "1. Make sure you have 1 capital letter" +
                         "2. Use special characters: @#%$ for security purposes" +
                         "3. It should not be shorter then 6 and longer then 20 characters.";
-            }
         }
 
         User user = new User();
@@ -103,14 +101,9 @@ public class RegistrationServlet extends HttpServlet {
 
     //validate email
     private static boolean validateEmail(String email) {
-        boolean result = true;
-        try {
-            InternetAddress mailbox = new InternetAddress(email);
-            mailbox.validate();
-        } catch (AddressException ex) {
-            result = false;
-        }
-        return result;
+        String EMAIL_PATTERN = "^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(?:\\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@(?:[a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\\.)*(?:aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$";
+        Matcher check = Pattern.compile(EMAIL_PATTERN).matcher(email);
+        return check.matches();
     }
 
     //validate password
