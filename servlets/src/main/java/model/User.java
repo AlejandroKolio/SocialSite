@@ -16,7 +16,7 @@ import java.io.Serializable;
  */
 
 @Data
-public class User implements Serializable {
+public class User implements Serializable, Comparable<User> {
     private int userId;
     private String firstName;
     private String lastName;
@@ -27,5 +27,16 @@ public class User implements Serializable {
 
     public int getPosts() {
         return new PostDaoImp().postCounter(getUserId());
+    }
+
+    @Override
+    public int compareTo(User user) {
+        if(this.getPosts() >= user.getPosts()) {
+            return -1;
+        }
+        if(this.getPosts() <= user.getPosts()) {
+            return 1;
+        }
+        else return 0;
     }
 }

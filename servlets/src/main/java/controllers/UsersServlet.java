@@ -38,6 +38,7 @@ public class UsersServlet extends HttpServlet {
 
         if (req.getPathInfo() == null) {
             List<User> users = service.getUsers();
+            Collections.sort(users);
             Map<Post, Integer> leaders = likeDao.getAllCountLikes();
 
             logger.info(users);
