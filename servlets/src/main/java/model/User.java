@@ -16,7 +16,7 @@ import java.io.Serializable;
  */
 
 @Data
-public class User implements Serializable, Comparable<User> {
+public class User implements Comparable<User> {
     private int userId;
     private String firstName;
     private String lastName;

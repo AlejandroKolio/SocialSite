@@ -1,6 +1,5 @@
 package model;
 
-import dao.PostDao;
 import dao.PostDaoImp;
 import dao.UserDaoImp;
 import lombok.Data;

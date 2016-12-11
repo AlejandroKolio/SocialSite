@@ -24,6 +24,6 @@ public class Comment {
         return new UserDaoImp().getUserByUserId(userId);
     }
     public String getTime() {
-        return new SimpleDateFormat("MMMM d, yyyy hh:mm", Locale.ENGLISH).format(date);
+        return new SimpleDateFormat("MMMM d, yyyy hh:mm a", Locale.ENGLISH).format(date);
     }
 }

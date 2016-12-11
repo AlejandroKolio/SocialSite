@@ -52,10 +52,10 @@ public class RegistrationServlet extends HttpServlet {
         if (email == null || email.equals("") || !validateEmail(email))
             errorMsg = "Email ID can't be null or empty or does not exist.";
         if (password == null || password.equals("") || !validatePassword(password)) {
-            errorMsg = "Password might be null or empty." +
-                        "Or Password does not meet the requirements:" +
-                        "1. Make sure you have 1 capital letter" +
-                        "2. Use special characters: @#%$ for security purposes" +
+            errorMsg = "Password might be null or empty." + '\n' +
+                        "Or Password does not meet the requirements:" + '\n' +
+                        "1. Make sure you have 1 capital letter" + '\n' +
+                        "2. Use special characters: @#%$ for security purposes" + '\n' +
                         "3. It should not be shorter then 6 and longer then 20 characters.";
         }
 
@@ -71,7 +71,7 @@ public class RegistrationServlet extends HttpServlet {
         if (errorMsg != null) {
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
             PrintWriter out = resp.getWriter();
-            out.println("<br><br><br><p align = center><font color=\"#ffe4b5\" size=\"3\" style=\"align-self: auto\">" + errorMsg + "</font></p>");
+            out.println("<br><br><br><p align = center><font color=fffaf0 size=3 style=align-self: auto>" + errorMsg + "</font></p>");
             rd.include(req, resp);
         } else {
             if (isNewUser) {

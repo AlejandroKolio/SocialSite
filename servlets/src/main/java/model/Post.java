@@ -22,7 +22,7 @@ import java.util.logging.SimpleFormatter;
  */
 
 @Data
-public class Post implements Serializable, Comparable<Post> {
+public class Post implements Comparable<Post> {
     private int postId;
     private int userId;
     private String body;
