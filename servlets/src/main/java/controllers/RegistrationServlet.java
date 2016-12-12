@@ -5,8 +5,6 @@ import org.apache.log4j.Logger;
 import services.UserService;
 import services.UserServiceImp;
 
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

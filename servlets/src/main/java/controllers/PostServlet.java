@@ -3,6 +3,7 @@ package controllers;
 import model.Comment;
 import model.Post;
 import model.User;
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import services.*;
 
@@ -12,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -68,12 +70,12 @@ public class PostServlet extends HttpServlet {
         } else if (request.getRequestURI().matches("/postkill/\\d+")) {
             deletePost(request);
             response.sendRedirect("/posts");
-        } else if(request.getRequestURI().matches("/postlike/\\d+/\\d+/\\d+")) {
+        } else if (request.getRequestURI().matches("/postlike/\\d+/\\d+/\\d+")) {
             String[] tokens = request.getPathInfo().split("/");
             int userId = Integer.parseInt(tokens[2]);
             likePost(request);
             response.sendRedirect("/user/" + userId);
-        } else if(request.getRequestURI().matches("/postdislike/\\d+/\\d+/\\d+")) {
+        } else if (request.getRequestURI().matches("/postdislike/\\d+/\\d+/\\d+")) {
             String[] tokens = request.getPathInfo().split("/");
             int userId = Integer.parseInt(tokens[2]);
             dislikePost(request);
@@ -92,6 +94,14 @@ public class PostServlet extends HttpServlet {
     private void deletePost(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("User");
         int postId = getPostId(request);
+
+        /*try {
+            String path = postService.getPicture(postId);
+            FileUtils.deleteDirectory(new File("/usr/local/Cellar/tomcat/domains/SocialSite" + path));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+
         postService.killPost(postService.getPostById(postId));
     }
 

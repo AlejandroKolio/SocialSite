@@ -45,7 +45,7 @@ public class UploadServlet extends HttpServlet {
             File personal = new File(personFolder);
 
             if (common.exists()) {
-                if (!personal.exists()) {
+                if (personal.exists()) {
                     personal.mkdir();
                 }
             } else {
@@ -55,7 +55,7 @@ public class UploadServlet extends HttpServlet {
             //Get all the parts from request and write it to the file on server
             String fileName = "";
             for (Part part : request.getParts()) {
-                fileName = setFileName(part);
+                fileName = setFileNameAvatar(part);
                 part.write(personal + File.separator + fileName);
             }
 
@@ -65,7 +65,7 @@ public class UploadServlet extends HttpServlet {
             String avatar = userDao.getAvatar(user.getUserId());
 
             request.getSession().setAttribute("avatar", avatar);
-            response.sendRedirect("/profile");
+            response.sendRedirect("/posts");
 
         } else if(request.getRequestURI().matches("/uploadpostpic/\\d+")) {
             String commonFolderPosts = "/usr/local/Cellar/tomcat/domains/SocialSite/uploads/posts/";
@@ -86,7 +86,7 @@ public class UploadServlet extends HttpServlet {
             //Get all the parts from request and write it to the file on server
             String fileName = "";
             for (Part part : request.getParts()) {
-                fileName = setFileName(part);
+                fileName = setFileNamePost(part);
                 part.write(personal + File.separator + fileName);
             }
             postDao.doPicture(getPathForDB(personal.getAbsolutePath()) + fileName, id);
@@ -94,11 +94,29 @@ public class UploadServlet extends HttpServlet {
         }
     }
 
-    private String setFileName(Part part) {
+    private String setFileNameAvatar(Part part) {
+        //UUID uuid = UUID.randomUUID();
+
+        String contentDisposition = part.getHeader("content-disposition");
+
+        String[] tokens = contentDisposition.split(";");
+        for (String token : tokens) {
+            if (token.trim().startsWith("filename")) {
+                String name = token.substring(token.indexOf("=") + 2, token.length() - 1);
+                String[] result = name.split("\\.");
+
+                result[0] = "picture_" + "avatar" + "." + result[1];
+                return result[0];
+            }
+        }
+        return "";
+    }
+
+    private String setFileNamePost(Part part) {
         UUID uuid = UUID.randomUUID();
 
         String contentDisposition = part.getHeader("content-disposition");
-        System.out.println("content - disposition header= "+ contentDisposition);
+
         String[] tokens = contentDisposition.split(";");
         for (String token : tokens) {
             if (token.trim().startsWith("filename")) {

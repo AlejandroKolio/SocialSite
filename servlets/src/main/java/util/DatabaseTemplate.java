@@ -101,6 +101,19 @@ public class DatabaseTemplate {
         return avaPath;
     }
 
+    public static String getPostPicture(String query, int postId) {
+        String postPath = "";
+        try(PreparedStatement ps = createPreparedStatement(query, postId);
+            ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                postPath = rs.getString("picture");
+            }
+        } catch (SQLException e) {
+            closeConnection(connection);
+        }
+        return postPath;
+    }
+
     public static List<Integer> executeFollowing(String query, int user_id) {
         List<Integer> list = new ArrayList<>();
         try(PreparedStatement ps = createPreparedStatement(query, user_id);

@@ -70,4 +70,9 @@ public class PostServiceImp implements PostService {
     public int hasPicture(int postId) {
         return postDao.hasPicture(postId);
     }
+
+    @Override
+    public String getPicture(int postId) {
+        return postDao.getPicturePath(postId);
+    }
 }

@@ -18,4 +18,5 @@ public interface PostService {
     List<Post> getLatestPosts(int userId);
     Post getPostById(int postId);
     int hasPicture(int postId);
+    String getPicture(int postId);
 }

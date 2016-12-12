@@ -106,4 +106,9 @@ public class PostDaoImp implements PostDao {
     public List<Post> getPosts() {
         return DatabaseTemplate.executeQueryForObject(new PostRowMapper(), GET_ALL_POSTS);
     }
+
+    @Override
+    public String getPicturePath(int postId) {
+        return DatabaseTemplate.getPostPicture(HAS_PICTURE, postId);
+    }
 }
