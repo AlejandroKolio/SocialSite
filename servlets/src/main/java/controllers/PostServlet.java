@@ -3,7 +3,6 @@ package controllers;
 import model.Comment;
 import model.Post;
 import model.User;
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import services.*;
 
@@ -13,7 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -95,9 +93,12 @@ public class PostServlet extends HttpServlet {
         User user = (User) request.getSession().getAttribute("User");
         int postId = getPostId(request);
 
+        //Here we can use FilesUtil to kill the directory for post path to avoid disk space overloading.
         /*try {
             String path = postService.getPicture(postId);
-            FileUtils.deleteDirectory(new File("/usr/local/Cellar/tomcat/domains/SocialSite" + path));
+            if(path != null || !path.equals("")) {
+                FileUtils.deleteDirectory(new File("/usr/local/Cellar/tomcat/domains/SocialSite" + path));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }*/
