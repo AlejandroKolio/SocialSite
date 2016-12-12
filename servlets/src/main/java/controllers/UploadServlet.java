@@ -62,10 +62,10 @@ public class UploadServlet extends HttpServlet {
             userDao.updateAvatar(getPathForDB(personal.getAbsolutePath()) + fileName, id);
 
             User user = userDao.getUserByUserId(id);
-            String avatar = user.getAvatar();
-            request.setAttribute("avatar", avatar);
+            String avatar = userDao.getAvatar(user.getUserId());
 
-            response.sendRedirect("/posts");
+            request.getSession().setAttribute("avatar", avatar);
+            response.sendRedirect("/profile");
 
         } else if(request.getRequestURI().matches("/uploadpostpic/\\d+")) {
             String commonFolderPosts = "/usr/local/Cellar/tomcat/domains/SocialSite/uploads/posts/";

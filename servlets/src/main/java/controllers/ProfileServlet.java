@@ -6,6 +6,8 @@ import model.Post;
 import model.User;
 import services.PostService;
 import services.PostServiceImp;
+import services.UserService;
+import services.UserServiceImp;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,9 +34,10 @@ public class ProfileServlet extends HttpServlet {
 
         PostDao postDao = new PostDaoImp();
         PostService postService = new PostServiceImp();
+        UserService userService = new UserServiceImp();
 
         User user = (User)request.getSession().getAttribute("User");
-        String avatar = user.getAvatar();
+        String avatar = userService.getAvatar(user);
         List<Post> postsOfFriends = postDao.getPostsOfFriends(user.getUserId());
         List<Post> latestPosts    = postService.getLatestPosts(user.getUserId());
 

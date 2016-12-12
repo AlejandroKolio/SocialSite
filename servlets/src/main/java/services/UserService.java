@@ -14,4 +14,5 @@ public interface UserService {
     boolean verifyNewUser(User user);
     User verifyUser(User user);
     List<User> getUsers();
+    String getAvatar(User user);
 }

@@ -30,8 +30,6 @@ public class UserServlet extends HttpServlet {
 
     private UserService service = new UserServiceImp();
     private PostService postService = new PostServiceImp();
-    private LikeService likeService = new LikeServiceImp();
-    private LikeDao likeDao = new LikeDaoImp();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,7 +47,7 @@ public class UserServlet extends HttpServlet {
                 if (userDao.isRegisteredId(userId) != null) {
 
                     User user = userDao.getUserByUserId(userId);
-                    String avatar = user.getAvatar();
+                    String avatar = service.getAvatar(user);
 
                     List<Post> posts = postService.getPostOfUser(user);
 

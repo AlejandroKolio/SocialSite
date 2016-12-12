@@ -44,7 +44,7 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#"> Profile</a></li>
+                            <li><a href="/profile"> Profile</a></li>
                             <li><a href="Logout"> Logout</a></li>
                         </ul>
                     </li><!--end of User-->
@@ -68,7 +68,7 @@
             <div class="sidebar-block">
                 <div class="profile">
 
-                    <img src="<%=avatar%>" alt="people" class="img-circle" width="110"/>
+                    <img src="${avatar}" alt="people" class="img-circle" width="110"/>
                     <h4><%= user.getFirstName() + " " + user.getLastName()%>
                     </h4>
 

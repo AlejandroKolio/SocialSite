@@ -45,7 +45,7 @@ public class UsersServlet extends HttpServlet {
 
             User user = (User) req.getSession().getAttribute("User");
             int currentUserId = user.getUserId();
-            String avaPath = user.getAvatar();
+            String avaPath = service.getAvatar(user);
 
             List<User> following = followerService.following(followerDao.following(currentUserId));
 

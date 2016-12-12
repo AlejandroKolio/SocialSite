@@ -16,4 +16,5 @@ public interface UserDao {
     User getUserByUserId(int userId);
     User isRegisteredId(int userId);
     void updateAvatar(String path, int userId);
+    String getAvatar(int userId);
 }

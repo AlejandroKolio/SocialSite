@@ -66,9 +66,10 @@ public class LoginServlet extends HttpServlet {
 
                 HttpSession session = request.getSession();
 
-                String avatar = user.getAvatar();
+                /*String avatar = user.getAvatar();*/
 
                 session.setAttribute("User", user);
+                String avatar = service.getAvatar(user);
                 request.setAttribute("avatar", avatar);
 
                 response.sendRedirect("/profile");

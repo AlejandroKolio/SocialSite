@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.Setter;
 import services.PostService;
 import services.PostServiceImp;
+import services.UserService;
+import services.UserServiceImp;
 
 import java.io.Serializable;
 

@@ -38,6 +38,7 @@ public class UserDaoImp implements UserDao {
     private final String GET_ALL_USERS     = "SELECT * FROM user";
     private final String IS_REGISTERED     = "SELECT * FROM user WHERE user_id = ?;";
     private final String UPDATE_AVATAR     = "UPDATE user SET avatar = ? WHERE user_id = ?;";
+    private final String GET_AVATAR        = "SELECT avatar FROM user WHERE user_id = ?;";
 
 
     @Override
@@ -96,5 +97,10 @@ public class UserDaoImp implements UserDao {
     @Override
     public void updateAvatar(String path, int userId) {
         DatabaseTemplate.executeInsertQuery(UPDATE_AVATAR, path, userId);
+    }
+
+    @Override
+    public String getAvatar(int userId) {
+        return DatabaseTemplate.getAvatar(GET_AVATAR, userId);
     }
 }

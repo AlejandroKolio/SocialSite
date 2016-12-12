@@ -88,6 +88,19 @@ public class DatabaseTemplate {
         return counter;
     }
 
+    public static String getAvatar(String query, int userId) {
+        String avaPath = "/uploads/avatar/default_user.jpg";
+        try(PreparedStatement ps = createPreparedStatement(query, userId);
+        ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                avaPath = rs.getString("avatar");
+            }
+        } catch (SQLException e) {
+            closeConnection(connection);
+        }
+        return avaPath;
+    }
+
     public static List<Integer> executeFollowing(String query, int user_id) {
         List<Integer> list = new ArrayList<>();
         try(PreparedStatement ps = createPreparedStatement(query, user_id);

@@ -45,4 +45,9 @@ public class UserServiceImp implements UserService {
     public List<User> getUsers() {
         return userDao.getUsers();
     }
+
+    @Override
+    public String getAvatar(User user) {
+        return userDao.getAvatar(user.getUserId());
+    }
 }

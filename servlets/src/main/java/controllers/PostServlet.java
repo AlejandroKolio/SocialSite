@@ -35,9 +35,10 @@ public class PostServlet extends HttpServlet {
             List<User> users = userService.getUsers();
 
             User user = (User) request.getSession().getAttribute("User");
+            UserService userService = new UserServiceImp();
             List<Post> posts = postService.getPostOfUser(user);
 
-            String avatar = user.getAvatar();
+            String avatar = userService.getAvatar(user);
             int postSize = posts.size();
 
             logger.info(posts);
