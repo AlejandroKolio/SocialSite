@@ -33,7 +33,6 @@
                     <!-- User -->
 
                     <%User user = (User) session.getAttribute("User");%>
-                    <%String avatar = user.getAvatar();%>
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle user" data-toggle="dropdown">

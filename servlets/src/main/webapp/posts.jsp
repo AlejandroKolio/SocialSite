@@ -32,11 +32,10 @@
                     <!-- User -->
 
                     <%User user = (User) session.getAttribute("User");%>
-                    <%String avatar = user.getAvatar();%>
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle user" data-toggle="dropdown">
-                            <img src="<%=avatar%>" alt="User" class="img-circle" width="40"/>
+                            <img src="${avatar}" alt="User" class="img-circle" width="40"/>
 
 
                             <%= user.getFirstName() + " " + user.getLastName() %>

@@ -38,7 +38,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle user" data-toggle="dropdown">
 
-                            <img src="<%=avatar%>" alt="User" class="img-circle" width="40"/>
+                            <img src="${requestScope.avaPath}" alt="User" class="img-circle" width="40"/>
 
                             <%= user.getFirstName() + " " + user.getLastName() %>
                             <span class="caret"></span>
