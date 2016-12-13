@@ -46,6 +46,9 @@ public class UserServlet extends HttpServlet {
 
                 if (userDao.isRegisteredId(userId) != null) {
 
+                    User sessionUser = (User)request.getSession().getAttribute("User");
+                    String userSessionAvatar = sessionUser.getAvatar();
+
                     User user = userDao.getUserByUserId(userId);
                     String avatar = service.getAvatar(user);
 
@@ -60,6 +63,7 @@ public class UserServlet extends HttpServlet {
                     request.setAttribute("userName", userName);
                     request.setAttribute("followerDao", followerDao);
                     request.setAttribute("avatar", avatar);
+                    request.setAttribute("userSessionAvatar", userSessionAvatar);
                     request.setAttribute("posts", posts);
                     request.setAttribute("followerCounter", followerCounter);
                     request.setAttribute("postCounter", postCounter);
