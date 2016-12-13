@@ -16,4 +16,5 @@ public interface FollowerDao {
     int followerCounter(int userdId);
 
     List<Integer> following(int userId);
+    List<Integer> follower(int followerId);
 }

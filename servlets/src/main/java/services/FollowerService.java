@@ -11,4 +11,5 @@ import java.util.List;
 
 public interface FollowerService {
     List<User> following(List<Integer> list);
+    List<User> follower(List<Integer> list);
 }

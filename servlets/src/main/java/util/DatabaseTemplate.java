@@ -130,6 +130,22 @@ public class DatabaseTemplate {
         return list;
     }
 
+    public static List<Integer> executeFollower(String query, int follower_id) {
+        List<Integer> list = new ArrayList<>();
+        try(PreparedStatement ps = createPreparedStatement(query, follower_id);
+            ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                list.add(rs.getInt("user_id"));
+            }
+        } catch (SQLException e) {
+            e.getErrorCode();
+            throw new RuntimeException();
+        } finally {
+            closeConnection(connection);
+        }
+        return list;
+    }
+
     public static Map<Integer, Integer> executeLikesCounter(String query) {
         Map<Integer, Integer> map = new HashMap<>();
         try(PreparedStatement ps = createPreparedStatement(query);

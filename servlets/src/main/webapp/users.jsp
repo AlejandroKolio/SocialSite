@@ -103,10 +103,11 @@
                                     class="fa fa-fw fa-users"></i> People</a></li>
                             <li class=""><a href="#followers" data-toggle="tab" aria-expanded="false"><i
                                     class="fa fa-fw fa-user"></i> My Followers</a></li>
+                            <li class=""><a href="#iFollow" data-toggle="tab" aria-expanded="false"><i
+                                    class="fa fa-fw fa-user"></i> I Follow</a></li>
                             <li class=""><a href="#leaders" data-toggle="tab" aria-expanded="false"><i
                                     class="fa fa-fw fa-user"></i> Leaders</a></li>
                         </ul>
-
 
                         <div class="tab-content">
                             <div id="home" class="tab-pane active">
@@ -178,6 +179,41 @@
                                     </table>
                                 </div>
                             </div>
+
+
+                            <div id="iFollow" class="tab-pane">
+                                <!-- Progress table -->
+                                <div class="table-responsive">
+                                    <table class="table v-middle">
+
+                                        <thead>
+                                        <tr>
+                                            <th width="1"></th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Posts</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody id="responsive-tab">
+                                        <c:forEach items="${requestScope.follower}" var="follower">
+                                            <tr>
+                                                <td></td>
+                                                <td><img src="${follower.avatar}" width="40" class="img-circle">
+                                                    <a href="/user/${follower.userId}/posts">  ${follower.firstName} ${follower.lastName}</a>
+                                                </td>
+                                                <td><a href="#">${follower.email}</a></td>
+                                                <td><i class="fa fa-fw fa-twitter"></i><span class="muted"></span>
+                                                        ${follower.posts}
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+
 
                             <div id="leaders" class="tab-pane">
                                 <!-- Progress table -->

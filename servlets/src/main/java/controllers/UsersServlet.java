@@ -48,11 +48,13 @@ public class UsersServlet extends HttpServlet {
             String avaPath = service.getAvatar(user);
 
             List<User> following = followerService.following(followerDao.following(currentUserId));
+            List<User> follower  = followerService.follower(followerDao.follower(currentUserId));
 
             req.setAttribute("currentUserId", currentUserId);
             req.setAttribute("users", users);
             req.setAttribute("avaPath", avaPath);
             req.setAttribute("following", following);
+            req.setAttribute("follower", follower);
             req.setAttribute("leaders", leaders);
 
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/users.jsp");

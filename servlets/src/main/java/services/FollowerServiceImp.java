@@ -21,4 +21,13 @@ public class FollowerServiceImp implements FollowerService {
         }
         return following;
     }
+
+    @Override
+    public List<User> follower(List<Integer> list) {
+        List<User> follower = new ArrayList<>();
+        for(Integer i : list) {
+            follower.add(new UserDaoImp().getUserByUserId(i));
+        }
+        return follower;
+    }
 }
