@@ -39,12 +39,11 @@
                             <img src="${avatar}" alt="User" class="img-circle" width="40"/>
                             <%= user.getFirstName() + " " + user.getLastName() %>
                             <span class="caret"></span>
+                            </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Profile</a></li>
-                                <li><a href="#">Messages</a></li>
-                                <li><a href="Logout">Logout</a></li>
+                                <li><a href="/profile"> Profile</a></li>
+                                <li><a href="Logout"> Logout</a></li>
                             </ul>
-                        </a>
 
                         <!--Notifications-->
                         <li class="dropdown notifications updates hidden-xs hidden-sm">
