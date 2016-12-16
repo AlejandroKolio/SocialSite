@@ -59,7 +59,6 @@ public class DatabaseConnectionPool {
         cpds.setMinPoolSize(5);
         cpds.setAcquireIncrement(5);
         cpds.setMaxPoolSize(100);
-        cpds.setAcquireIncrement(1);
         //cpds.setUnreturnedConnectionTimeout(10); //This one I put for debug only. To detect connection leaks
 
         return cpds;
