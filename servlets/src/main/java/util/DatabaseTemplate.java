@@ -31,7 +31,8 @@ public class DatabaseTemplate {
 
     public static <E> List<E> executeQueryForObject(ObjectRowMapper<E> objectRowMapper, String query, Object... objects) {
 
-        try (PreparedStatement preparedStatement = createPreparedStatement(query, objects);
+        try (Connection connection = getConnection();
+                PreparedStatement preparedStatement = createPreparedStatement(query, objects);
              ResultSet resultSet = preparedStatement.executeQuery()) {
 
             List<E> listOfE = new ArrayList<>();
