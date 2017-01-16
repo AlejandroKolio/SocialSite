@@ -39,47 +39,49 @@
                             <img src="${avatar}" alt="User" class="img-circle" width="40"/>
                             <%= user.getFirstName() + " " + user.getLastName() %>
                             <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="/profile"> Profile</a></li>
-                                <li><a href="Logout"> Logout</a></li>
-                            </ul>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/profile"> Profile</a></li>
+                            <li><a href="Logout"> Logout</a></li>
+                        </ul>
 
                         <!--Notifications-->
-                        <li class="dropdown notifications updates hidden-xs hidden-sm">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <i class="fa fa-bell-o"></i>
-                            </a>
+                    <li class="dropdown notifications updates hidden-xs hidden-sm">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-bell-o"></i>
+                        </a>
 
 
-                            <ul class="dropdown-menu" role="notification" style="overflow-y: scroll">
+                        <ul class="dropdown-menu" role="notification" style="overflow-y: scroll">
 
-                                <li class="dropdown-header">Notifications</li>
+                            <li class="dropdown-header">Notifications</li>
 
-                                <c:forEach items="${requestScope.latestPosts}" var="latestPosts">
+                            <c:forEach items="${requestScope.latestPosts}" var="latestPosts">
                                 <li class="media">
                                     <div class="media-left">
-                                        <img src="${latestPosts.friend.avatar}" alt="people" class="img-circle" width="30">
+                                        <img src="${latestPosts.friend.avatar}" alt="people" class="img-circle"
+                                             width="30">
                                     </div>
                                     <div class="media-body">
-                                        <a href="#">${latestPosts.friend.firstName} ${latestPosts.friend.lastName} </a> posted on timeline.
+                                        <a href="#">${latestPosts.friend.firstName} ${latestPosts.friend.lastName} </a>
+                                        posted on timeline.
                                         <br>
                                         <span class="text-caption text-muted">${latestPosts.date}</span>
                                     </div>
                                 </li>
-                                </c:forEach>
+                            </c:forEach>
 
-                            </ul>
-
-
-                        </li>
-                        <!--End of Notifications-->
-
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Profile</a></li>
-                            <li><a href="#">Messages</a></li>
-                            <li><a href="Logout">Logout</a></li>
                         </ul>
+
+
+                    </li>
+                    <!--End of Notifications-->
+
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Messages</a></li>
+                        <li><a href="Logout">Logout</a></li>
+                    </ul>
                     </li><!--end of User-->
 
                 </ul>
@@ -105,13 +107,16 @@
 
                     <img src="${avatar}" alt="people" class="img-circle" width="110"/>
 
-                    <h4><%= user.getFirstName() + " " + user.getLastName() %></h4>
+                    <h4><%= user.getFirstName() + " " + user.getLastName() %>
+                    </h4>
 
                     <form action="/upload/<%=user.getUserId()%>" method="post" enctype="multipart/form-data">
                         <label for="fusk" style="color: antiquewhite">Click me first to change photo</label>
                         <input id="fusk" type="file" name="photo" style="display: none;">
                         <br/>
-                        <button type="submit" value="Upload File" class="btn btn-info btn-xs"><i class="fa fa-download"></i> Upload</button>
+                        <button type="submit" value="Upload File" class="btn btn-info btn-xs"><i
+                                class="fa fa-download"></i> Upload
+                        </button>
                     </form>
 
                 </div>
@@ -128,41 +133,66 @@
     <!--end of sidebar left sidebar-size-2 sidebar-offset-0 sidebar-visible-desktop sidebar-visible-mobile sidebar-skin-dark-->
 
 
-
-
     <!--content push wrapper-->
     <div class="st-pusher" id="content">
         <!-- this is the wrapper for the content -->
         <div class="st-content">
             <!--extra div for emulating position:fixed of the menu-->
             <div class="st-content-inner">
-
                 <div class="container-fluid">
-                    <div class="row">
 
-                        <!--SHARING THOUGHTS-->
-                        <div class="col-md-6">
-                            <div class="panel-body">
-                                <div class="timeline-block">
-
-                                    <div class="panel panel-default share clearfix-xs">
-                                        <div class="panel-heading panel-heading-gray title">What's new</div>
-
-                                        <form action="/post/newpost" method="post" >
-                                            <div class="panel-body">
-                                                <textarea name="status" class="form-control share-text" rows="3" placeholder="Share your thoughts..." autofocus style="margin: 0px -7px 0px 0px; height: 60px; width: 338px;"></textarea>
-                                            </div>
-                                            <div class="panel-footer share-buttons">
-                                                <a href="#"><i class="fa fa-photo"></i></a>
-                                                <button type="submit" class="btn btn-primary btn-xs pull-right display-none"> Post</button>
-                                            </div>
-                                        </form>
+                    <div class="panel-default share clearfix-xs">
+                        <div class="panel-body">
+                            <form>
+                                <div class="row">
+                                    <div class="col-xs-6 col-md-4">
+                                        <div class="form-group form-control-default">
+                                            <label for="exampleInputFirstName">First name</label>
+                                            <input type="email" class="form-control" id="exampleInputFirstName"
+                                                   placeholder="Your first name">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-md-4">
+                                        <div class="form-group form-control-default">
+                                            <label for="exampleInputLastName">Last name</label>
+                                            <input type="email" class="form-control" id="exampleInputLastName" placeholder="Your last name">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div><!--END OF THOUGHTS-->
-
+                                <button type="submit" class="btn btn-primary">Change</button>
+                            </form>
+                        </div>
                     </div>
+
+                    <div class="panel-default share clearfix-xs">
+                        <div class="panel-body">
+                            <form>
+                                <div class="row">
+                                    <div class="col-xs-6 col-md-4">
+                                        <div class="form-group form-control-default">
+                                            <label for="exampleInputFirstName">Email</label>
+                                            <input type="email" class="form-control" id="exampleInputEmail" placeholder="Email">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-md-4">
+                                        <div class="form-group form-control-default">
+                                            <label for="exampleInputLastName">Password</label>
+                                            <input type="email" class="form-control" id="exampleInputPassword" placeholder="Password">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Change</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="panel-body buttons-spacing-vertical">
+                        <p>
+                            <button class="btn btn-danger"><i class="fa fa-times"></i> Delete account</button>
+                        </p>
+                    </div>
+
+
                 </div><!--container-fluid-->
             </div><!--end of st-content-inner-->
 
