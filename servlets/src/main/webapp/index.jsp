@@ -141,21 +141,15 @@
             <div class="st-content-inner">
                 <div class="container-fluid">
 
+                    <!--Change First Name-->
                     <div class="panel-default share clearfix-xs">
                         <div class="panel-body">
-                            <form>
+                            <form action="/editfirstname" method="post">
                                 <div class="row">
                                     <div class="col-xs-6 col-md-4">
                                         <div class="form-group form-control-default">
-                                            <label for="exampleInputFirstName">First name</label>
-                                            <input type="email" class="form-control" id="exampleInputFirstName"
-                                                   placeholder="Your first name">
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-6 col-md-4">
-                                        <div class="form-group form-control-default">
-                                            <label for="exampleInputLastName">Last name</label>
-                                            <input type="email" class="form-control" id="exampleInputLastName" placeholder="Your last name">
+                                            <label for="firstName">First name</label>
+                                            <input type="text" name="firstName" id="firstName" class="form-control" placeholder="Your first name">
                                         </div>
                                     </div>
                                 </div>
@@ -164,20 +158,32 @@
                         </div>
                     </div>
 
+                    <!--Change Last Name-->
                     <div class="panel-default share clearfix-xs">
                         <div class="panel-body">
-                            <form>
+                            <form action="/editlastname" method="post">
                                 <div class="row">
                                     <div class="col-xs-6 col-md-4">
                                         <div class="form-group form-control-default">
-                                            <label for="exampleInputFirstName">Email</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail" placeholder="Email">
+                                            <label for="lastName">Last name</label>
+                                            <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Your last name">
                                         </div>
                                     </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Change</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!--Change Password Name-->
+                    <div class="panel-default share clearfix-xs">
+                        <div class="panel-body">
+                            <form action="/editpassword" method="post">
+                                <div class="row">
                                     <div class="col-xs-6 col-md-4">
                                         <div class="form-group form-control-default">
-                                            <label for="exampleInputLastName">Password</label>
-                                            <input type="email" class="form-control" id="exampleInputPassword" placeholder="Password">
+                                            <label for="password">Password</label>
+                                            <input type="text" name="password" class="form-control" id="password" placeholder="Password">
                                         </div>
                                     </div>
                                 </div>

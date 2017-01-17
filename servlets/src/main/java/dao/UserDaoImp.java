@@ -40,6 +40,10 @@ public class UserDaoImp implements UserDao {
     private final String UPDATE_AVATAR     = "UPDATE user SET avatar = ? WHERE user_id = ?;";
     private final String GET_AVATAR        = "SELECT avatar FROM user WHERE user_id = ?;";
 
+    private final String UPDATE_FIRST_NAME = "UPDATE user SET first_name = ? WHERE user_id = ?;";
+    private final String UPDATE_LAST_NAME  = "UPDATE user SET last_name = ? WHERE user_id = ?;";
+    private final String UPDATE_PASSWORD   = "UPDATE user SET password = ? WHERE user_id = ?;";
+
 
     @Override
     public User getUserByEmail(String email) {
@@ -102,5 +106,20 @@ public class UserDaoImp implements UserDao {
     @Override
     public String getAvatar(int userId) {
         return DatabaseTemplate.getAvatar(GET_AVATAR, userId);
+    }
+
+    @Override
+    public void updateFirstName(String firstName, int userId) {
+        DatabaseTemplate.executeInsertQuery(UPDATE_FIRST_NAME, firstName, userId);
+    }
+
+    @Override
+    public void updateLastName(String lastName, int userId) {
+        DatabaseTemplate.executeInsertQuery(UPDATE_LAST_NAME, lastName, userId);
+    }
+
+    @Override
+    public void updatePassword(String pass, int userId) {
+        DatabaseTemplate.executeInsertQuery(UPDATE_PASSWORD, pass, userId);
     }
 }
