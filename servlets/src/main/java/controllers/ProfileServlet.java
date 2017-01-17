@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -56,6 +57,7 @@ public class ProfileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        PrintWriter out = response.getWriter();
         UserDao userDao = new UserDaoImp();
         User user = (User) request.getSession().getAttribute("User");
 
@@ -68,14 +70,29 @@ public class ProfileServlet extends HttpServlet {
         if (request.getRequestURI().matches("/editfirstname")) {
             if (firstName == null || firstName.equals("") || !validateFirstName(firstName)) {
                 errorMsg = "Your name can't be null or empty or does not meet the requirements.";
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
+                out.println("<br><br><br><br><br><br><p align='center'><font color = fffaf0 size=3>" + errorMsg + "</font></p>");
+                rd.include(request, response);
             } else {
                 userDao.updateFirstName(firstName, user.getUserId());
                 response.sendRedirect("/profile");
+                out.write("Please logout and login again to update your profile");
             }
         }
+
+
+
+
+
+
+
+
         if (request.getRequestURI().matches("/editlastname")) {
             if (lastName == null || lastName.equals("") || !validateLastName(lastName)) {
                 errorMsg = "Your surname can't be null or empty does not meet the requirements.";
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
+                out.println("<br><br><br><br><br><br><p align='center'><font color = fffaf0 size=3>" + errorMsg + "</font></p>");
+                rd.include(request, response);
             } else {
                 userDao.updateLastName(lastName, user.getUserId());
                 response.sendRedirect("/profile");
@@ -88,8 +105,12 @@ public class ProfileServlet extends HttpServlet {
                         "1. Make sure you have 1 capital letter" + '\n' +
                         "2. Use special characters: @#%$ for security purposes" + '\n' +
                         "3. It should not be shorter then 6 and longer then 20 characters.";
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
+                out.println("<br><br><br><br><br><br><p align='center'><font color = fffaf0 size=3>" + errorMsg + "</font></p>");
+                rd.include(request, response);
             } else {
                 userDao.updatePassword(password, user.getUserId());
+
                 response.sendRedirect("/profile");
             }
         }
