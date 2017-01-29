@@ -17,9 +17,7 @@ public interface UserDao {
     User isRegisteredId(int userId);
     void updateAvatar(String path, int userId);
 
-    void updateFirstName(String firstName, int userId);
-    void updateLastName(String lastName, int userId);
-    void updatePassword(String pass, int userId);
+    void updateProfile(int userId, User user);
 
     String getAvatar(int userId);
 }

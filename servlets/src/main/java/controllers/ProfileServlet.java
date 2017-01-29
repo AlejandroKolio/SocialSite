@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,7 +30,7 @@ import java.util.regex.Pattern;
  * Created by Aleksandr_Shakhov on 13.11.16 19:45.
  */
 
-@WebServlet(name = "ProfileServlet", urlPatterns = {"/profile", "/editfirstname", "/editlastname", "/editpassword"})
+@WebServlet(name = "ProfileServlet", urlPatterns = {"/profile", "/editprofile"})
 public class ProfileServlet extends HttpServlet {
 
     LocalTime time = LocalTime.now();
@@ -61,58 +62,28 @@ public class ProfileServlet extends HttpServlet {
         UserDao userDao = new UserDaoImp();
         User user = (User) request.getSession().getAttribute("User");
 
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
+        String message = null;
+
+        String firstName = request.getParameter("firstname");
+        String lastName = request.getParameter("lastname");
+        String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        String errorMsg = null;
+        if(!firstName.equals(null) && !firstName.equals("")
+                && !lastName.equals(null) && !lastName.equals("")
+                && !email.equals(null) && !email.equals("")
+                && !password.equals(null) && !password.equals("")) {
 
-        if (request.getRequestURI().matches("/editfirstname")) {
-            if (firstName == null || firstName.equals("") || !validateFirstName(firstName)) {
-                errorMsg = "Your name can't be null or empty or does not meet the requirements.";
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
-                out.println("<br><br><br><br><br><br><p align='center'><font color = fffaf0 size=3>" + errorMsg + "</font></p>");
-                rd.include(request, response);
-            } else {
-                userDao.updateFirstName(firstName, user.getUserId());
-                response.sendRedirect("/profile");
-                out.write("Please logout and login again to update your profile");
-            }
-        }
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+            user.setEmail(email);
+            user.setPassword(password);
 
+            userDao.updateProfile(user.getUserId(), user);
 
-
-
-
-
-
-
-        if (request.getRequestURI().matches("/editlastname")) {
-            if (lastName == null || lastName.equals("") || !validateLastName(lastName)) {
-                errorMsg = "Your surname can't be null or empty does not meet the requirements.";
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
-                out.println("<br><br><br><br><br><br><p align='center'><font color = fffaf0 size=3>" + errorMsg + "</font></p>");
-                rd.include(request, response);
-            } else {
-                userDao.updateLastName(lastName, user.getUserId());
-                response.sendRedirect("/profile");
-            }
-        }
-        if(request.getRequestURI().matches("/editpassword")) {
-            if (password == null || password.equals("") || !validatePassword(password)) {
-                errorMsg = "Password might be null or empty." + '\n' +
-                        "Or Password does not meet the requirements:" + '\n' +
-                        "1. Make sure you have 1 capital letter" + '\n' +
-                        "2. Use special characters: @#%$ for security purposes" + '\n' +
-                        "3. It should not be shorter then 6 and longer then 20 characters.";
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
-                out.println("<br><br><br><br><br><br><p align='center'><font color = fffaf0 size=3>" + errorMsg + "</font></p>");
-                rd.include(request, response);
-            } else {
-                userDao.updatePassword(password, user.getUserId());
-
-                response.sendRedirect("/profile");
-            }
+            message = "Your personal information has been updated";
+            request.getSession().setAttribute("message", message);
+            doGet(request, response);
         }
     }
 

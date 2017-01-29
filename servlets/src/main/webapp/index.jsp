@@ -10,8 +10,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Profile</title>
-    <link href="/css/vendor/all.css" rel="stylesheet">
-    <link href="/css/app/app.css" rel="stylesheet">
+    <link href="css/vendor/all.css" rel="stylesheet">
+    <link href="css/app/app.css" rel="stylesheet">
+
+    <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+    <script src="js/form-validation.js"></script>
+
 </head>
 
 <body>
@@ -141,62 +146,60 @@
             <div class="st-content-inner">
                 <div class="container-fluid">
 
-                    <!--Change First Name-->
                     <div class="panel-default share clearfix-xs">
                         <div class="panel-body">
-                            <form action="/editfirstname" method="post">
+
+                            <form action="/editprofile" name="registration" method="post">
+
                                 <div class="row">
                                     <div class="col-xs-6 col-md-4">
                                         <div class="form-group form-control-default">
-                                            <label for="firstName">First name</label>
-                                            <input type="text" name="firstName" id="firstName" class="form-control" placeholder="Your first name">
+                                            <label for="firstname">First Name</label>
+                                            <input type="text" name="firstname" id="firstname" value="<%= user.getFirstName()%>" class="form-control"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-6 col-md-4">
+                                        <div class="form-group form-control-default">
+                                            <label for="lastname">Last Name</label>
+                                            <input type="text" name="lastname" id="lastname" value="<%= user.getLastName()%>" class="form-control"/>
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Change</button>
-                            </form>
-                        </div>
-                    </div>
 
-                    <!--Change Last Name-->
-                    <div class="panel-default share clearfix-xs">
-                        <div class="panel-body">
-                            <form action="/editlastname" method="post">
+
                                 <div class="row">
                                     <div class="col-xs-6 col-md-4">
                                         <div class="form-group form-control-default">
-                                            <label for="lastName">Last name</label>
-                                            <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Your last name">
+                                            <label for="email">Email</label>
+                                            <input type="email" name="email" id="email" value="<%= user.getEmail()%>" class="form-control"/>
                                         </div>
                                     </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Change</button>
-                            </form>
-                        </div>
-                    </div>
 
-                    <!--Change Password Name-->
-                    <div class="panel-default share clearfix-xs">
-                        <div class="panel-body">
-                            <form action="/editpassword" method="post">
-                                <div class="row">
                                     <div class="col-xs-6 col-md-4">
                                         <div class="form-group form-control-default">
                                             <label for="password">Password</label>
-                                            <input type="text" name="password" class="form-control" id="password" placeholder="Password">
+                                            <input type="password" name="password" class="form-control" id="password"
+                                                   placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"/>
                                         </div>
                                     </div>
+
                                 </div>
+
                                 <button type="submit" class="btn btn-primary">Change</button>
                             </form>
+                            <br>
+                            <c:if test="${message ne null}">
+                                <p style="color: #519f50">${message}</p>
+                            </c:if>
                         </div>
                     </div>
 
-                    <div class="panel-body buttons-spacing-vertical">
+                    <%--<div class="panel-body buttons-spacing-vertical">
                         <p>
                             <button class="btn btn-danger"><i class="fa fa-times"></i> Delete account</button>
                         </p>
-                    </div>
+                    </div>--%>
 
 
                 </div><!--container-fluid-->
@@ -250,7 +253,7 @@
     };
 </script>
 
-<script src="/js/vendor/all.js"></script>
-<script src="/js/app/app.js"></script>
+<%--<script src="/js/vendor/all.js"></script>
+<script src="/js/app/app.js"></script>--%>
 </body>
 </html>
